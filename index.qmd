@@ -1,37 +1,34 @@
 ---
-title: "Takım: XXX"
+title: "Takım: sona_kalanlar"
 sidebar: false 
 ---
 
-MUY660-İş Analitiği dersi takım sayfamıza hoş geldiniz.
+MUY665-İş Analitiği dersi takım sayfamıza hoş geldiniz.
 
-Bu analitik çalışmalarımızı paylaşıyoruz.
+Bu sayfa içerisinde analitik çalışmalarımızı paylaşıyoruz.
 
 Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.
-
-
 
 ## Takım Üyeleri
 
 1.  [Edin_Džeko](/takim/edindzeko.qmd)
 
-2.  [Dušan Tadić](/takim/dusantadic.qmd)
+2.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
 
 3.  [Frederico Rodrigues de Paula Santos](/takim/fred.qmd)
 
 4.  [Sebastian Szymański](/takim/szymanski.qmd)
 
-
 ## Proje Adı
-MUY660-İş Analitiği iyileştirme çalışmaları (örnek)
+
+MUY665-İş Analitiği 2024-2025 Bahar Dönemi Ödev-1
 
 ## Proje Konusu
-Örnek:
-Bu projede MUY660-İş Analitiği ders içeriğinin analitik yaklaşımlarla iyileştirilmesini hedefledik. Bu doğrultuda tüm üniversitelerdeki benzer derslerin verisini toplayarak bir veri seti oluşturduk Analiz için ........ yöntemleri kullanarak, ....... çalışmaları yaptık Sonuç olarak, MUY660-İş Analitiği dersinin dünyadaki tüm derslerden daha iyi olduğunu ve bu dersi aldığımız için çok mutlu olduğumuzu tespit ettik.
 
+Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler -Kerem Demirtaş & Erdi Daşdemir
 
 ## Veri Seti Hakkında Özet Bilgi
 
+R dilinde yerlesik olarak gelen mtcars veri seti ile çalısacagız. Bu veri seti, 32 otomobilin 11 farklı özelligini icermektedir.
 
 ## Sonuçlar
-Burada key takeways verilmelidir. En az 3 en fazla 5 madde ile çarpıcı sonuçlar sunulmalıdır.
