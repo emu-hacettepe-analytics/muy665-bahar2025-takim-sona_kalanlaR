@@ -11,13 +11,13 @@ Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.
 
 ## Takım Üyeleri
 
-1.  [Edin_Džeko](/takim/edindzeko.qmd)
+1.  [Ece AKBULUT](/takim/eceakbulut.qmd)
 
 2.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
 
-3.  [Frederico Rodrigues de Paula Santos](/takim/fred.qmd)
+3.  [Sude SENGUL](/takim/sudesengul.qmd)
 
-4.  [Sebastian Szymański](/takim/szymanski.qmd)
+4.  [Tülay ARAS](/takim/tulayaras.qmd)
 
 ## Proje Adı
 
@@ -32,3 +32,23 @@ Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler -Kerem Demirtaş & Er
 R dilinde yerlesik olarak gelen mtcars veri seti ile çalısacagız. Bu veri seti, 32 otomobilin 11 farklı özelligini icermektedir.
 
 ## Sonuçlar
+
+**Veri Özetleme:**
+
+-   `my_summary_stats` fonksiyonu ile bir veri kümesindeki sayısal verilerin özet istatistiklerini hesapladık. Bu, her sütun için ortalama, medyan, standart sapma, minimum ve maksimum değerleri bulmak, veri setini anlamada önemli bir adımdır.
+
+-   `sapply` fonksiyonu ile veri setinin tamamına benzer işlemleri uyguladık ve özet bilgileri daha verimli bir şekilde aldık.
+
+**Veri Temizleme ve Eksik Değerler:**
+
+-   `na_example` veri setindeki eksik değerleri (`NA`) inceledin ve bunları 2025 ile değiştirdin. Bu işlem veri temizleme sürecini anlamanı sağladı ve eksik verilerin nasıl yönetileceğini öğrendin.
+
+-   Veri temizleme, analize başlamadan önce önemli bir adımdır çünkü eksik veriler analiz sonuçlarını olumsuz etkileyebilir.
+
+**Veri Görselleştirme:**
+
+-   **Histogram**: `ggplot2` kullanarak bir değişkenin (MPG) dağılımını inceledik. Histogram, verinin dağılımını anlamak için çok faydalıdır ve bu sayede verinin simetrik olup olmadığını, dağılımın ne kadar geniş olduğunu gözlemleyebilirsiniz.
+
+-   **Kutu Grafiği (Boxplot)**: HP değişkeni için kutu grafiği oluşturarak, veri kümesindeki medyanı, çeyrekleri ve uç değerleri daha net bir şekilde gördük. Bu, özellikle veri setindeki uç değerleri ve dağılımı gözlemlemek için yararlıdır.
+
+-   **Dağılım Grafiği (Scatter Plot)**: MPG ve HP arasındaki ilişkiyi inceledik. Bu tür bir grafik, iki değişken arasındaki doğrusal veya doğrusal olmayan ilişkiyi görsel olarak anlamanızı sağlar.
