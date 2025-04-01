@@ -7,13 +7,14 @@ title: "Çalışma 1"
 
 Bu çalışmada 3 görevimiz var. Bu görevler..... Bunlara sırayla aşağıda cevap arıyoruz.
 
-## (a)
+## (a) Aşağıdaki kaynaklardan bir video seçin ve Quarto dokümanınızda kısa bir özet sağlayın:
 
+• Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Kerem Demirtaş & Erdi Daşdemir 
 ```{r}
 
 ```
 
-## (b)
+## (b) Fonksiyonlar ve Döngüler ile Verileri Özetleme:
 
 ```{r}
 
@@ -22,7 +23,7 @@ library(knitr)  # kable fonksiyonu
 data(mtcars)  # mtcars veri seti 
 print(mtcars) # mtcars içeriğini gösterir
 
-# Özel Özet Fonksiyonu
+# Özel Özet Fonksiyonu:
 
 my_summary_stats <- function(x) {
   c(
@@ -35,11 +36,12 @@ my_summary_stats <- function(x) {
 }
 
 # Fonksiyonu Döngü Kullanarak Uygulama:
+
 # Özet listesi
 
 summary_list <- list()
 
-# Fonksiyonu döngü ile kullanma
+# Fonksiyonu döngü ile kullanma:
 for (col_name in names(mtcars)) {
   column <- mtcars[[col_name]]
   if (is.numeric(column)) {
@@ -57,13 +59,13 @@ summary_df <- as.data.frame(do.call(rbind, summary_list))
 
 print (summary_df)
 
-# apply fonksiyonu ile alternatif yaklaşım
+# apply fonksiyonu ile alternatif yaklaşım:
 table_summary <- sapply(mtcars, function(col) {
   if (is.numeric(col)) unlist(my_summary_stats(col))
 })
 print(table_summary)
 
-# dslabs paketini yükleme ve na_example veri seti ile çalışma
+# dslabs paketini yükleme ve na_example veri seti ile çalışma:
 library(dslabs)
 data("na_example")
 
