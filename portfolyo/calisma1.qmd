@@ -2,11 +2,6 @@
 title: "Çalışma 1"
 ---
 
-\
-(Aşağıdakiler örnek olarak verilmiştir.)
-
-Bu çalışmada 3 görevimiz var. Bu görevler..... Bunlara sırayla aşağıda cevap arıyoruz.
-
 ## (a) Aşağıdaki kaynaklardan bir video seçin ve Quarto dokümanınızda kısa bir özet sağlayın:
 
 • Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Kerem Demirtaş & Erdi Daşdemir 
