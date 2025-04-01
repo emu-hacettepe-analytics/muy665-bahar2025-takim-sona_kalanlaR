@@ -6,10 +6,10 @@ Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfaları
 
 # Takım Üyeleri
 
-1.  [Edin_Džeko](/takim/edindzeko.qmd)
+1.  [Ece AKBULUT](/takim/eceakbulut.qmd)
 
 2.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
 
-3.  [Frederico Rodrigues de Paula Santos](/takim/fred.qmd)
+3.  [Sude SENGUL](/takim/sudesengul.qmd)
 
-4.  [Sebastian Szymański](/takim/szymanski.qmd)
+4.  [Tülay ARAS](/takim/tulayaras.qmd)
