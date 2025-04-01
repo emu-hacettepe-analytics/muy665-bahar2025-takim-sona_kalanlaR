@@ -3,11 +3,11 @@ title: "Muhammed DOĞAN"
 format: html
 ---
 
-![](/assets/images/muhammeddogan.png){fig-align="center" width="160"}
+![](/assets/images/muhammeddogan.png){fig-align="left" width="160"}
 
-[Özgeçmiş görüntüle.](/assets/muhammeddogan_CV.pdf "Muhammed DOĞAN"){fig-align="center" width="122" height="61"}
+^~[**ÖZGEÇMİŞ**](/assets/muhammeddogan_CV.pdf "Muhammed DOĞAN")~^
 
-[![](/assets/linkedin-logo.jpg){fig-align="center" width="122" height="61"}](https://www.linkedin.com/in/muhammed-dogan/)
+[![](/assets/linkedin-logo.jpg){fig-align="left" width="122" height="61"}](https://www.linkedin.com/in/muhammed-dogan/)
 
 # Eğitim
 
