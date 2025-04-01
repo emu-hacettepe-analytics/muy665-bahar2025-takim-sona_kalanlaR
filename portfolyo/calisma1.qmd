@@ -10,7 +10,76 @@ Bu çalışmada 3 görevimiz var. Bu görevler..... Bunlara sırayla aşağıda 
 ## (a)
 
 ```{r}
-1 + 1
+
 ```
 
 ## (b)
+
+```{r}
+
+library(dslabs)  # dslabs paketi
+library(knitr)  # kable fonksiyonu 
+data(mtcars)  # mtcars veri seti 
+print(mtcars) # mtcars içeriğini gösterir
+
+# Özel Özet Fonksiyonu
+
+my_summary_stats <- function(x) {
+  c(
+    Ortalama = mean(x, na.rm = TRUE),
+    Medyan = median(x, na.rm = TRUE),
+    StandartSapma = sd(x, na.rm = TRUE),
+    Minimum = min(x, na.rm = TRUE),
+    Maksimum = max(x, na.rm = TRUE)
+  )
+}
+
+# Fonksiyonu Döngü Kullanarak Uygulama:
+# Özet listesi
+
+summary_list <- list()
+
+# Fonksiyonu döngü ile kullanma
+for (col_name in names(mtcars)) {
+  column <- mtcars[[col_name]]
+  if (is.numeric(column)) {
+    stats <- my_summary_stats(column)
+    summary_list[[col_name]] <- stats
+  }
+}
+apply(mtcars, 2, mean)
+apply(mtcars, 2, median)
+apply(mtcars, 2, sd)
+apply(mtcars, 2, min)
+apply(mtcars, 2, max)
+
+summary_df <- as.data.frame(do.call(rbind, summary_list))
+
+print (summary_df)
+
+# apply fonksiyonu ile alternatif yaklaşım
+table_summary <- sapply(mtcars, function(col) {
+  if (is.numeric(col)) unlist(my_summary_stats(col))
+})
+print(table_summary)
+
+# dslabs paketini yükleme ve na_example veri seti ile çalışma
+library(dslabs)
+data("na_example")
+
+# NA değerlerinin sayısını hesapla
+na_count <- sum(is.na(na_example))
+cat("NA Sayısı:", na_count, "\n")
+
+# NA değerlerini 2025 ile değiştirme
+cleaned_data <- ifelse(is.na(na_example), 2025, na_example)
+
+# Güncellenmiş veri setinin artık eksik değer içermediğini gösteme
+na_after_cleaning <- sum(is.na(cleaned_data))
+cat("Temizlendikten Sonra NA Sayısı:", na_after_cleaning, "\n")
+
+# 2025 değerinin veri seti içinde kaç kez geçtiğini raporlama
+count_2025 <- sum(cleaned_data == 2025)
+cat("2025 Değeri Kaç Kez Geçiyor:", count_2025, "\n")
+
+```
