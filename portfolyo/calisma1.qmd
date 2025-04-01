@@ -82,4 +82,29 @@ cat("Temizlendikten Sonra NA Sayısı:", na_after_cleaning, "\n")
 count_2025 <- sum(cleaned_data == 2025)
 cat("2025 Değeri Kaç Kez Geçiyor:", count_2025, "\n")
 
+# BONUS mtcars veri seti ile çalışma
+library(ggplot2)
+install.packages("ggplot2")
+library(tidyverse)
+library(dslabs)
+data("mtcars")
+
+# Histogram: mtcars veri setindeki mpg değişkeninin dağılımı
+ggplot(mtcars, aes(x = mpg)) + 
+  geom_histogram(binwidth = 2, fill = "green", color = "grey") + 
+  ggtitle("MPG Histogram") + 
+  theme_minimal()
+
+# Kutu grafiği: mtcars veri setindeki hp değişkeni için
+ggplot(mtcars, aes(y = hp)) + 
+  geom_boxplot(fill = "yellow", color = "grey") + 
+  ggtitle("HP Kutu Grafiği") + 
+  theme_minimal()
+
+# Dağılım grafiği: mpg ve hp değişkenleri arasında
+ggplot(mtcars, aes(x = mpg, y = hp)) + 
+  geom_point(color = "pink") + 
+  ggtitle("MPG vs HP Dağılım Grafiği") + 
+  theme_minimal()
+
 ```
