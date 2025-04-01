@@ -1,8 +1,13 @@
 ---
 title: "Muhammed DOĞAN"
+format: html
 ---
 
-![](/assets/images/muhammeddogan.png){fig-align="center"}
+![](/assets/images/muhammeddogan.png){fig-align="center" width="160"}
+
+[Özgeçmiş görüntüle.](/assets/muhammeddogan_CV.pdf "Muhammed DOĞAN"){fig-align="center" width="160"}
+
+[![](/assets/linkedin-logo.jpg){fig-align="center" width="38"}](https://www.linkedin.com/in/muhammed-dogan/)
 
 # Eğitim
 
