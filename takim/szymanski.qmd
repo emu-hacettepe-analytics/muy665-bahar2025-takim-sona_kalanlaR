@@ -1,13 +1,12 @@
 ---
-title: "Sebastian Szymański"
+title: "Sebastian Szymańs"
 ---
-
 
 ![](/assets/images/vesikalik.jpeg){fig-align="center"}
 
 # Eğitim
 
--   Lisans, ................................., .................................... Üniversitesi, Türkiye, 20xx - 20xx.
+-   Lisans, .........ted................, .................................... Üniversitesi, Türkiye, 20xx - 20xx.
 -   Yüksek Lisans, Endüstri Mühendisliği, Hacettepe Üniversitesi, Türkiye, 20xx - devam ediyor.
 
 # İş Deneyimi
