@@ -1,0 +1,38 @@
+---
+title: "Muhammed DOĞAN"
+---
+
+![](/assets/images/muhammeddogan.png){fig-align="center"}
+
+# Eğitim
+
+-   Süleyman Demirel Anadolu Lisesi, 2010-2014
+-   Elektrik Elektronik Mühendisliği, Selçuk Üniversitesi, Türkiye, 2015 - 2020.
+-   Endüstri Mühendisliği, Hacettepe Üniversitesi, Türkiye, 2024 - devam ediyor.
+
+# İş Deneyimi
+
+## İşler
+
+1.  Aselsannet, Proje Mühendisi, 2021-
+
+## Stajlar
+
+1.  TUSAŞ, Intership, 2018
+
+2.  Tecimm, Intership, 2016
+
+# Projeler
+
+1.  2019- SCADA controlled factory automation and panel with Siemens S7 1200
+2.  2018- DC motor control and speed measurement with Hall Effect Sensor
+
+# Yayınlar
+
+# Yetkinlikler
+
+R, Quarto, Git, Python, HMI and SCADA, TiaPortal Siemens,
+
+# Hobiler
+
+Spor, Müzik, Kahve
