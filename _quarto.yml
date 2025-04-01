@@ -37,9 +37,9 @@ website:
       contents:
         - takim.qmd
         - takim/muhammeddogan.qmd
-        - takim/edindzeko.qmd
-        - takim/fred.qmd  
-        - takim/szymanski.qmd  
+        - takim/Ece AKBULUT.qmd
+        - takim/Sude SENGUL.qmd  
+        - takim/Tülay ARAS.qmd  
         
         
   page-navigation: true
