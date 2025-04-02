@@ -2,7 +2,7 @@
 title: "Çalışma 1"
 ---
 
-## (a) Aşağıdaki kaynaklardan bir video seçin ve Quarto dokümanınızda kısa bir özet sağlayın:
+## (a) Video özeti
 
 • **Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Mustafa Baydoğan & Erdi Daşdemir**
 
@@ -10,7 +10,7 @@ title: "Çalışma 1"
 
 ```
 
-## (b) Fonksiyonlar ve Döngüler ile Verileri Özetleme:
+## (b) Fonksiyonlar ve Döngüler ile Verileri Özetleme
 
 ```{r}
 
