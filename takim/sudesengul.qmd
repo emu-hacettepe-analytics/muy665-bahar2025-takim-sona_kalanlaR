@@ -6,11 +6,8 @@ title: "Sude SENGUL"
 
 # Eğitim
 
--   Lisans, .................................,
-    .................................... Üniversitesi, Türkiye, 20xx -
-    20xx.
--   Yüksek Lisans, Endüstri Mühendisliği, Hacettepe Üniversitesi,
-    Türkiye, 20xx - devam ediyor.
+-   Lisans, ................................., .................................... Üniversitesi, Türkiye, 20xx - 20xx.
+-   Yüksek Lisans, Endüstri Mühendisliği, Hacettepe Üniversitesi, Türkiye, 20xx - devam ediyor.
 
 # İş Deneyimi
 
@@ -32,10 +29,7 @@ title: "Sude SENGUL"
 
 # Yayınlar
 
-1.  Dasdemir, E., Batta, R., Koksalan, M., Tezcaner Öztürk, D. (2022)
-    “İHA Yönlendirmesi için Keşif Misyonu: Zaman Bağımlı Ödülleri ve
-    Çoklu Bağlantıları Olan Çok Amaçlı Oryantiring Problemi”, Computers
-    & Operations Research, 145: 105882
+1.  Dasdemir, E., Batta, R., Koksalan, M., Tezcaner Öztürk, D. (2022) “İHA Yönlendirmesi için Keşif Misyonu: Zaman Bağımlı Ödülleri ve Çoklu Bağlantıları Olan Çok Amaçlı Oryantiring Problemi”, Computers & Operations Research, 145: 105882
 
 # Yetkinlikler
 

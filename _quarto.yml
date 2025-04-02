@@ -9,7 +9,7 @@ website:
     left:
       - text: Ana Sayfa
         href: index.qmd
-      - text: Takim Uyeleri
+      - text: Takım Üyeleri
         href: takim.qmd
       - text: Proje
         href: proje.qmd
@@ -33,7 +33,7 @@ website:
         - portfolyo/calisma1.qmd
         - portfolyo/calisma2.qmd  
         
-    - title: "takım"
+    - title: "Takım Üyeleri"
       style: "docked"
       search: true
       contents:
@@ -47,7 +47,7 @@ website:
   page-navigation: true
   back-to-top-navigation: true
   page-footer:
-    center: "EMU Hacettepe MUY665 - 2025 Bahar" 
+    center: "MUY665 - 2025 Bahar" 
     border: true
 format:
   html:

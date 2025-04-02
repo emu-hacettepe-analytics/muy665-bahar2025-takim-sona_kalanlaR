@@ -2,7 +2,7 @@
 title: "Tülay ARAS"
 ---
 
-![](/assets/images/tulayaras.jpeg){fig-align="center"}
+![](/assets/images/tulayaras.jpeg){fig-align="center" width="241"}
 
 # Eğitim
 
