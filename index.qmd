@@ -1,6 +1,6 @@
 ---
 title: "Takım sona kalanlaR"
-sidebar: false 
+sidebar: true 
 ---
 
 MUY665-İş Analitiği dersi takım sayfamıza hoş geldiniz.
