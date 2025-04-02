@@ -13,7 +13,6 @@ website:
         href: takim.qmd
       - text: Proje
         href: proje.qmd
-    right:
       - text: Porfolyo
         href: portfolyo.qmd
 
