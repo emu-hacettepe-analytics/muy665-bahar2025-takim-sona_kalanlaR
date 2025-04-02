@@ -1,41 +1,62 @@
----
-editor: 
-  markdown: 
-    wrap: 72
----
+project:
+  type: website
+  output-dir: docs
 
-project: type: website output-dir: docs
+website:
+  title: "sona kalanlaR"
+  navbar:
+    search: true
+    left:
+      - text: Ana Sayfa
+        href: index.qmd
+      - text: Takim Uyeleri
+        href: takim.qmd
+      - text: Proje
+        href: proje.qmd
+    right:
+      - text: Porfolyo
+        href: portfolyo.qmd
 
-website: title: "sona_kalanlar" navbar: search: true left: - text: Ana
-Sayfa href: index.qmd - text: Takım Üyeleri href: takim.qmd - text:
-Porfolyo href: portfolyo.qmd - text: Proje href: proje.qmd
 
-```         
-tools:
-  - icon: github
-    href: https://github.com
-```
 
-sidebar: - title: "Çalışmalar" style: "docked" search: true contents: -
-portfolyo.qmd - portfolyo/calisma1.qmd - portfolyo/calisma2.qmd
+            
+    tools:
+      - icon: github
+        href: https://github.com
 
-```         
-- title: "Takım"
-  style: "docked"
-  search: true
-  contents:
-    - takim.qmd
-    - takim/muhammeddogan.qmd
-    - takim/eceakbulut.qmd
-    - takim/sudesengul.qmd 
-    - takim/tulayaras.qmd 
-    
-    
-```
+  sidebar:
+    - title: "Ana Sayfa"
+      style: "docked"
+      search: true
+      contents:
+        - portfolyo.qmd
+        - portfolyo/calisma1.qmd
+        - portfolyo/calisma2.qmd  
+        
+    - title: "takım"
+      style: "docked"
+      search: true
+      contents:
+        - takim.qmd
+        - takim/muhammeddogan.qmd
+        - takim/tulayaras.qmd  
+        - takim/sudesengul.qmd  
+        - takim/eceakbulut.qmd  
+        
+        
+  page-navigation: true
+  back-to-top-navigation: true
+  page-footer:
+    center: "EMU Hacettepe MUY665 - 2025 Bahar" 
+    border: true
+format:
+  html:
+    toc: true
+    toc-location: left
+    theme: 
+      light: simplex 
+      dark: cyborg
+    css: styles.css
 
-page-navigation: true back-to-top-navigation: true page-footer: center:
-"EMU Hacettepe MUY665 - 2023-2024 Bahar" border: true format: html: toc:
-true toc-location: left theme: light: simplex dark: cyborg css:
-styles.css
 
 editor: visual

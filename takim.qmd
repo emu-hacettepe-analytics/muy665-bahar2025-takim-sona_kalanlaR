@@ -2,7 +2,8 @@
 title: "Takım Üyeleri"
 ---
 
-Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.
+Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına
+gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.
 
 # Takım Üyeleri
 
