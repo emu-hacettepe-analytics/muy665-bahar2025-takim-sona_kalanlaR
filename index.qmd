@@ -1,5 +1,5 @@
 ---
-title: "Takım: sona_kalanlar"
+title: "Takım sona kalanlaR"
 sidebar: false 
 ---
 
@@ -11,13 +11,13 @@ Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.
 
 ## Takım Üyeleri
 
-1.  [Ece AKBULUT](/takim/eceakbulut.qmd)
+1.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
 
-2.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
+2.  [Tülay ARAS](/takim/tulayaras.qmd)
 
 3.  [Sude SENGUL](/takim/sudesengul.qmd)
 
-4.  [Tülay ARAS](/takim/tulayaras.qmd)
+4.  [Ece AKBULUT](/takim/eceakbulut.qmd)
 
 ## Proje Adı
 
