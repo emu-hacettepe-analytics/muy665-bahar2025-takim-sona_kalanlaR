@@ -2,15 +2,14 @@
 title: "Takım Üyeleri"
 ---
 
-Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına
-gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.
+Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.
 
 # Takım Üyeleri
 
-1.  [Ece AKBULUT](/takim/eceakbulut.qmd)
+1.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
 
-2.  [Muhammed DOĞAN](/takim/muhammeddogan.qmd)
+2.  [Tülay ARAS](/takim/tulayaras.qmd)
 
 3.  [Sude SENGUL](/takim/sudesengul.qmd)
 
-4.  [Tülay ARAS](/takim/tulayaras.qmd)
+4.  [Ece AKBULUT](/takim/eceakbulut.qmd)
