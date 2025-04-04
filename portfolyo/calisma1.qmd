@@ -6,9 +6,13 @@ title: "Çalışma 1"
 
 • **Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Mustafa Baydoğan & Erdi Daşdemir**
 
+<<<<<<< HEAD
 ## Doç. Dr. Mustafa Gökçe Baydoğan ve Dr. Erdi Daşdemir'in gerçekleştirdiği bu söyleşi, veri bilimi ve endüstri mühendisliği alanlarının kesişim noktalarını ve bu alandaki kariyer fırsatlarını inceliyor. Söyleşi boyunca, veri biliminin karar verme süreçlerini nasıl optimize ettiği, problem çözme yeteneklerini nasıl güçlendirdiği ve çeşitli endüstriyel süreçlerde nasıl verimlilik artışı sağladığı somut örneklerle açıklanıyor. Özellikle, veri analizinin maliyet düşürme ve verimlilik artırma gibi kritik konulardaki katkıları detaylandırılıyor. Geleneksel öğrenme ve derin öğrenme yöntemleri arasındaki farklar ve bu yöntemlerin uygulamalı örnekleri de ele alınıyor. Tahmin modellerinin doğruluğunun karar verme süreçlerindeki önemi, uygulamalı örnekler üzerinden açıklanıyor. Söyleşi, Doç. Dr. Mustafa Gökçe Baydoğan'ın, veri bilimi ve endüstri mühendisliği alanlarında kariyer hedefleyen öğrencilere yönelik tavsiyeleriyle sona eriyor.
 
 ```
+=======
+Doç. Dr. Mustafa Gökçe Baydoğan ve Dr. Erdi Daşdemir'in gerçekleştirdiği bu söyleşi, veri bilimi ve endüstri mühendisliği alanlarının kesişim noktalarını ve bu alandaki kariyer fırsatlarını inceliyor. Söyleşi boyunca, veri biliminin karar verme süreçlerini nasıl optimize ettiği, problem çözme yeteneklerini nasıl güçlendirdiği ve çeşitli endüstriyel süreçlerde nasıl verimlilik artışı sağladığı somut örneklerle açıklanıyor. Özellikle, veri analizinin maliyet düşürme ve verimlilik artırma gibi kritik konulardaki katkıları detaylandırılıyor. Geleneksel öğrenme ve derin öğrenme yöntemleri arasındaki farklar ve bu yöntemlerin uygulamalı örnekleri de ele alınıyor. Tahmin modellerinin doğruluğunun karar verme süreçlerindeki önemi, uygulamalı örnekler üzerinden açıklanıyor. Söyleşi, Doç. Dr. Mustafa Gökçe Baydoğan'ın, veri bilimi ve endüstri mühendisliği alanlarında kariyer hedefleyen öğrencilere yönelik tavsiyeleriyle sona eriyor.
+>>>>>>> 77b43b089e64dc03f78a19ea86cf83ef29a0636f
 
 ## (b) Fonksiyonlar ve Döngüler ile Verileri Özetleme
 
