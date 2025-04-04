@@ -5,7 +5,6 @@ title: "Çalışma 1"
 
 ## (a) Video özeti
 
-
 ## Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Mustafa Baydoğan & Erdi Daşdemir**
 
 print("Doç. Dr. Mustafa Gökçe Baydoğan ve Dr. Erdi Daşdemir'in gerçekleştirdiği bu söyleşi, veri bilimi ve endüstri mühendisliği alanlarının kesişim noktalarını ve bu alandaki kariyer fırsatlarını inceliyor.")
