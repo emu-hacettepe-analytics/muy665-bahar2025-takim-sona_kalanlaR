@@ -1,17 +1,21 @@
 ---
-title: "Proje X (proje adını yazınız)"
+title: "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi"
 number-sections: true
 ---
 
 **Proje sayfamıza hoş geldiniz.**
 
-*Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
+![](/assets/images/image_2025.png){fig-align="center" width="360"}
 
-(Aşağıdaki başlıklar örnek olarak verilmiştir; lütfen gerektiği şekilde düzenlemekten çekinmeyin.)
+*Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
 
 # Proje Genel Bakış ve Kapsamı
 
-xxxxxx
+Hava kirliliği şu anda Türkiye'deki en önemli sorunlardan biri olarak kabul ediliyor ve her yıl tahmini 30 bin kişi ilgili nedenlerle ölüyor ve ülke çapındaki tüm ölümlerin yaklaşık yüzde 8'ini temsil ediyor.
+
+Ankara'da ve aslında Türkiye'nin birçok şehrinde kirliliğin ana nedeni, 1990 yılı itibariyle ülkede yaklaşık 4 milyon araç olan araç emisyonlarının 2020'de 25 milyona yükseldiği anlamına geliyor. Otomobiller, kamyonlar ve otobüsler gibi bu araçların çoğu, emisyonlar söz konusu olduğunda uluslararası standartları karşılamıyor ve büyük miktarlarda dizel yakıt kullanılıyor.
+
+Ankara sınırları içinde yaklaşık 4,5 milyon nüfusa sahip olması sebebi ile yüksek nüfuslu birçok şehirde ortaya çıkan kirlilik kaynaklarına maruz kalmaktadır.
 
 # Veri
 
@@ -19,15 +23,15 @@ xxxxxx
 
 ## Veri Kaynağı
 
-xxxxxx
+<https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew>
 
 ## Veri Hakkında Genel Bilgiler
 
-xxxxxx
+PM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır.
 
 ## Tercih Sebebi
 
-xxxxxx
+Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek
 
 ## Ön İşleme
 
@@ -35,24 +39,209 @@ xxxxxx
 
 # Analiz
 
-xxxxxx
+```{r}
+# Gerekli kütüphaneleri yükleyin
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(tidyr)
+
+# Veri dosyasını okuyun
+hava_verisi <- read_excel("ankara_hava_kalitesi_2024.xlsx")
+
+# Tarih ve saat sütunlarını birleştirerek datetime oluşturun
+hava_verisi <- hava_verisi %>%
+  mutate(datetime = as.POSIXct(paste(Tarih, Saat), format = "%Y-%m-%d %H:%M"))
+
+# İlçe, gün, ay, mevsim bilgilerini ekleyin
+hava_verisi <- hava_verisi %>%
+  mutate(
+    İlçe = as.factor(İlçe),
+    Gün = day(datetime),
+    Ay = month(datetime, label = TRUE),
+    Mevsim = case_when(
+      Ay %in% c("Dec", "Jan", "Feb") ~ "Kış",
+      Ay %in% c("Mar", "Apr", "May") ~ "İlkbahar",
+      Ay %in% c("Jun", "Jul", "Aug") ~ "Yaz",
+      Ay %in% c("Sep", "Oct", "Nov") ~ "Sonbahar"
+    )
+  )
+
+# İlçe bazında PM2.5 ve PM10 ortalamalarını hesaplayın
+ilce_ortalamalari <- hava_verisi %>%
+  group_by(İlçe) %>%
+  summarise(
+    PM2.5_Ortalama = mean(PM2.5, na.rm = TRUE),
+    PM10_Ortalama = mean(PM10, na.rm = TRUE)
+  )
+
+# Mevsimsel analiz
+mevsim_analizi <- hava_verisi %>%
+  group_by(Mevsim, İlçe) %>%
+  summarise(
+    PM2.5_Ortalama = mean(PM2.5, na.rm = TRUE),
+    PM10_Ortalama = mean(PM10, na.rm = TRUE)
+  )
+
+# Görselleştirme: İlçelere göre PM2.5 ortalamaları
+ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Ortalama)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(title = "İlçelere Göre PM2.5 Ortalamaları (2024)", x = "İlçe", y = "PM2.5 (µg/m³)")
+
+```
+
+## 
+
+```{r}
+# Gerekli kütüphaneler
+library(readxl)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+library(reshape2)
+library(heatmaply)
+library(plotly)
+library(corrplot)
+library(caret)
+
+# Veriyi oku
+df <- read_excel("ankara_hava_kalitesi_2024.xlsx")
+
+# Sütun adlarını düzenle
+colnames(df) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
+df <- df %>% select(-Extra)
+
+# Ondalıkları düzelt ve sayısala çevir
+df <- df %>%
+  mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
+
+# Tarih sütununu zaman formatına çevir
+df$Tarih <- ymd_hms(df$Tarih)
+
+```
 
 ## Keşifsel Veri Analizi
 
-xxxxxx
+```{r}
+# Günlük ortalamaları hesapla
+daily_avg <- df %>%
+  mutate(Gun = as_date(Tarih)) %>%
+  group_by(Gun) %>%
+  summarise(across(PM10:NO, ~mean(., na.rm = TRUE)))
+
+# Zaman serisi çizimi
+ggplot(daily_avg, aes(x = Gun)) +
+  geom_line(aes(y = PM10, color = "PM10")) +
+  geom_line(aes(y = PM2_5, color = "PM2.5")) +
+  labs(title = "Günlük Ortalama PM10 ve PM2.5 Değerleri", y = "Konsantrasyon (µg/m3)", x = "Tarih") +
+  scale_color_manual(values = c("PM10" = "darkorange", "PM2.5" = "steelblue")) +
+  theme_minimal()
+
+df_heat <- df %>%
+  mutate(Ay = month(Tarih, label = TRUE),
+         Saat = hour(Tarih)) %>%
+  group_by(Ay, Saat) %>%
+  summarise(PM2_5_ort = mean(PM2_5, na.rm = TRUE)) %>%
+  pivot_wider(names_from = Saat, values_from = PM2_5_ort)
+
+# Isı haritası
+heatmaply::heatmaply(
+  as.matrix(df_heat[,-1]),
+  xlab = "Saat",
+  ylab = "Ay",
+  row_side_colors = df_heat$Ay,
+  main = "Saatlik Ortalama PM2.5 Isı Haritası"
+)
+
+```
 
 ## Trend Analizi
 
-xxxxxx
+```{r}
+# Korelasyon matrisi oluştur
+cor_matrix <- df %>%
+  select(PM10:NO) %>%
+  cor(use = "complete.obs")
+
+# Görselleştir
+corrplot::corrplot(cor_matrix, method = "color", addCoef.col = "black", tl.cex = 0.8)
+```
 
 ## Model Uydurma
 
-xxxxxx
+```{r}
+# PM10'u sınıflara ayıralım (örnek: temiz - kirli)
+df <- df %>%
+  mutate(PM10_Sinif = case_when(
+    PM10 < 50 ~ "Temiz",
+    PM10 >= 50 ~ "Kirli",
+    TRUE ~ NA_character_
+  )) %>%
+  drop_na(PM10_Sinif)
+
+# Eğitim-test bölmesi
+set.seed(123)
+train_index <- createDataPartition(df$PM10_Sinif, p = 0.7, list = FALSE)
+train_data <- df[train_index,]
+test_data <- df[-train_index,]
+
+# Model: Karar ağacı (rpart)
+library(rpart)
+model <- rpart(PM10_Sinif ~ SO2 + NO2 + NOX + NO + PM2_5, data = train_data, method = "class")
+pred <- predict(model, test_data, type = "class")
+
+# Performans
+confusionMatrix(pred, test_data$PM10_Sinif)
+```
+
+## Görselleştirme
+
+```{r}
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  selectInput("istasyon", "İstasyon Seçin:", choices = unique(df$Istasyon)),
+  plotOutput("plot")
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    df_filtered <- df %>% filter(Istasyon == input$istasyon) %>%
+      group_by(Gun = as.Date(Tarih)) %>%
+      summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
+
+    ggplot(df_filtered, aes(x = Gun, y = PM2_5)) +
+      geom_line(color = "blue") +
+      labs(title = paste(input$istasyon, "PM2.5 Günlük Ortalaması"), y = "µg/m3", x = "Tarih") +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui, server)
+```
 
 ## Sonuçlar
 
-xxxxxx
+```{r}
+
+```
 
 # Sonuçlar ve Ana Çıkarımlar
 
-xxxxxxxx
+```{r}
+
+```
+
+# Kaynaklar
+
+[https://sim.csb.gov.tr](https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew)
+
+<https://www.iqair.com/us/turkey/ankara/ankara>
+
+<https://aqicn.org/city/turkey/ankara/ulus-trafik/>
+
+<https://quarto.org/docs/interactive/widgets/jupyter.html>
