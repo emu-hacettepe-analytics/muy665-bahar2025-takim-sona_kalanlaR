@@ -9,6 +9,10 @@ number-sections: true
 
 *Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
 
+Proje tanıtım filmine buradan ulaşabilirsiniz.
+
+[![](/assets/video-logo.jpg){fig-align="left" width="65" height="65"}](https://www.youtube.com)
+
 # Proje Genel Bakış ve Kapsamı
 
 Hava kirliliği şu anda Türkiye'deki en önemli sorunlardan biri olarak kabul ediliyor ve her yıl tahmini 30 bin kişi ilgili nedenlerle ölüyor ve ülke çapındaki tüm ölümlerin yaklaşık yüzde 8'ini temsil ediyor.
@@ -35,7 +39,34 @@ Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkın
 
 ## Ön İşleme
 
-xxxxxx
+```{r}
+# Gerekli kütüphaneler
+library(readxl)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+library(reshape2)
+library(heatmaply)
+library(plotly)
+library(corrplot)
+library(caret)
+
+# Veriyi oku
+df <- read_excel("ankara_hava_kalitesi_2024.xlsx")
+
+# Sütun adlarını düzenle
+colnames(df) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
+df <- df %>% select(-Extra)
+
+# Ondalıkları düzelt ve sayısala çevir
+df <- df %>%
+  mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
+
+# Tarih sütununu zaman formatına çevir
+df$Tarih <- ymd_hms(df$Tarih)
+
+```
 
 # Analiz
 
@@ -89,37 +120,6 @@ ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Or
   geom_bar(stat = "identity", fill = "steelblue") +
   coord_flip() +
   labs(title = "İlçelere Göre PM2.5 Ortalamaları (2024)", x = "İlçe", y = "PM2.5 (µg/m³)")
-
-```
-
-## 
-
-```{r}
-# Gerekli kütüphaneler
-library(readxl)
-library(dplyr)
-library(lubridate)
-library(ggplot2)
-library(tidyr)
-library(reshape2)
-library(heatmaply)
-library(plotly)
-library(corrplot)
-library(caret)
-
-# Veriyi oku
-df <- read_excel("ankara_hava_kalitesi_2024.xlsx")
-
-# Sütun adlarını düzenle
-colnames(df) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
-df <- df %>% select(-Extra)
-
-# Ondalıkları düzelt ve sayısala çevir
-df <- df %>%
-  mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
-
-# Tarih sütununu zaman formatına çevir
-df$Tarih <- ymd_hms(df$Tarih)
 
 ```
 
