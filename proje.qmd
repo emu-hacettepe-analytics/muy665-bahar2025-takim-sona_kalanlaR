@@ -51,6 +51,8 @@ library(heatmaply)
 library(plotly)
 library(corrplot)
 library(caret)
+library(ipred)
+library(recipes)
 
 # Veriyi oku
 df <- read_excel("ankara_hava_kalitesi_2024.xlsx")
