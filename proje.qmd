@@ -40,7 +40,6 @@ Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkın
 ## Ön İşleme
 
 ```{r}
-# Gerekli kütüphaneler
 library(readxl)
 library(dplyr)
 library(lubridate)
@@ -50,24 +49,22 @@ library(reshape2)
 library(heatmaply)
 library(plotly)
 library(corrplot)
-library(caret)
-library(ipred)
-library(recipes)
+library(rpart)
+library(rpart.plot)
+library(shiny)
 
-# Veriyi oku
-df <- read_excel("ankara_hava_kalitesi_2024.xlsx")
+# Veri yükleme
+veri <- read_excel("ankara_hava_kalitesi_2024.xlsx")
 
-# Sütun adlarını düzenle
-colnames(df) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
-df <- df %>% select(-Extra)
+# Sütun adları düzenleme
+colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
+veri <- veri %>% select(-Extra)
 
-# Ondalıkları düzelt ve sayısala çevir
-df <- df %>%
-  mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
+# Ondalıkları düzeltme ve sayıya çevirme
+veri <- veri %>% mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
 
-# Tarih sütununu zaman formatına çevir
-df$Tarih <- ymd_hms(df$Tarih)
-
+# Tarih dönüşümü
+veri$Tarih <- ymd_hms(veri$Tarih)
 ```
 
 # Analiz
@@ -127,98 +124,96 @@ ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Or
 
 ## Keşifsel Veri Analizi
 
+## 1.Zaman Serisi Analizi
 ```{r}
-# Günlük ortalamaları hesapla
-daily_avg <- df %>%
-  mutate(Gun = as_date(Tarih)) %>%
-  group_by(Gun) %>%
+# Günlük ortalama
+gunluk <- veri %>% mutate(Gun = as_date(Tarih)) %>% group_by(Gun) %>%
   summarise(across(PM10:NO, ~mean(., na.rm = TRUE)))
 
-# Zaman serisi çizimi
-ggplot(daily_avg, aes(x = Gun)) +
+# Çizim
+ggplot(gunluk, aes(x = Gun)) +
   geom_line(aes(y = PM10, color = "PM10")) +
   geom_line(aes(y = PM2_5, color = "PM2.5")) +
-  labs(title = "Günlük Ortalama PM10 ve PM2.5 Değerleri", y = "Konsantrasyon (µg/m3)", x = "Tarih") +
-  scale_color_manual(values = c("PM10" = "darkorange", "PM2.5" = "steelblue")) +
-  theme_minimal()
+  labs(title = "Günlük PM10 ve PM2.5", x = "Tarih", y = "Konsantrasyon (ug/m3)") +
+  theme_minimal() +
+  scale_color_manual(values = c("PM10" = "orange", "PM2.5" = "blue"))
+```
 
-df_heat <- df %>%
-  mutate(Ay = month(Tarih, label = TRUE),
-         Saat = hour(Tarih)) %>%
-  group_by(Ay, Saat) %>%
-  summarise(PM2_5_ort = mean(PM2_5, na.rm = TRUE)) %>%
-  pivot_wider(names_from = Saat, values_from = PM2_5_ort)
+## 2. Isı Haritası Analizi
+```{r}
+isi <- veri %>% mutate(Ay = month(Tarih, label = TRUE), Saat = hour(Tarih)) %>%
+  group_by(Ay, Saat) %>% summarise(PM2_5 = mean(PM2_5, na.rm = TRUE)) %>%
+  pivot_wider(names_from = Saat, values_from = PM2_5)
 
-# Isı haritası
-heatmaply::heatmaply(
-  as.matrix(df_heat[,-1]),
-  xlab = "Saat",
-  ylab = "Ay",
-  row_side_colors = df_heat$Ay,
-  main = "Saatlik Ortalama PM2.5 Isı Haritası"
-)
+heatmaply(as.matrix(isi[,-1]),
+          xlab = "Saat", ylab = "Ay",
+          row_side_colors = isi$Ay,
+          main = "PM2.5 Isı Haritası")
 
 ```
 
 ## Trend Analizi
 
+## 1. Korelasyon Analizi
 ```{r}
 # Korelasyon matrisi oluştur
-cor_matrix <- df %>%
-  select(PM10:NO) %>%
-  cor(use = "complete.obs")
+cor_data <- veri %>% select(PM10:NO)
+cor_matrix <- cor(cor_data, use = "complete.obs")
 
 # Görselleştir
-corrplot::corrplot(cor_matrix, method = "color", addCoef.col = "black", tl.cex = 0.8)
+corrplot(cor_matrix, method = "color", addCoef.col = "black")
 ```
 
 ## Model Uydurma
 
+## 1. SInıflandırma Modeli
 ```{r}
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
-df <- df %>%
-  mutate(PM10_Sinif = case_when(
-    PM10 < 50 ~ "Temiz",
-    PM10 >= 50 ~ "Kirli",
-    TRUE ~ NA_character_
-  )) %>%
-  drop_na(PM10_Sinif)
+veri_model <- veri %>% mutate(PM10_Sinif = case_when(
+  PM10 < 50 ~ "Temiz",
+  PM10 >= 50 ~ "Kirli",
+  TRUE ~ NA_character_
+)) %>% drop_na(PM10_Sinif)
+
 
 # Eğitim-test bölmesi
 set.seed(123)
-train_index <- createDataPartition(df$PM10_Sinif, p = 0.7, list = FALSE)
-train_data <- df[train_index,]
-test_data <- df[-train_index,]
+trainIndex <- sample(1:nrow(veri_model), 0.7 * nrow(veri_model))
+train <- veri_model[trainIndex, ]
+test <- veri_model[-trainIndex, ]
+
 
 # Model: Karar ağacı (rpart)
 library(rpart)
-model <- rpart(PM10_Sinif ~ SO2 + NO2 + NOX + NO + PM2_5, data = train_data, method = "class")
-pred <- predict(model, test_data, type = "class")
+model <- rpart(PM10_Sinif ~ SO2 + NO2 + NOX + NO + PM2_5, data = train, method = "class")
+pred <- predict(model, test, type = "class")
 
-# Performans
-confusionMatrix(pred, test_data$PM10_Sinif)
+# Doğruluk oranı
+accuracy <- mean(pred == test$PM10_Sinif)
+print(paste("Doğruluk:", round(accuracy * 100, 2), "%"))
 ```
 
 ## Görselleştirme
 
+## 1. Etkileşimli Grafik: İstasyona göre PM2.5
 ```{r}
 library(shiny)
 library(ggplot2)
 
 ui <- fluidPage(
-  selectInput("istasyon", "İstasyon Seçin:", choices = unique(df$Istasyon)),
-  plotOutput("plot")
+  selectInput("istasyon", "İstasyon Seçin", choices = unique(veri$Istasyon)),
+  plotOutput("grafik")
 )
 
 server <- function(input, output) {
-  output$plot <- renderPlot({
-    df_filtered <- df %>% filter(Istasyon == input$istasyon) %>%
+  output$grafik <- renderPlot({
+    df_filt <- veri %>% filter(Istasyon == input$istasyon) %>%
       group_by(Gun = as.Date(Tarih)) %>%
       summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
 
-    ggplot(df_filtered, aes(x = Gun, y = PM2_5)) +
-      geom_line(color = "blue") +
-      labs(title = paste(input$istasyon, "PM2.5 Günlük Ortalaması"), y = "µg/m3", x = "Tarih") +
+   ggplot(df_filt, aes(x = Gun, y = PM2_5)) +
+      geom_line(color = "darkgreen") +
+      labs(title = paste(input$istasyon, "PM2.5 Günlük Ortalama"), x = "Tarih", y = "PM2.5") +
       theme_minimal()
   })
 }
