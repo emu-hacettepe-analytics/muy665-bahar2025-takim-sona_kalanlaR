@@ -23,19 +23,17 @@ Ankara sınırları içinde yaklaşık 4,5 milyon nüfusa sahip olması sebebi i
 
 # Veri
 
-Ankara iline ait 2024 yılı boyunca ölçülen hava kalitesi verileri.
+Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
 ## Veri Kaynağı
 
-<https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew>
+[https://sim.csb.gov.tr](https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew){.uri}
 
 ## Veri Hakkında Genel Bilgiler
 
 -   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
 
-<!-- -->
-
--   Ölçümler saatlik olarak yapılmış. `Tarih` sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.
+-   Ölçümler saatlik olarak yapılmış. Tarih sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.
 
 -   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
 
@@ -43,7 +41,7 @@ Ankara iline ait 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
     `PM10` (Partikül madde ≤10 µm)
 
-    `PM2_5` (Partikül madde ≤2.5 µm)
+    `PM2.5` (Partikül madde ≤2.5 µm)
 
     `SO2` (Kükürt dioksit)
 
@@ -71,27 +69,21 @@ Ankara iline ait 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
     PM10, PM2.5, SO₂, NO₂, NOx, NO gibi farklı hava kirleticileri kapsaması sayesinde değişkenler arası **korelasyon** ve neden-sonuç ilişkileri incelenebilir.
 
--    **Mekânsal Karşılaştırma Yapılabilir:**
+-   **Mekânsal Karşılaştırma Yapılabilir:**
 
     Ankara’daki birden fazla istasyondan gelen veriler sayesinde **istasyonlar arası karşılaştırma** ve **ısı haritası görselleştirmeleri** mümkündür.
 
-<!-- -->
-
--    **Çevresel ve Toplumsal Anlam Taşıması:**
+-   **Çevresel ve Toplumsal Anlam Taşıması:**
 
     Hava kirliliği halk sağlığını doğrudan etkileyen önemli bir çevresel sorundur; bu da çalışmayı **toplumsal açıdan anlamlı** ve güncel kılar.
 
--    **Modelleme ve Sınıflandırma İçin Elverişli:**
+-   **Modelleme ve Sınıflandırma İçin Elverişli:**
 
     PM10 düzeyine göre hava “Temiz” ya da “Kirli” olarak sınıflandırılabilir; bu da **makine öğrenmesi (sınıflandırma) modellerinin** uygulanmasına olanak tanır.
-
-<!-- -->
 
 -   **Kamuya Açık ve Gerçek Veridir:**
 
     Verinin gerçek, ham ve karmaşık olması, dersin amacı doğrultusunda **veri temizleme, keşifsel analiz ve modelleme** gibi tüm süreci uygulamalı yapmaya olanak sağlar.
-
-<!-- -->
 
 -   **Etkileşimli Uygulamalar için Uygunluk:**
 
@@ -216,6 +208,23 @@ print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 ## 1. Etkileşimli Grafik: İstasyona göre PM2.5
 
 ```{r}
+ui <- fluidPage(
+  selectInput("istasyon", "İstasyon Seçin", choices = unique(veri$Istasyon)),
+  plotOutput("grafik")
+)
+
+server <- function(input, output) {
+  output$grafik <- renderPlot({
+    df_filt <- veri %>% filter(Istasyon == input$istasyon) %>%
+      group_by(Gun = as.Date(Tarih)) %>%
+      summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
+
+    ggplot(df_filt, aes(x = Gun, y = PM2_5)) +
+      geom_line(color = "darkgreen") +
+      labs(title = paste(input$istasyon, "PM2.5 Günlük Ortalama"), x = "Tarih", y = "PM2.5") +
+      theme_minimal()
+  })
+}
 
 ```
 
