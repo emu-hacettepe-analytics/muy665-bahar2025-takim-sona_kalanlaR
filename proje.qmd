@@ -121,9 +121,7 @@ library(viridis)
 library(readr)
 
 # 1. Veri Yükleme ve Temizleme
-data <- read_delim("ankara_hava_kalitesi.csv", 
-                   delim = ",", 
-                   locale = locale(decimal_mark = ",", encoding = "UTF-8"))
+data <- read_csv("ankara_hava_kalitesi.csv")
 
 # Gereksiz sütun kaldır
 data <- data[, -which(names(data) == "Unnamed..8")]
@@ -132,7 +130,7 @@ data <- data[, -which(names(data) == "Unnamed..8")]
 colnames(data) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
 
 # Nokta yerine virgül kullanılmış, düzelt
-numeric_cols <- c("PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
+numeric_cols <- c("PM10 ( µg/m3 )", "PM 2.5 ( µg/m3 )", "SO2 ( µg/m3 )", "NO2 ( µg/m3 )", "NOX ( µg/m3 )", "NO ( µg/m3 )")
 data[numeric_cols] <- lapply(data[numeric_cols], function(x) as.numeric(str_replace(x, ",", ".")))
 
 # Tarih-saat formatını düzenle
