@@ -31,76 +31,114 @@ Ankara iline ait 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
 ## Veri Hakkında Genel Bilgiler
 
-PM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır.
+-   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
+
+<!-- -->
+
+-   Ölçümler saatlik olarak yapılmış. `Tarih` sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.
+
+-   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
+
+-   Aşağıdaki 6 temel hava kirleticinin saatlik ölçümleri yer alıyor.
+
+    `PM10` (Partikül madde ≤10 µm)
+
+    `PM2_5` (Partikül madde ≤2.5 µm)
+
+    `SO2` (Kükürt dioksit)
+
+    `NO2` (Azot dioksit)
+
+    `NOX` (Azot oksitler toplamı)
+
+    `NO` (Azot monoksit)
+
+-   Veri setinde yaklaşık olarak **86.000+** gözlem bulunmaktadır (tüm istasyonlar dahil).
+
+    Sayısal değerler nokta yerine virgül ile girilmişti; bu durum düzeltilerek sayısal veri türüne dönüştürüldü.
+
+    Eksik değerler bazı sütunlarda mevcut ancak analiz için uygun şekilde ortalama alımı, sınıflandırma için filtreleme yapılmıştır.
+
+-   **Kapsanan Zaman Aralığı:**1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler).
 
 ## Tercih Sebebi
 
-Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek
+-   **Zaman Serisi Analizi İçin Uygunluk:**
+
+    Veri saatlik ölçümler içerdiğinden yıl boyu zaman serisi analizleri (trend, mevsimsellik, dalgalanma) yapılmasına elverişlidir.
+
+-   **Çoklu Değişken ve Ölçüm:**
+
+    PM10, PM2.5, SO₂, NO₂, NOx, NO gibi farklı hava kirleticileri kapsaması sayesinde değişkenler arası **korelasyon** ve neden-sonuç ilişkileri incelenebilir.
+
+-    **Mekânsal Karşılaştırma Yapılabilir:**
+
+    Ankara’daki birden fazla istasyondan gelen veriler sayesinde **istasyonlar arası karşılaştırma** ve **ısı haritası görselleştirmeleri** mümkündür.
+
+<!-- -->
+
+-    **Çevresel ve Toplumsal Anlam Taşıması:**
+
+    Hava kirliliği halk sağlığını doğrudan etkileyen önemli bir çevresel sorundur; bu da çalışmayı **toplumsal açıdan anlamlı** ve güncel kılar.
+
+-    **Modelleme ve Sınıflandırma İçin Elverişli:**
+
+    PM10 düzeyine göre hava “Temiz” ya da “Kirli” olarak sınıflandırılabilir; bu da **makine öğrenmesi (sınıflandırma) modellerinin** uygulanmasına olanak tanır.
+
+<!-- -->
+
+-   **Kamuya Açık ve Gerçek Veridir:**
+
+    Verinin gerçek, ham ve karmaşık olması, dersin amacı doğrultusunda **veri temizleme, keşifsel analiz ve modelleme** gibi tüm süreci uygulamalı yapmaya olanak sağlar.
+
+<!-- -->
+
+-   **Etkileşimli Uygulamalar için Uygunluk:**
+
+    Verinin zaman ve istasyon bazlı olması sayesinde **Shiny veya Quarto Widget gibi etkileşimli uygulamalarda** kullanılabilir, kullanıcıya veriyle oynama şansı tanır.
 
 ## Ön İşleme
 
 ```{r}
 
-install.packages("readxl")
-library(readxl)
-
-# Veri yükleme
-veri <- read_excel("ankara_hava_kalitesi_2024")
-
-# Sütun adları düzenleme
-colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
-veri <- veri %>% select(-Extra)
-
-# Ondalıkları düzeltme ve sayıya çevirme
-veri <- veri %>% mutate(across(PM10:NO, ~as.numeric(gsub(",", ".", .))))
-
-# Tarih dönüşümü
-veri$Tarih <- ymd_hms(veri$Tarih)
 ```
 
-# Analiz
+# Veri Analizi
 
 ```{r}
-# Tarih ve saat sütunlarını birleştirerek datetime oluşturun
-hava_verisi <- hava_verisi %>%
-  mutate(datetime = as.POSIXct(paste(Tarih, Saat), format = "%Y-%m-%d %H:%M"))
+# Gerekli kütüphaneler
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(reshape2)
+library(corrplot)
+library(rpart)
+library(rpart.plot)
+library(shiny)
+library(leaflet)
+library(DT)
+library(viridis)
+library(readr)
 
-# İlçe, gün, ay, mevsim bilgilerini ekleyin
-hava_verisi <- hava_verisi %>%
-  mutate(
-    İlçe = as.factor(İlçe),
-    Gün = day(datetime),
-    Ay = month(datetime, label = TRUE),
-    Mevsim = case_when(
-      Ay %in% c("Dec", "Jan", "Feb") ~ "Kış",
-      Ay %in% c("Mar", "Apr", "May") ~ "İlkbahar",
-      Ay %in% c("Jun", "Jul", "Aug") ~ "Yaz",
-      Ay %in% c("Sep", "Oct", "Nov") ~ "Sonbahar"
-    )
-  )
+# 1. Veri Yükleme ve Temizleme
+data <- read_delim("ankara_hava_kalitesi.csv", 
+                   delim = ",", 
+                   locale = locale(decimal_mark = ",", encoding = "UTF-8"))
 
-# İlçe bazında PM2.5 ve PM10 ortalamalarını hesaplayın
-ilce_ortalamalari <- hava_verisi %>%
-  group_by(İlçe) %>%
-  summarise(
-    PM2.5_Ortalama = mean(PM2.5, na.rm = TRUE),
-    PM10_Ortalama = mean(PM10, na.rm = TRUE)
-  )
+# Gereksiz sütun kaldır
+data <- data[, -which(names(data) == "Unnamed..8")]
 
-# Mevsimsel analiz
-mevsim_analizi <- hava_verisi %>%
-  group_by(Mevsim, İlçe) %>%
-  summarise(
-    PM2.5_Ortalama = mean(PM2.5, na.rm = TRUE),
-    PM10_Ortalama = mean(PM10, na.rm = TRUE)
-  )
+# Sütun adlarını temizle
+colnames(data) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
 
-# Görselleştirme: İlçelere göre PM2.5 ortalamaları
-ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Ortalama)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +
-  labs(title = "İlçelere Göre PM2.5 Ortalamaları (2024)", x = "İlçe", y = "PM2.5 (µg/m³)")
+# Nokta yerine virgül kullanılmış, düzelt
+numeric_cols <- c("PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
+data[numeric_cols] <- lapply(data[numeric_cols], function(x) as.numeric(str_replace(x, ",", ".")))
 
+# Tarih-saat formatını düzenle
+data$Tarih <- dmy_hms(data$Tarih)
+data$Saat <- hour(data$Tarih)
+data$Ay <- month(data$Tarih, label = TRUE)
 ```
 
 ## Keşifsel Veri Analizi
@@ -108,30 +146,28 @@ ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Or
 ## 1.Zaman Serisi Analizi
 
 ```{r}
-# Günlük ortalama
-gunluk <- veri %>% mutate(Gun = as_date(Tarih)) %>% group_by(Gun) %>%
-  summarise(across(PM10:NO, ~mean(., na.rm = TRUE)))
+daily_avg <- data %>%
+  mutate(Gun = as_date(Tarih)) %>%
+  group_by(Gun) %>%
+  summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))
 
-# Çizim
-ggplot(gunluk, aes(x = Gun)) +
-  geom_line(aes(y = PM10, color = "PM10")) +
-  geom_line(aes(y = PM2_5, color = "PM2.5")) +
-  labs(title = "Günlük PM10 ve PM2.5", x = "Tarih", y = "Konsantrasyon (ug/m3)") +
-  theme_minimal() +
-  scale_color_manual(values = c("PM10" = "orange", "PM2.5" = "blue"))
+ggplot(daily_avg, aes(x = Gun, y = PM10)) +
+  geom_line(color = "firebrick") +
+  labs(title = "Günlük Ortalama PM10 (2024)", x = "Tarih", y = "PM10 (µg/m³)")
 ```
 
 ## 2. Isı Haritası Analizi
 
 ```{r}
-isi <- veri %>% mutate(Ay = month(Tarih, label = TRUE), Saat = hour(Tarih)) %>%
-  group_by(Ay, Saat) %>% summarise(PM2_5 = mean(PM2_5, na.rm = TRUE)) %>%
-  pivot_wider(names_from = Saat, values_from = PM2_5)
+heat_data <- data %>%
+  group_by(Saat, Ay) %>%
+  summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
 
-heatmaply(as.matrix(isi[,-1]),
-          xlab = "Saat", ylab = "Ay",
-          row_side_colors = isi$Ay,
-          main = "PM2.5 Isı Haritası")
+ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
+  geom_tile(color = "white") +
+  scale_fill_viridis(name = "PM2.5", option = "C") +
+  labs(title = "PM2.5 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
+  theme_minimal()
 
 ```
 
@@ -140,42 +176,41 @@ heatmaply(as.matrix(isi[,-1]),
 ## 1. Korelasyon Analizi
 
 ```{r}
-# Korelasyon matrisi oluştur
-cor_data <- veri %>% select(PM10:NO)
-cor_matrix <- cor(cor_data, use = "complete.obs")
+cor_data <- data %>%
+  select(all_of(numeric_cols)) %>%
+  drop_na()
 
-# Görselleştir
-corrplot(cor_matrix, method = "color", addCoef.col = "black")
+corr_matrix <- cor(cor_data)
+corrplot(corr_matrix, method = "color", type = "lower", tl.col = "black")
 ```
 
 ## Model Uydurma
 
-## 1. SInıflandırma Modeli
+## 1. Sınıflandırma Modeli
 
 ```{r}
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
-veri_model <- veri %>% mutate(PM10_Sinif = case_when(
-  PM10 < 50 ~ "Temiz",
-  PM10 >= 50 ~ "Kirli",
-  TRUE ~ NA_character_
-)) %>% drop_na(PM10_Sinif)
+data$class <- ifelse(data$PM10 > 50, "Kirli", "Temiz")
+data_model <- data %>%
+  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
+  drop_na()
 
 
 # Eğitim-test bölmesi
 set.seed(123)
-trainIndex <- sample(1:nrow(veri_model), 0.7 * nrow(veri_model))
-train <- veri_model[trainIndex, ]
-test <- veri_model[-trainIndex, ]
+sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
+train <- data_model[sample_idx, ]
+test <- data_model[-sample_idx, ]
 
 
 # Model: Karar ağacı (rpart)
-library(rpart)
-model <- rpart(PM10_Sinif ~ SO2 + NO2 + NOX + NO + PM2_5, data = train, method = "class")
-pred <- predict(model, test, type = "class")
+model <- rpart(class ~ ., data = train, method = "class")
+rpart.plot(model)
 
 # Doğruluk oranı
-accuracy <- mean(pred == test$PM10_Sinif)
-print(paste("Doğruluk:", round(accuracy * 100, 2), "%"))
+pred <- predict(model, test, type = "class")
+accuracy <- mean(pred == test$class)
+print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 ```
 
 ## Görselleştirme
@@ -183,28 +218,7 @@ print(paste("Doğruluk:", round(accuracy * 100, 2), "%"))
 ## 1. Etkileşimli Grafik: İstasyona göre PM2.5
 
 ```{r}
-library(shiny)
-library(ggplot2)
 
-ui <- fluidPage(
-  selectInput("istasyon", "İstasyon Seçin", choices = unique(veri$Istasyon)),
-  plotOutput("grafik")
-)
-
-server <- function(input, output) {
-  output$grafik <- renderPlot({
-    df_filt <- veri %>% filter(Istasyon == input$istasyon) %>%
-      group_by(Gun = as.Date(Tarih)) %>%
-      summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
-
-   ggplot(df_filt, aes(x = Gun, y = PM2_5)) +
-      geom_line(color = "darkgreen") +
-      labs(title = paste(input$istasyon, "PM2.5 Günlük Ortalama"), x = "Tarih", y = "PM2.5") +
-      theme_minimal()
-  })
-}
-
-shinyApp(ui, server)
 ```
 
 ## Sonuçlar
