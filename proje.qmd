@@ -5,7 +5,7 @@ number-sections: true
 
 **Proje sayfamıza hoş geldiniz.**
 
-![](/assets/images/image_2025.png){fig-align="center" width="360"}
+![](/assets/images/image_2025.png){fig-align="left" width="360"}
 
 *Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
 
@@ -23,7 +23,7 @@ Ankara sınırları içinde yaklaşık 4,5 milyon nüfusa sahip olması sebebi i
 
 # Veri
 
-xxxxxx
+Ankara iline ait 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
 ## Veri Kaynağı
 
@@ -40,21 +40,12 @@ Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkın
 ## Ön İşleme
 
 ```{r}
+
+install.packages("readxl")
 library(readxl)
-library(dplyr)
-library(lubridate)
-library(ggplot2)
-library(tidyr)
-library(reshape2)
-library(heatmaply)
-library(plotly)
-library(corrplot)
-library(rpart)
-library(rpart.plot)
-library(shiny)
 
 # Veri yükleme
-veri <- read_excel("ankara_hava_kalitesi_2024.xlsx")
+veri <- read_excel("ankara_hava_kalitesi_2024")
 
 # Sütun adları düzenleme
 colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO", "Extra")
@@ -70,16 +61,6 @@ veri$Tarih <- ymd_hms(veri$Tarih)
 # Analiz
 
 ```{r}
-# Gerekli kütüphaneleri yükleyin
-library(readxl)
-library(dplyr)
-library(ggplot2)
-library(lubridate)
-library(tidyr)
-
-# Veri dosyasını okuyun
-hava_verisi <- read_excel("ankara_hava_kalitesi_2024.xlsx")
-
 # Tarih ve saat sütunlarını birleştirerek datetime oluşturun
 hava_verisi <- hava_verisi %>%
   mutate(datetime = as.POSIXct(paste(Tarih, Saat), format = "%Y-%m-%d %H:%M"))
