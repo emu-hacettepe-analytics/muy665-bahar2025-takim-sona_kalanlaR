@@ -125,6 +125,7 @@ ggplot(ilce_ortalamalari, aes(x = reorder(İlçe, -PM2.5_Ortalama), y = PM2.5_Or
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
+
 ```{r}
 # Günlük ortalama
 gunluk <- veri %>% mutate(Gun = as_date(Tarih)) %>% group_by(Gun) %>%
@@ -140,6 +141,7 @@ ggplot(gunluk, aes(x = Gun)) +
 ```
 
 ## 2. Isı Haritası Analizi
+
 ```{r}
 isi <- veri %>% mutate(Ay = month(Tarih, label = TRUE), Saat = hour(Tarih)) %>%
   group_by(Ay, Saat) %>% summarise(PM2_5 = mean(PM2_5, na.rm = TRUE)) %>%
@@ -155,6 +157,7 @@ heatmaply(as.matrix(isi[,-1]),
 ## Trend Analizi
 
 ## 1. Korelasyon Analizi
+
 ```{r}
 # Korelasyon matrisi oluştur
 cor_data <- veri %>% select(PM10:NO)
@@ -167,6 +170,7 @@ corrplot(cor_matrix, method = "color", addCoef.col = "black")
 ## Model Uydurma
 
 ## 1. SInıflandırma Modeli
+
 ```{r}
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
 veri_model <- veri %>% mutate(PM10_Sinif = case_when(
@@ -196,6 +200,7 @@ print(paste("Doğruluk:", round(accuracy * 100, 2), "%"))
 ## Görselleştirme
 
 ## 1. Etkileşimli Grafik: İstasyona göre PM2.5
+
 ```{r}
 library(shiny)
 library(ggplot2)
