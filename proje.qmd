@@ -90,13 +90,10 @@ Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi veriler
     Verinin zaman ve istasyon bazlı olması sayesinde **Shiny veya Quarto Widget gibi etkileşimli uygulamalarda** kullanılabilir, kullanıcıya veriyle oynama şansı tanır.
 
 ## Ön İşleme
-
 ```{r}
 
 ```
-
-# Veri Analizi
-
+# Veri Analizi ve Ön İşleme
 ```{r}
 # Gerekli kütüphaneler
 library(tidyverse)
@@ -130,11 +127,8 @@ data$Tarih <- dmy_hms(data$Tarih)
 data$Saat <- hour(data$Tarih)
 data$Ay <- month(data$Tarih, label = TRUE)
 ```
-
 ## Keşifsel Veri Analizi
-
 ## 1.Zaman Serisi Analizi
-
 ```{r}
 daily_avg <- data %>%
   mutate(Gun = as_date(Tarih)) %>%
@@ -145,9 +139,7 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
   geom_line(color = "firebrick") +
   labs(title = "Günlük Ortalama PM10 (2024)", x = "Tarih", y = "PM10 (µg/m³)")
 ```
-
 ## 2. Isı Haritası Analizi
-
 ```{r}
 heat_data <- data %>%
   group_by(Saat, Ay) %>%
@@ -160,11 +152,8 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
   theme_minimal()
 
 ```
-
 ## Trend Analizi
-
 ## 1. Korelasyon Analizi
-
 ```{r}
 cor_data <- data %>%
   select(all_of(numeric_cols)) %>%
@@ -173,11 +162,8 @@ cor_data <- data %>%
 corr_matrix <- cor(cor_data)
 corrplot(corr_matrix, method = "color", type = "lower", tl.col = "black")
 ```
-
 ## Model Uydurma
-
 ## 1. Sınıflandırma Modeli
-
 ```{r}
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
 data$class <- ifelse(data$PM10 > 50, "Kirli", "Temiz")
@@ -185,13 +171,11 @@ data_model <- data %>%
   select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
   drop_na()
 
-
 # Eğitim-test bölmesi
 set.seed(123)
 sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
 train <- data_model[sample_idx, ]
 test <- data_model[-sample_idx, ]
-
 
 # Model: Karar ağacı (rpart)
 model <- rpart(class ~ ., data = train, method = "class")
@@ -208,6 +192,7 @@ print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 ## 1. Etkileşimli Grafik: İstasyona göre PM2.5
 
 ```{r}
+
 ui <- fluidPage(
   selectInput("istasyon", "İstasyon Seçin", choices = unique(veri$Istasyon)),
   plotOutput("grafik")
@@ -248,4 +233,4 @@ server <- function(input, output) {
 
 <https://aqicn.org/city/turkey/ankara/ulus-trafik/>
 
-<https://quarto.org/docs/interactive/widgets/jupyter.html>
+<https://quarto.org/docs/interactive/widgets/jupyter.html> 
