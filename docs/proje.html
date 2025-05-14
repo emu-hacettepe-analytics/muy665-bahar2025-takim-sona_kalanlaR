@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -131,14 +160,33 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tercih-sebebi" id="toc-tercih-sebebi" class="nav-link" data-scroll-target="#tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</a></li>
   <li><a href="#ön-işleme" id="toc-ön-işleme" class="nav-link" data-scroll-target="#ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</a></li>
   </ul></li>
-  <li><a href="#gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" id="toc-gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" class="nav-link" data-scroll-target="#gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız"><span class="header-section-number">3</span> Gerekli paketi yükleyin ve aktif hale getirin (ilk kez çalıştırıyorsanız)</a></li>
-  <li><a href="#csv-dosyasını-yükleme" id="toc-csv-dosyasını-yükleme" class="nav-link" data-scroll-target="#csv-dosyasını-yükleme"><span class="header-section-number">4</span> CSV dosyasını yükleme</a></li>
-  <li><a href="#analiz" id="toc-analiz" class="nav-link" data-scroll-target="#analiz"><span class="header-section-number">5</span> Analiz</a>
+  <li><a href="#csv-dosyasını-yükleme" id="toc-csv-dosyasını-yükleme" class="nav-link" data-scroll-target="#csv-dosyasını-yükleme"><span class="header-section-number">3</span> CSV dosyasını yükleme</a></li>
+  <li><a href="#analiz" id="toc-analiz" class="nav-link" data-scroll-target="#analiz"><span class="header-section-number">4</span> # Analiz</a></li>
+  <li><a href="#veri-analizi-ve-ön-işleme" id="toc-veri-analizi-ve-ön-işleme" class="nav-link" data-scroll-target="#veri-analizi-ve-ön-işleme"><span class="header-section-number">5</span> Veri Analizi ve Ön İşleme</a></li>
+  <li><a href="#veri-yükleme-ve-temizleme" id="toc-veri-yükleme-ve-temizleme" class="nav-link" data-scroll-target="#veri-yükleme-ve-temizleme"><span class="header-section-number">6</span> 1. Veri Yükleme ve Temizleme</a></li>
+  <li><a href="#gereksiz-sütun-kaldır" id="toc-gereksiz-sütun-kaldır" class="nav-link" data-scroll-target="#gereksiz-sütun-kaldır"><span class="header-section-number">7</span> Gereksiz sütun kaldır</a></li>
+  <li><a href="#sütun-adlarını-temizle" id="toc-sütun-adlarını-temizle" class="nav-link" data-scroll-target="#sütun-adlarını-temizle"><span class="header-section-number">8</span> Sütun adlarını temizle</a></li>
+  <li><a href="#nokta-yerine-virgül-kullanılmış-düzelt" id="toc-nokta-yerine-virgül-kullanılmış-düzelt" class="nav-link" data-scroll-target="#nokta-yerine-virgül-kullanılmış-düzelt"><span class="header-section-number">9</span> Nokta yerine virgül kullanılmış, düzelt</a></li>
+  <li><a href="#tarih-saat-formatını-düzenle" id="toc-tarih-saat-formatını-düzenle" class="nav-link" data-scroll-target="#tarih-saat-formatını-düzenle"><span class="header-section-number">10</span> Tarih-saat formatını düzenle</a>
   <ul class="collapse">
-  <li><a href="#keşifsel-veri-analizi" id="toc-keşifsel-veri-analizi" class="nav-link" data-scroll-target="#keşifsel-veri-analizi"><span class="header-section-number">5.1</span> Keşifsel Veri Analizi</a></li>
-  <li><a href="#zaman-serisi-analizi" id="toc-zaman-serisi-analizi" class="nav-link" data-scroll-target="#zaman-serisi-analizi"><span class="header-section-number">5.2</span> 1.Zaman Serisi Analizi</a></li>
-  <li><a href="#isı-haritası-analizi" id="toc-isı-haritası-analizi" class="nav-link" data-scroll-target="#isı-haritası-analizi"><span class="header-section-number">5.3</span> 2. Isı Haritası Analizi</a></li>
+  <li><a href="#keşifsel-veri-analizi" id="toc-keşifsel-veri-analizi" class="nav-link" data-scroll-target="#keşifsel-veri-analizi"><span class="header-section-number">10.1</span> Keşifsel Veri Analizi</a></li>
+  <li><a href="#zaman-serisi-analizi" id="toc-zaman-serisi-analizi" class="nav-link" data-scroll-target="#zaman-serisi-analizi"><span class="header-section-number">10.2</span> 1.Zaman Serisi Analizi</a></li>
+  <li><a href="#trend-analizi" id="toc-trend-analizi" class="nav-link" data-scroll-target="#trend-analizi"><span class="header-section-number">10.3</span> Trend Analizi</a></li>
+  <li><a href="#korelasyon-analizi" id="toc-korelasyon-analizi" class="nav-link" data-scroll-target="#korelasyon-analizi"><span class="header-section-number">10.4</span> 1. Korelasyon Analizi</a></li>
+  <li><a href="#model-uydurma" id="toc-model-uydurma" class="nav-link" data-scroll-target="#model-uydurma"><span class="header-section-number">10.5</span> Model Uydurma</a></li>
+  <li><a href="#sınıflandırma-modeli" id="toc-sınıflandırma-modeli" class="nav-link" data-scroll-target="#sınıflandırma-modeli"><span class="header-section-number">10.6</span> 1. Sınıflandırma Modeli</a></li>
   </ul></li>
+  <li><a href="#pm10u-sınıflara-ayıralım-örnek-temiz---kirli" id="toc-pm10u-sınıflara-ayıralım-örnek-temiz---kirli" class="nav-link" data-scroll-target="#pm10u-sınıflara-ayıralım-örnek-temiz---kirli"><span class="header-section-number">11</span> PM10’u sınıflara ayıralım (örnek: temiz - kirli)</a></li>
+  <li><a href="#eğitim-test-bölmesi" id="toc-eğitim-test-bölmesi" class="nav-link" data-scroll-target="#eğitim-test-bölmesi"><span class="header-section-number">12</span> Eğitim-test bölmesi</a></li>
+  <li><a href="#model-karar-ağacı-rpart" id="toc-model-karar-ağacı-rpart" class="nav-link" data-scroll-target="#model-karar-ağacı-rpart"><span class="header-section-number">13</span> Model: Karar ağacı (rpart)</a></li>
+  <li><a href="#doğruluk-oranı" id="toc-doğruluk-oranı" class="nav-link" data-scroll-target="#doğruluk-oranı"><span class="header-section-number">14</span> Doğruluk oranı</a>
+  <ul class="collapse">
+  <li><a href="#görselleştirme" id="toc-görselleştirme" class="nav-link" data-scroll-target="#görselleştirme"><span class="header-section-number">14.1</span> Görselleştirme</a></li>
+  <li><a href="#etkileşimli-grafik-istasyona-göre-pm2.5" id="toc-etkileşimli-grafik-istasyona-göre-pm2.5" class="nav-link" data-scroll-target="#etkileşimli-grafik-istasyona-göre-pm2.5"><span class="header-section-number">14.2</span> 1. Etkileşimli Grafik: İstasyona göre PM2.5</a></li>
+  <li><a href="#sonuçlar" id="toc-sonuçlar" class="nav-link" data-scroll-target="#sonuçlar"><span class="header-section-number">14.3</span> Sonuçlar</a></li>
+  </ul></li>
+  <li><a href="#sonuçlar-ve-ana-çıkarımlar" id="toc-sonuçlar-ve-ana-çıkarımlar" class="nav-link" data-scroll-target="#sonuçlar-ve-ana-çıkarımlar"><span class="header-section-number">15</span> Sonuçlar ve Ana Çıkarımlar</a></li>
+  <li><a href="#kaynaklar" id="toc-kaynaklar" class="nav-link" data-scroll-target="#kaynaklar"><span class="header-section-number">16</span> Kaynaklar</a></li>
   </ul>
 </nav>
 </nav>
@@ -168,10 +216,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Proje sayfamıza hoş geldiniz.</strong></p>
-<div class="quarto-figure quarto-figure-center">
+<p><strong><em>Proje sayfamıza hoş geldiniz.</em></strong></p>
+<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src=".\assets/images/image_2025.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="360"></p>
+<p><img src=".\assets/images/image_2025.png" class="img-fluid quarto-figure quarto-figure-left figure-img" width="360"></p>
 </figure>
 </div>
 <p><em>Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.</em></p>
@@ -189,37 +237,65 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="veri" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Veri</h1>
-<p>xxxxxx</p>
+<p>Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi verileri.</p>
 <section id="veri-kaynağı" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="veri-kaynağı"><span class="header-section-number">2.1</span> Veri Kaynağı</h2>
-<p><a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew" class="uri">https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew</a></p>
+<p><a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew" class="uri">https://sim.csb.gov.tr</a></p>
 </section>
 <section id="veri-hakkında-genel-bilgiler" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="veri-hakkında-genel-bilgiler"><span class="header-section-number">2.2</span> Veri Hakkında Genel Bilgiler</h2>
-<p>PM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır.</p>
+<ul>
+<li><p>Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.</p></li>
+<li><p>Ölçümler saatlik olarak yapılmış. Tarih sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.</p></li>
+<li><p>Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.</p></li>
+<li><p>Aşağıdaki 6 temel hava kirleticinin saatlik ölçümleri yer alıyor.</p>
+<p><code>PM10</code> (Partikül madde ≤10 µm)</p>
+<p><code>PM2.5</code> (Partikül madde ≤2.5 µm)</p>
+<p><code>SO2</code> (Kükürt dioksit)</p>
+<p><code>NO2</code> (Azot dioksit)</p>
+<p><code>NOX</code> (Azot oksitler toplamı)</p>
+<p><code>NO</code> (Azot monoksit)</p></li>
+<li><p>Veri setinde yaklaşık olarak <strong>86.000+</strong> gözlem bulunmaktadır (tüm istasyonlar dahil).</p>
+<p>Sayısal değerler nokta yerine virgül ile girilmişti; bu durum düzeltilerek sayısal veri türüne dönüştürüldü.</p>
+<p>Eksik değerler bazı sütunlarda mevcut ancak analiz için uygun şekilde ortalama alımı, sınıflandırma için filtreleme yapılmıştır.</p></li>
+<li><p><strong>Kapsanan Zaman Aralığı:</strong>1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler).</p></li>
+</ul>
 </section>
 <section id="tercih-sebebi" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</h2>
-<p>Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara’mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek</p>
+<ul>
+<li><p><strong>Zaman Serisi Analizi İçin Uygunluk:</strong></p>
+<p>Veri saatlik ölçümler içerdiğinden yıl boyu zaman serisi analizleri (trend, mevsimsellik, dalgalanma) yapılmasına elverişlidir.</p></li>
+<li><p><strong>Çoklu Değişken ve Ölçüm:</strong></p>
+<p>PM10, PM2.5, SO₂, NO₂, NOx, NO gibi farklı hava kirleticileri kapsaması sayesinde değişkenler arası <strong>korelasyon</strong> ve neden-sonuç ilişkileri incelenebilir.</p></li>
+<li><p><strong>Mekânsal Karşılaştırma Yapılabilir:</strong></p>
+<p>Ankara’daki birden fazla istasyondan gelen veriler sayesinde <strong>istasyonlar arası karşılaştırma</strong> ve <strong>ısı haritası görselleştirmeleri</strong> mümkündür.</p></li>
+<li><p><strong>Çevresel ve Toplumsal Anlam Taşıması:</strong></p>
+<p>Hava kirliliği halk sağlığını doğrudan etkileyen önemli bir çevresel sorundur; bu da çalışmayı <strong>toplumsal açıdan anlamlı</strong> ve güncel kılar.</p></li>
+<li><p><strong>Modelleme ve Sınıflandırma İçin Elverişli:</strong></p>
+<p>PM10 düzeyine göre hava “Temiz” ya da “Kirli” olarak sınıflandırılabilir; bu da <strong>makine öğrenmesi (sınıflandırma) modellerinin</strong> uygulanmasına olanak tanır.</p></li>
+<li><p><strong>Kamuya Açık ve Gerçek Veridir:</strong></p>
+<p>Verinin gerçek, ham ve karmaşık olması, dersin amacı doğrultusunda <strong>veri temizleme, keşifsel analiz ve modelleme</strong> gibi tüm süreci uygulamalı yapmaya olanak sağlar.</p></li>
+<li><p><strong>Etkileşimli Uygulamalar için Uygunluk:</strong></p>
+<p>Verinin zaman ve istasyon bazlı olması sayesinde <strong>Shiny veya Quarto Widget gibi etkileşimli uygulamalarda</strong> kullanılabilir, kullanıcıya veriyle oynama şansı tanır.</p></li>
+</ul>
 </section>
 <section id="ön-işleme" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</h2>
-</section>
-</section>
-<section id="gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Gerekli paketi yükleyin ve aktif hale getirin (ilk kez çalıştırıyorsanız)</h1>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## Gerekli kütüphaneler</p>
 <blockquote class="blockquote">
 <p>install.packages(“readr”)</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>library(readr)</p>
+<p>library(tidyverse) library(lubridate) library(ggplot2) library(reshape2) library(corrplot) library(rpart) library(rpart.plot) library(shiny) library(leaflet) library(DT) library(viridis) library(readr)</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>getwd(“C:.aras-bahar2025-takim-sona_kalanlaR”)</p>
 </blockquote>
 </section>
-<section id="csv-dosyasını-yükleme" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> CSV dosyasını yükleme</h1>
+</section>
+<section id="csv-dosyasını-yükleme" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> CSV dosyasını yükleme</h1>
 <blockquote class="blockquote">
 <p>veri &lt;- read.csv(“ankara_hava_kalitesi”, header=TRUE)</p>
 </blockquote>
@@ -228,19 +304,96 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <p>```</p>
 </section>
-<section id="analiz" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Analiz</h1>
-<section id="keşifsel-veri-analizi" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">5.1</span> Keşifsel Veri Analizi</h2>
+<section id="analiz" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> # Analiz</h1>
 </section>
-<section id="zaman-serisi-analizi" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="zaman-serisi-analizi"><span class="header-section-number">5.2</span> 1.Zaman Serisi Analizi</h2>
+<section id="veri-analizi-ve-ön-işleme" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Veri Analizi ve Ön İşleme</h1>
 </section>
-<section id="isı-haritası-analizi" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="isı-haritası-analizi"><span class="header-section-number">5.3</span> 2. Isı Haritası Analizi</h2>
+<section id="veri-yükleme-ve-temizleme" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 1. Veri Yükleme ve Temizleme</h1>
+</section>
+<section id="gereksiz-sütun-kaldır" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Gereksiz sütun kaldır</h1>
+<blockquote class="blockquote">
+<p>veri &lt;- veri[, -which(names(veri) == “Unnamed..8”)]</p>
+</blockquote>
+</section>
+<section id="sütun-adlarını-temizle" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Sütun adlarını temizle</h1>
+<blockquote class="blockquote">
+<p>colnames(veri) &lt;- c(“Istasyon”, “Tarih”, “PM10”, “PM2_5”, “SO2”, “NO2”, “NOX”, “NO”)</p>
+</blockquote>
+</section>
+<section id="nokta-yerine-virgül-kullanılmış-düzelt" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Nokta yerine virgül kullanılmış, düzelt</h1>
+<blockquote class="blockquote">
+<p>numeric_cols &lt;- c(“PM10 ( µg/m3 )”, “PM 2.5 ( µg/m3 )”, “SO2 ( µg/m3 )”, “NO2 ( µg/m3 )”, “NOX ( µg/m3 )”, “NO ( µg/m3 )”) veri[numeric_cols] &lt;- lapply(veri[numeric_cols], function(x) as.numeric(str_replace(x, “,”, “.”)))</p>
+</blockquote>
+</section>
+<section id="tarih-saat-formatını-düzenle" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Tarih-saat formatını düzenle</h1>
+<blockquote class="blockquote">
+<p>veri<span class="math inline">\(Tarih &lt;- dmy_hms(veri\)</span>Tarih) veri<span class="math inline">\(Saat &lt;- hour(veri\)</span>Tarih) veri<span class="math inline">\(Ay &lt;- month(veri\)</span>Tarih, label = TRUE) ``` &gt;&gt;&gt;&gt;&gt;&gt; 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2</p>
+</blockquote>
+<section id="keşifsel-veri-analizi" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">10.1</span> Keşifsel Veri Analizi</h2>
+</section>
+<section id="zaman-serisi-analizi" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="zaman-serisi-analizi"><span class="header-section-number">10.2</span> 1.Zaman Serisi Analizi</h2>
+<blockquote class="blockquote">
+<p>daily_avg &lt;- veri %&gt;% mutate(Gun = as_date(Tarih)) %&gt;% group_by(Gun) %&gt;% summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>ggplot(daily_avg, aes(x = Gun, y = PM10)) + geom_line(color = “firebrick”) + labs(title = “Günlük Ortalama PM10 (2024)”, x = “Tarih”, y = “PM10 (µg/m³)”)</p>
+</blockquote>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## 2. Isı Haritası Analizi =======</p>
+</section>
+<section id="trend-analizi" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="trend-analizi"><span class="header-section-number">10.3</span> Trend Analizi</h2>
+</section>
+<section id="korelasyon-analizi" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="korelasyon-analizi"><span class="header-section-number">10.4</span> 1. Korelasyon Analizi</h2>
+</section>
+<section id="model-uydurma" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="model-uydurma"><span class="header-section-number">10.5</span> Model Uydurma</h2>
+</section>
+<section id="sınıflandırma-modeli" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sınıflandırma-modeli"><span class="header-section-number">10.6</span> 1. Sınıflandırma Modeli</h2>
+</section>
+</section>
+<section id="pm10u-sınıflara-ayıralım-örnek-temiz---kirli" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> PM10’u sınıflara ayıralım (örnek: temiz - kirli)</h1>
+</section>
+<section id="eğitim-test-bölmesi" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Eğitim-test bölmesi</h1>
+</section>
+<section id="model-karar-ağacı-rpart" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Model: Karar ağacı (rpart)</h1>
+</section>
+<section id="doğruluk-oranı" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Doğruluk oranı</h1>
+<section id="görselleştirme" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="görselleştirme"><span class="header-section-number">14.1</span> Görselleştirme</h2>
+</section>
+<section id="etkileşimli-grafik-istasyona-göre-pm2.5" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="etkileşimli-grafik-istasyona-göre-pm2.5"><span class="header-section-number">14.2</span> 1. Etkileşimli Grafik: İstasyona göre PM2.5</h2>
+</section>
+<section id="sonuçlar" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">14.3</span> Sonuçlar</h2>
+</section>
+</section>
+<section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Sonuçlar ve Ana Çıkarımlar</h1>
+</section>
+<section id="kaynaklar" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Kaynaklar</h1>
+<p><a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew">https://sim.csb.gov.tr</a></p>
+<p><a href="https://www.iqair.com/us/turkey/ankara/ankara" class="uri">https://www.iqair.com/us/turkey/ankara/ankara</a></p>
+<p><a href="https://aqicn.org/city/turkey/ankara/ulus-trafik/" class="uri">https://aqicn.org/city/turkey/ankara/ulus-trafik/</a></p>
+<p><a href="https://quarto.org/docs/interactive/widgets/jupyter.html" class="uri">https://quarto.org/docs/interactive/widgets/jupyter.html</a> &gt;&gt;&gt;&gt;&gt;&gt;&gt; 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2</p>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
