@@ -3,9 +3,9 @@ title: "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi"
 number-sections: true
 ---
 
-**Proje sayfamıza hoş geldiniz.**
+***Proje sayfamıza hoş geldiniz.***
 
-![](/assets/images/image_2025.png){fig-align="center" width="360"}
+![](/assets/images/image_2025.png){fig-align="left" width="360"}
 
 *Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
 
@@ -23,26 +23,90 @@ Ankara sınırları içinde yaklaşık 4,5 milyon nüfusa sahip olması sebebi i
 
 # Veri
 
-xxxxxx
+Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi verileri.
 
 ## Veri Kaynağı
 
-<https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew>
+[https://sim.csb.gov.tr](https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew){.uri}
 
 ## Veri Hakkında Genel Bilgiler
 
-PM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır.
+-   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
+
+-   Ölçümler saatlik olarak yapılmış. Tarih sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.
+
+-   Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.
+
+-   Aşağıdaki 6 temel hava kirleticinin saatlik ölçümleri yer alıyor.
+
+    `PM10` (Partikül madde ≤10 µm)
+
+    `PM2.5` (Partikül madde ≤2.5 µm)
+
+    `SO2` (Kükürt dioksit)
+
+    `NO2` (Azot dioksit)
+
+    `NOX` (Azot oksitler toplamı)
+
+    `NO` (Azot monoksit)
+
+-   Veri setinde yaklaşık olarak **86.000+** gözlem bulunmaktadır (tüm istasyonlar dahil).
+
+    Sayısal değerler nokta yerine virgül ile girilmişti; bu durum düzeltilerek sayısal veri türüne dönüştürüldü.
+
+    Eksik değerler bazı sütunlarda mevcut ancak analiz için uygun şekilde ortalama alımı, sınıflandırma için filtreleme yapılmıştır.
+
+-   **Kapsanan Zaman Aralığı:**1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler).
 
 ## Tercih Sebebi
 
-Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek
+-   **Zaman Serisi Analizi İçin Uygunluk:**
+
+    Veri saatlik ölçümler içerdiğinden yıl boyu zaman serisi analizleri (trend, mevsimsellik, dalgalanma) yapılmasına elverişlidir.
+
+-   **Çoklu Değişken ve Ölçüm:**
+
+    PM10, PM2.5, SO₂, NO₂, NOx, NO gibi farklı hava kirleticileri kapsaması sayesinde değişkenler arası **korelasyon** ve neden-sonuç ilişkileri incelenebilir.
+
+-   **Mekânsal Karşılaştırma Yapılabilir:**
+
+    Ankara’daki birden fazla istasyondan gelen veriler sayesinde **istasyonlar arası karşılaştırma** ve **ısı haritası görselleştirmeleri** mümkündür.
+
+-   **Çevresel ve Toplumsal Anlam Taşıması:**
+
+    Hava kirliliği halk sağlığını doğrudan etkileyen önemli bir çevresel sorundur; bu da çalışmayı **toplumsal açıdan anlamlı** ve güncel kılar.
+
+-   **Modelleme ve Sınıflandırma İçin Elverişli:**
+
+    PM10 düzeyine göre hava “Temiz” ya da “Kirli” olarak sınıflandırılabilir; bu da **makine öğrenmesi (sınıflandırma) modellerinin** uygulanmasına olanak tanır.
+
+-   **Kamuya Açık ve Gerçek Veridir:**
+
+    Verinin gerçek, ham ve karmaşık olması, dersin amacı doğrultusunda **veri temizleme, keşifsel analiz ve modelleme** gibi tüm süreci uygulamalı yapmaya olanak sağlar.
+
+-   **Etkileşimli Uygulamalar için Uygunluk:**
+
+    Verinin zaman ve istasyon bazlı olması sayesinde **Shiny veya Quarto Widget gibi etkileşimli uygulamalarda** kullanılabilir, kullanıcıya veriyle oynama şansı tanır.
 
 ## Ön İşleme
 
-# Gerekli paketi yükleyin ve aktif hale getirin (ilk kez çalıştırıyorsanız)
+<<<<<<< HEAD
+## Gerekli kütüphaneler
 
 >install.packages("readr")
 
+>library(tidyverse)
+>library(lubridate)
+>library(ggplot2)
+>library(reshape2)
+>library(corrplot)
+>library(rpart)
+>library(rpart.plot)
+>library(shiny)
+>library(leaflet)
+>library(DT)
+>library(viridis)
 >library(readr)
 
 >getwd("C:\Users\tulay.aras\Desktop\github\muy665-bahar2025-takim-sona_kalanlaR\data")
@@ -52,13 +116,87 @@ Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara'mızın havası hakkın
 
 >print(veri)
 
-
 \`\`\`
 
 # Analiz
+=======
+
+# Veri Analizi ve Ön İşleme
+
+# 1. Veri Yükleme ve Temizleme
+
+# Gereksiz sütun kaldır
+>veri <- veri[, -which(names(veri) == "Unnamed..8")]
+
+# Sütun adlarını temizle
+>colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
+
+# Nokta yerine virgül kullanılmış, düzelt
+>numeric_cols <- c("PM10 ( µg/m3 )", "PM 2.5 ( µg/m3 )", "SO2 ( µg/m3 )", "NO2 ( µg/m3 )", "NOX ( µg/m3 )", "NO ( µg/m3 )")
+>veri[numeric_cols] <- lapply(veri[numeric_cols], function(x) as.numeric(str_replace(x, ",", ".")))
+
+# Tarih-saat formatını düzenle
+>veri$Tarih <- dmy_hms(veri$Tarih)
+>veri$Saat <- hour(veri$Tarih)
+>veri$Ay <- month(veri$Tarih, label = TRUE)
+```
+>>>>>>> 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2
 
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
+>daily_avg <- veri %>%
+  mutate(Gun = as_date(Tarih)) %>%
+  group_by(Gun) %>%
+  summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))
 
+>ggplot(daily_avg, aes(x = Gun, y = PM10)) +
+  geom_line(color = "firebrick") +
+  labs(title = "Günlük Ortalama PM10 (2024)", x = "Tarih", y = "PM10 (µg/m³)")
+
+<<<<<<< HEAD
 ## 2. Isı Haritası Analizi
+=======
+
+## Trend Analizi
+
+## 1. Korelasyon Analizi
+
+## Model Uydurma
+
+## 1. Sınıflandırma Modeli
+
+# PM10'u sınıflara ayıralım (örnek: temiz - kirli)
+
+# Eğitim-test bölmesi
+
+# Model: Karar ağacı (rpart)
+
+# Doğruluk oranı
+
+
+## Görselleştirme
+
+## 1. Etkileşimli Grafik: İstasyona göre PM2.5
+
+
+
+## Sonuçlar
+
+
+
+
+# Sonuçlar ve Ana Çıkarımlar
+
+
+
+# Kaynaklar
+
+[https://sim.csb.gov.tr](https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew)
+
+<https://www.iqair.com/us/turkey/ankara/ankara>
+
+<https://aqicn.org/city/turkey/ankara/ulus-trafik/>
+
+<https://quarto.org/docs/interactive/widgets/jupyter.html>
+>>>>>>> 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2
