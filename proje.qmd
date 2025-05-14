@@ -100,7 +100,7 @@ Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi veriler
 ```{r}
 
 # install.packages("readr")
-
+# install.packages("corrplot")
 library(tidyverse)
 library(lubridate)
 library(ggplot2)
@@ -114,19 +114,16 @@ library(viridis)
 library(readr)
 library(stringr)
 library(dplyr)
-
+library(corrplot)
 
 # CSV dosyasını yükleme
 veri <- read.csv("ankara_hava_kalitesi.csv", header=TRUE)
-
 
 # Son sütunun sayısını bulalım
 son_sutun_indeksi <- ncol(veri)
 
 # Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım
 veri <- veri[, -son_sutun_indeksi]
-
-
 
 # Sütun adlarını temizle
 colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
@@ -176,6 +173,13 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
 ## 1. Korelasyon Analizi
 
 ```{r}
+cor_data <- veri %>%
+  select(all_of(numeric_cols)) %>%
+  drop_na()
+
+corr_matrix <- cor(cor_data)
+corrplot(corr_matrix, method = "color", type = "lower", tl.col = "black"
+)
 ```
 
 ## Model Uydurma
@@ -184,12 +188,26 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
 
 ```{r}
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
+veri$class <- ifelse(veri$PM10 > 50, "Kirli", "Temiz")
+data_model <- veri %>%
+  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
+  drop_na()
 
 # Eğitim-test bölmesi
+set.seed(123)
+sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
+train <- data_model[sample_idx, ]
+test <- data_model[-sample_idx, ]
+
 
 # Model: Karar ağacı (rpart)
+model <- rpart(class ~ ., data = train, method = "class")
+rpart.plot(model)
 
 # Doğruluk oranı
+pred <- predict(model, test, type = "class")
+accuracy <- mean(pred == test$class)
+print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 
 ```
 
