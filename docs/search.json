@@ -356,7 +356,7 @@
     "href": "proje.html#ön-işleme",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.4 Ön İşleme",
-    "text": "2.4 Ön İşleme\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## Gerekli kütüphaneler\n\ninstall.packages(“readr”)\n\n\nlibrary(tidyverse) library(lubridate) library(ggplot2) library(reshape2) library(corrplot) library(rpart) library(rpart.plot) library(shiny) library(leaflet) library(DT) library(viridis) library(readr)\n\n\ngetwd(“C:.aras-bahar2025-takim-sona_kalanlaR”)"
+    "text": "2.4 Ön İşleme"
   },
   {
     "objectID": "proje.html#keşifsel-veri-analizi",
@@ -369,22 +369,22 @@
     "objectID": "proje.html#trend-analizi",
     "href": "proje.html#trend-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "10.3 Trend Analizi",
-    "text": "10.3 Trend Analizi"
+    "section": "2.9 Trend Analizi",
+    "text": "2.9 Trend Analizi"
   },
   {
     "objectID": "proje.html#model-uydurma",
     "href": "proje.html#model-uydurma",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "10.5 Model Uydurma",
-    "text": "10.5 Model Uydurma"
+    "section": "2.11 Model Uydurma",
+    "text": "2.11 Model Uydurma"
   },
   {
     "objectID": "proje.html#sonuçlar",
     "href": "proje.html#sonuçlar",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "14.3 Sonuçlar",
-    "text": "14.3 Sonuçlar"
+    "section": "2.14 Sonuçlar",
+    "text": "2.14 Sonuçlar"
   },
   {
     "objectID": "portfolyo/calisma1.html#a",
@@ -714,29 +714,29 @@
     "objectID": "proje.html#isı-haritası-analizi",
     "href": "proje.html#isı-haritası-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "10.3 2. Isı Haritası Analizi",
-    "text": "10.3 2. Isı Haritası Analizi"
+    "section": "2.8 2. Isı Haritası Analizi",
+    "text": "2.8 2. Isı Haritası Analizi\n\nheat_data &lt;- veri %&gt;%\n  group_by(Saat, Ay) %&gt;%\n  summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))\n\n`summarise()` has grouped output by 'Saat'. You can override using the\n`.groups` argument.\n\nggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +\n  geom_tile(color = \"white\") +\n  scale_fill_viridis(name = \"PM2.5\", option = \"C\") +\n  labs(title = \"PM2.5 Isı Haritası (Saat x Ay)\", x = \"Ay\", y = \"Saat\") +\n  theme_minimal()"
   },
   {
     "objectID": "proje.html#korelasyon-analizi",
     "href": "proje.html#korelasyon-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "10.4 1. Korelasyon Analizi",
-    "text": "10.4 1. Korelasyon Analizi"
+    "section": "2.10 1. Korelasyon Analizi",
+    "text": "2.10 1. Korelasyon Analizi"
   },
   {
     "objectID": "proje.html#sınıflandırma-modeli",
     "href": "proje.html#sınıflandırma-modeli",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "10.6 1. Sınıflandırma Modeli",
-    "text": "10.6 1. Sınıflandırma Modeli"
+    "section": "2.12 1. Sınıflandırma Modeli",
+    "text": "2.12 1. Sınıflandırma Modeli\n\n# PM10'u sınıflara ayıralım (örnek: temiz - kirli)\n\n# Eğitim-test bölmesi\n\n# Model: Karar ağacı (rpart)\n\n# Doğruluk oranı"
   },
   {
     "objectID": "proje.html#görselleştirme",
     "href": "proje.html#görselleştirme",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "14.1 Görselleştirme",
-    "text": "14.1 Görselleştirme"
+    "section": "2.13 Görselleştirme",
+    "text": "2.13 Görselleştirme\n\n## 1. Etkileşimli Grafik: İstasyona göre PM2.5"
   },
   {
     "objectID": "proje.html#etkileşimli-grafik-istasyona-göre-pm2.5",
@@ -765,5 +765,26 @@
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "15.3 2. Isı Haritası Analizi",
     "text": "15.3 2. Isı Haritası Analizi"
+  },
+  {
+    "objectID": "proje.html#gerekli-kütüphaneler",
+    "href": "proje.html#gerekli-kütüphaneler",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "2.5 Gerekli kütüphaneler",
+    "text": "2.5 Gerekli kütüphaneler"
+  },
+  {
+    "objectID": "proje.html#veri-analizi-ve-ön-işleme",
+    "href": "proje.html#veri-analizi-ve-ön-işleme",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "2.6 Veri Analizi ve Ön İşleme",
+    "text": "2.6 Veri Analizi ve Ön İşleme"
+  },
+  {
+    "objectID": "proje.html#veri-yükleme-ve-temizleme",
+    "href": "proje.html#veri-yükleme-ve-temizleme",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "2.7 1. Veri Yükleme ve Temizleme",
+    "text": "2.7 1. Veri Yükleme ve Temizleme\n\n# install.packages(\"readr\")\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(lubridate)\nlibrary(ggplot2)\nlibrary(reshape2)\n\n\nAttaching package: 'reshape2'\n\nThe following object is masked from 'package:tidyr':\n\n    smiths\n\nlibrary(corrplot)\n\ncorrplot 0.95 loaded\n\nlibrary(rpart)\nlibrary(rpart.plot)\nlibrary(shiny)\nlibrary(DT)\n\n\nAttaching package: 'DT'\n\nThe following objects are masked from 'package:shiny':\n\n    dataTableOutput, renderDataTable\n\nlibrary(viridis)\n\nZorunlu paket yükleniyor: viridisLite\n\nlibrary(readr)\nlibrary(stringr)\nlibrary(dplyr)\n\n\n# CSV dosyasını yükleme\nveri &lt;- read.csv(\"ankara_hava_kalitesi.csv\", header=TRUE)\n\n\n# Son sütunun sayısını bulalım\nson_sutun_indeksi &lt;- ncol(veri)\n\n# Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım\nveri &lt;- veri[, -son_sutun_indeksi]\n\n\n\n# Sütun adlarını temizle\ncolnames(veri) &lt;- c(\"Istasyon\", \"Tarih\", \"PM10\", \"PM2_5\", \"SO2\", \"NO2\", \"NOX\", \"NO\")\n\n# Nokta yerine virgül kullanılmış, düzelt\nnumeric_cols &lt;- c(\"PM10\", \"PM2_5\", \"SO2\", \"NO2\", \"NOX\", \"NO\")\nveri[numeric_cols] &lt;- lapply(veri[numeric_cols], function(x) as.numeric(str_replace(x, \",\", \".\")))\n\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\nWarning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs\n\n# Tarih-saat formatını düzenle\nveri$Tarih &lt;- dmy_hms(veri$Tarih)\nveri$Saat &lt;- hour(veri$Tarih)\nveri$Ay &lt;- month(veri$Tarih, label = TRUE)\n\n\n## Keşifsel Veri Analizi\n\n## 1.Zaman Serisi Analizi\n\n\ndaily_avg &lt;- veri %&gt;%\n  mutate(Gun = as_date(Tarih)) %&gt;%\n  group_by(Gun) %&gt;%\n  summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))\n\nWarning: There was 1 warning in `summarise()`.\nℹ In argument: `across(all_of(numeric_cols), mean, na.rm = TRUE)`.\nℹ In group 1: `Gun = 2024-01-01`.\nCaused by warning:\n! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.\nSupply arguments directly to `.fns` through an anonymous function instead.\n\n  # Previously\n  across(a:b, mean, na.rm = TRUE)\n\n  # Now\n  across(a:b, \\(x) mean(x, na.rm = TRUE))\n\nggplot(daily_avg, aes(x = Gun, y = PM10)) +\n  geom_line(color = \"firebrick\") +\n  labs(title = \"Günlük Ortalama PM10 (2024)\", x = \"Tarih\", y = \"PM10 (µg/m³)\")"
   }
 ]
