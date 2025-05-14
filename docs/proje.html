@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Proje X (proje adını yazınız) – sona kalanlaR</title>
+<title>Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi – sona kalanlaR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,14 +131,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tercih-sebebi" id="toc-tercih-sebebi" class="nav-link" data-scroll-target="#tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</a></li>
   <li><a href="#ön-işleme" id="toc-ön-işleme" class="nav-link" data-scroll-target="#ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</a></li>
   </ul></li>
-  <li><a href="#analiz" id="toc-analiz" class="nav-link" data-scroll-target="#analiz"><span class="header-section-number">3</span> Analiz</a>
+  <li><a href="#gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" id="toc-gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" class="nav-link" data-scroll-target="#gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız"><span class="header-section-number">3</span> Gerekli paketi yükleyin ve aktif hale getirin (ilk kez çalıştırıyorsanız)</a></li>
+  <li><a href="#csv-dosyasını-yükleme" id="toc-csv-dosyasını-yükleme" class="nav-link" data-scroll-target="#csv-dosyasını-yükleme"><span class="header-section-number">4</span> CSV dosyasını yükleme</a></li>
+  <li><a href="#analiz" id="toc-analiz" class="nav-link" data-scroll-target="#analiz"><span class="header-section-number">5</span> Analiz</a>
   <ul class="collapse">
-  <li><a href="#keşifsel-veri-analizi" id="toc-keşifsel-veri-analizi" class="nav-link" data-scroll-target="#keşifsel-veri-analizi"><span class="header-section-number">3.1</span> Keşifsel Veri Analizi</a></li>
-  <li><a href="#trend-analizi" id="toc-trend-analizi" class="nav-link" data-scroll-target="#trend-analizi"><span class="header-section-number">3.2</span> Trend Analizi</a></li>
-  <li><a href="#model-uydurma" id="toc-model-uydurma" class="nav-link" data-scroll-target="#model-uydurma"><span class="header-section-number">3.3</span> Model Uydurma</a></li>
-  <li><a href="#sonuçlar" id="toc-sonuçlar" class="nav-link" data-scroll-target="#sonuçlar"><span class="header-section-number">3.4</span> Sonuçlar</a></li>
+  <li><a href="#keşifsel-veri-analizi" id="toc-keşifsel-veri-analizi" class="nav-link" data-scroll-target="#keşifsel-veri-analizi"><span class="header-section-number">5.1</span> Keşifsel Veri Analizi</a></li>
+  <li><a href="#zaman-serisi-analizi" id="toc-zaman-serisi-analizi" class="nav-link" data-scroll-target="#zaman-serisi-analizi"><span class="header-section-number">5.2</span> 1.Zaman Serisi Analizi</a></li>
+  <li><a href="#isı-haritası-analizi" id="toc-isı-haritası-analizi" class="nav-link" data-scroll-target="#isı-haritası-analizi"><span class="header-section-number">5.3</span> 2. Isı Haritası Analizi</a></li>
   </ul></li>
-  <li><a href="#sonuçlar-ve-ana-çıkarımlar" id="toc-sonuçlar-ve-ana-çıkarımlar" class="nav-link" data-scroll-target="#sonuçlar-ve-ana-çıkarımlar"><span class="header-section-number">4</span> Sonuçlar ve Ana Çıkarımlar</a></li>
   </ul>
 </nav>
 </nav>
@@ -151,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Proje X (proje adını yazınız)</h1>
+<h1 class="title">Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi</h1>
 </div>
 
 
@@ -169,57 +169,78 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Proje sayfamıza hoş geldiniz.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".\assets/images/image_2025.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="360"></p>
+</figure>
+</div>
 <p><em>Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.</em></p>
-<p>(Aşağıdaki başlıklar örnek olarak verilmiştir; lütfen gerektiği şekilde düzenlemekten çekinmeyin.)</p>
+<p>Proje tanıtım filmine buradan ulaşabilirsiniz.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><a href="https://www.youtube.com"><img src=".\assets/video-logo.jpg" class="quarto-figure quarto-figure-left figure-img" width="65" height="65"></a></p>
+</figure>
+</div>
 <section id="proje-genel-bakış-ve-kapsamı" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Proje Genel Bakış ve Kapsamı</h1>
-<p>xxxxxx</p>
+<p>Hava kirliliği şu anda Türkiye’deki en önemli sorunlardan biri olarak kabul ediliyor ve her yıl tahmini 30 bin kişi ilgili nedenlerle ölüyor ve ülke çapındaki tüm ölümlerin yaklaşık yüzde 8’ini temsil ediyor.</p>
+<p>Ankara’da ve aslında Türkiye’nin birçok şehrinde kirliliğin ana nedeni, 1990 yılı itibariyle ülkede yaklaşık 4 milyon araç olan araç emisyonlarının 2020’de 25 milyona yükseldiği anlamına geliyor. Otomobiller, kamyonlar ve otobüsler gibi bu araçların çoğu, emisyonlar söz konusu olduğunda uluslararası standartları karşılamıyor ve büyük miktarlarda dizel yakıt kullanılıyor.</p>
+<p>Ankara sınırları içinde yaklaşık 4,5 milyon nüfusa sahip olması sebebi ile yüksek nüfuslu birçok şehirde ortaya çıkan kirlilik kaynaklarına maruz kalmaktadır.</p>
 </section>
 <section id="veri" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Veri</h1>
 <p>xxxxxx</p>
 <section id="veri-kaynağı" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="veri-kaynağı"><span class="header-section-number">2.1</span> Veri Kaynağı</h2>
-<p>xxxxxx</p>
+<p><a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew" class="uri">https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew</a></p>
 </section>
 <section id="veri-hakkında-genel-bilgiler" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="veri-hakkında-genel-bilgiler"><span class="header-section-number">2.2</span> Veri Hakkında Genel Bilgiler</h2>
-<p>xxxxxx</p>
+<p>PM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır.</p>
 </section>
 <section id="tercih-sebebi" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</h2>
-<p>xxxxxx</p>
+<p>Hepimizin yaşamakta olduğu ülkemizin başkenti Ankara’mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek</p>
 </section>
 <section id="ön-işleme" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</h2>
-<p>xxxxxx</p>
 </section>
 </section>
-<section id="analiz" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Analiz</h1>
-<p>xxxxxx</p>
-<section id="keşifsel-veri-analizi" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">3.1</span> Keşifsel Veri Analizi</h2>
-<p>xxxxxx</p>
+<section id="gerekli-paketi-yükleyin-ve-aktif-hale-getirin-ilk-kez-çalıştırıyorsanız" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Gerekli paketi yükleyin ve aktif hale getirin (ilk kez çalıştırıyorsanız)</h1>
+<blockquote class="blockquote">
+<p>install.packages(“readr”)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>library(readr)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>getwd(“C:.aras-bahar2025-takim-sona_kalanlaR”)</p>
+</blockquote>
 </section>
-<section id="trend-analizi" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="trend-analizi"><span class="header-section-number">3.2</span> Trend Analizi</h2>
-<p>xxxxxx</p>
+<section id="csv-dosyasını-yükleme" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> CSV dosyasını yükleme</h1>
+<blockquote class="blockquote">
+<p>veri &lt;- read.csv(“ankara_hava_kalitesi”, header=TRUE)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>print(veri)</p>
+</blockquote>
+<p>```</p>
 </section>
-<section id="model-uydurma" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="model-uydurma"><span class="header-section-number">3.3</span> Model Uydurma</h2>
-<p>xxxxxx</p>
+<section id="analiz" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Analiz</h1>
+<section id="keşifsel-veri-analizi" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">5.1</span> Keşifsel Veri Analizi</h2>
 </section>
-<section id="sonuçlar" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">3.4</span> Sonuçlar</h2>
-<p>xxxxxx</p>
+<section id="zaman-serisi-analizi" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="zaman-serisi-analizi"><span class="header-section-number">5.2</span> 1.Zaman Serisi Analizi</h2>
 </section>
-</section>
-<section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Sonuçlar ve Ana Çıkarımlar</h1>
-<p>xxxxxxxx</p>
+<section id="isı-haritası-analizi" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="isı-haritası-analizi"><span class="header-section-number">5.3</span> 2. Isı Haritası Analizi</h2>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

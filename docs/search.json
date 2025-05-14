@@ -248,9 +248,9 @@
   {
     "objectID": "proje.html",
     "href": "proje.html",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "",
-    "text": "Proje sayfamıza hoş geldiniz.\nProjemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.\n(Aşağıdaki başlıklar örnek olarak verilmiştir; lütfen gerektiği şekilde düzenlemekten çekinmeyin.)"
+    "text": "Proje sayfamıza hoş geldiniz.\nProjemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.\nProje tanıtım filmine buradan ulaşabilirsiniz."
   },
   {
     "objectID": "proje.html#data-source",
@@ -333,51 +333,51 @@
   {
     "objectID": "proje.html#veri-kaynağı",
     "href": "proje.html#veri-kaynağı",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.1 Veri Kaynağı",
-    "text": "2.1 Veri Kaynağı\nxxxxxx"
+    "text": "2.1 Veri Kaynağı\nhttps://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew"
   },
   {
     "objectID": "proje.html#veri-hakkında-genel-bilgiler",
     "href": "proje.html#veri-hakkında-genel-bilgiler",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.2 Veri Hakkında Genel Bilgiler",
-    "text": "2.2 Veri Hakkında Genel Bilgiler\nxxxxxx"
+    "text": "2.2 Veri Hakkında Genel Bilgiler\nPM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır."
   },
   {
     "objectID": "proje.html#tercih-sebebi",
     "href": "proje.html#tercih-sebebi",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.3 Tercih Sebebi",
-    "text": "2.3 Tercih Sebebi\nxxxxxx"
+    "text": "2.3 Tercih Sebebi\nHepimizin yaşamakta olduğu ülkemizin başkenti Ankara’mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek"
   },
   {
     "objectID": "proje.html#ön-işleme",
     "href": "proje.html#ön-işleme",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.4 Ön İşleme",
-    "text": "2.4 Ön İşleme\nxxxxxx"
+    "text": "2.4 Ön İşleme"
   },
   {
     "objectID": "proje.html#keşifsel-veri-analizi",
     "href": "proje.html#keşifsel-veri-analizi",
-    "title": "Proje X (proje adını yazınız)",
-    "section": "3.1 Keşifsel Veri Analizi",
-    "text": "3.1 Keşifsel Veri Analizi\nxxxxxx"
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "5.1 Keşifsel Veri Analizi",
+    "text": "5.1 Keşifsel Veri Analizi"
   },
   {
     "objectID": "proje.html#trend-analizi",
     "href": "proje.html#trend-analizi",
-    "title": "Proje X (proje adını yazınız)",
-    "section": "3.2 Trend Analizi",
-    "text": "3.2 Trend Analizi\nxxxxxx"
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "4.1 Trend Analizi",
+    "text": "4.1 Trend Analizi"
   },
   {
     "objectID": "proje.html#model-uydurma",
     "href": "proje.html#model-uydurma",
-    "title": "Proje X (proje adını yazınız)",
-    "section": "3.3 Model Uydurma",
-    "text": "3.3 Model Uydurma\nxxxxxx"
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "4.3 Model Uydurma",
+    "text": "4.3 Model Uydurma"
   },
   {
     "objectID": "proje.html#sonuçlar",
@@ -702,5 +702,68 @@
       "Porfolyo",
       "Çalışma 1"
     ]
+  },
+  {
+    "objectID": "proje.html#zaman-serisi-analizi",
+    "href": "proje.html#zaman-serisi-analizi",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "5.2 1.Zaman Serisi Analizi",
+    "text": "5.2 1.Zaman Serisi Analizi"
+  },
+  {
+    "objectID": "proje.html#isı-haritası-analizi",
+    "href": "proje.html#isı-haritası-analizi",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "5.3 2. Isı Haritası Analizi",
+    "text": "5.3 2. Isı Haritası Analizi"
+  },
+  {
+    "objectID": "proje.html#korelasyon-analizi",
+    "href": "proje.html#korelasyon-analizi",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "4.2 1. Korelasyon Analizi",
+    "text": "4.2 1. Korelasyon Analizi\n{r} cor_data &lt;- data %&gt;% select(all_of(numeric_cols)) %&gt;% drop_na()\ncorr_matrix &lt;- cor(cor_data) corrplot(corr_matrix, method = “color”, type = “lower”, tl.col = “black”)"
+  },
+  {
+    "objectID": "proje.html#sınıflandırma-modeli",
+    "href": "proje.html#sınıflandırma-modeli",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "4.4 1. Sınıflandırma Modeli",
+    "text": "4.4 1. Sınıflandırma Modeli\n{r} # PM10’u sınıflara ayıralım (örnek: temiz - kirli) data\\(class &lt;- ifelse(data\\)PM10 &gt; 50, “Kirli”, “Temiz”) data_model &lt;- data %&gt;% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %&gt;% drop_na()"
+  },
+  {
+    "objectID": "proje.html#görselleştirme",
+    "href": "proje.html#görselleştirme",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "7.1 Görselleştirme",
+    "text": "7.1 Görselleştirme"
+  },
+  {
+    "objectID": "proje.html#etkileşimli-grafik-istasyona-göre-pm2.5",
+    "href": "proje.html#etkileşimli-grafik-istasyona-göre-pm2.5",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "7.2 1. Etkileşimli Grafik: İstasyona göre PM2.5",
+    "text": "7.2 1. Etkileşimli Grafik: İstasyona göre PM2.5\n{r} ui &lt;- fluidPage( selectInput(“istasyon”, “İstasyon Seçin”, choices = unique(veri$Istasyon)), plotOutput(“grafik”) )\nserver &lt;- function(input, output) { output\\(grafik &lt;- renderPlot({\n    df_filt &lt;- veri %&gt;% filter(Istasyon == input\\)istasyon) %&gt;% group_by(Gun = as.Date(Tarih)) %&gt;% summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))\nggplot(df_filt, aes(x = Gun, y = PM2_5)) +\n  geom_line(color = \"darkgreen\") +\n  labs(title = paste(input$istasyon, \"PM2.5 Günlük Ortalama\"), x = \"Tarih\", y = \"PM2.5\") +\n  theme_minimal()\n```"
+  },
+  {
+    "objectID": "proje.html#keşifsel-veri-analizi-1",
+    "href": "proje.html#keşifsel-veri-analizi-1",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "15.1 Keşifsel Veri Analizi",
+    "text": "15.1 Keşifsel Veri Analizi"
+  },
+  {
+    "objectID": "proje.html#zaman-serisi-analizi-1",
+    "href": "proje.html#zaman-serisi-analizi-1",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "15.2 1.Zaman Serisi Analizi",
+    "text": "15.2 1.Zaman Serisi Analizi"
+  },
+  {
+    "objectID": "proje.html#isı-haritası-analizi-1",
+    "href": "proje.html#isı-haritası-analizi-1",
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "15.3 2. Isı Haritası Analizi",
+    "text": "15.3 2. Isı Haritası Analizi"
   }
 ]
