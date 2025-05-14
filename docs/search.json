@@ -335,56 +335,56 @@
     "href": "proje.html#veri-kaynağı",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.1 Veri Kaynağı",
-    "text": "2.1 Veri Kaynağı\nhttps://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew"
+    "text": "2.1 Veri Kaynağı\nhttps://sim.csb.gov.tr"
   },
   {
     "objectID": "proje.html#veri-hakkında-genel-bilgiler",
     "href": "proje.html#veri-hakkında-genel-bilgiler",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.2 Veri Hakkında Genel Bilgiler",
-    "text": "2.2 Veri Hakkında Genel Bilgiler\nPM2.5, PM10 gibi partikül madde ölçümleri ile birlikte sıcaklık, nem gibi meteorolojik verileri de sağlamaktadır."
+    "text": "2.2 Veri Hakkında Genel Bilgiler\n\nVeride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.\nÖlçümler saatlik olarak yapılmış. Tarih sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.\nVeride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.\nAşağıdaki 6 temel hava kirleticinin saatlik ölçümleri yer alıyor.\nPM10 (Partikül madde ≤10 µm)\nPM2.5 (Partikül madde ≤2.5 µm)\nSO2 (Kükürt dioksit)\nNO2 (Azot dioksit)\nNOX (Azot oksitler toplamı)\nNO (Azot monoksit)\nVeri setinde yaklaşık olarak 86.000+ gözlem bulunmaktadır (tüm istasyonlar dahil).\nSayısal değerler nokta yerine virgül ile girilmişti; bu durum düzeltilerek sayısal veri türüne dönüştürüldü.\nEksik değerler bazı sütunlarda mevcut ancak analiz için uygun şekilde ortalama alımı, sınıflandırma için filtreleme yapılmıştır.\nKapsanan Zaman Aralığı:1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler)."
   },
   {
     "objectID": "proje.html#tercih-sebebi",
     "href": "proje.html#tercih-sebebi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.3 Tercih Sebebi",
-    "text": "2.3 Tercih Sebebi\nHepimizin yaşamakta olduğu ülkemizin başkenti Ankara’mızın havası hakkında farkındalık yaratmak ve elde edilen sonuçlara göre iyileştirmeler geliştirmek"
+    "text": "2.3 Tercih Sebebi\n\nZaman Serisi Analizi İçin Uygunluk:\nVeri saatlik ölçümler içerdiğinden yıl boyu zaman serisi analizleri (trend, mevsimsellik, dalgalanma) yapılmasına elverişlidir.\nÇoklu Değişken ve Ölçüm:\nPM10, PM2.5, SO₂, NO₂, NOx, NO gibi farklı hava kirleticileri kapsaması sayesinde değişkenler arası korelasyon ve neden-sonuç ilişkileri incelenebilir.\nMekânsal Karşılaştırma Yapılabilir:\nAnkara’daki birden fazla istasyondan gelen veriler sayesinde istasyonlar arası karşılaştırma ve ısı haritası görselleştirmeleri mümkündür.\nÇevresel ve Toplumsal Anlam Taşıması:\nHava kirliliği halk sağlığını doğrudan etkileyen önemli bir çevresel sorundur; bu da çalışmayı toplumsal açıdan anlamlı ve güncel kılar.\nModelleme ve Sınıflandırma İçin Elverişli:\nPM10 düzeyine göre hava “Temiz” ya da “Kirli” olarak sınıflandırılabilir; bu da makine öğrenmesi (sınıflandırma) modellerinin uygulanmasına olanak tanır.\nKamuya Açık ve Gerçek Veridir:\nVerinin gerçek, ham ve karmaşık olması, dersin amacı doğrultusunda veri temizleme, keşifsel analiz ve modelleme gibi tüm süreci uygulamalı yapmaya olanak sağlar.\nEtkileşimli Uygulamalar için Uygunluk:\nVerinin zaman ve istasyon bazlı olması sayesinde Shiny veya Quarto Widget gibi etkileşimli uygulamalarda kullanılabilir, kullanıcıya veriyle oynama şansı tanır."
   },
   {
     "objectID": "proje.html#ön-işleme",
     "href": "proje.html#ön-işleme",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
     "section": "2.4 Ön İşleme",
-    "text": "2.4 Ön İşleme"
+    "text": "2.4 Ön İşleme\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## Gerekli kütüphaneler\n\ninstall.packages(“readr”)\n\n\nlibrary(tidyverse) library(lubridate) library(ggplot2) library(reshape2) library(corrplot) library(rpart) library(rpart.plot) library(shiny) library(leaflet) library(DT) library(viridis) library(readr)\n\n\ngetwd(“C:.aras-bahar2025-takim-sona_kalanlaR”)"
   },
   {
     "objectID": "proje.html#keşifsel-veri-analizi",
     "href": "proje.html#keşifsel-veri-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "5.1 Keşifsel Veri Analizi",
-    "text": "5.1 Keşifsel Veri Analizi"
+    "section": "10.1 Keşifsel Veri Analizi",
+    "text": "10.1 Keşifsel Veri Analizi"
   },
   {
     "objectID": "proje.html#trend-analizi",
     "href": "proje.html#trend-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "4.1 Trend Analizi",
-    "text": "4.1 Trend Analizi"
+    "section": "10.3 Trend Analizi",
+    "text": "10.3 Trend Analizi"
   },
   {
     "objectID": "proje.html#model-uydurma",
     "href": "proje.html#model-uydurma",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "4.3 Model Uydurma",
-    "text": "4.3 Model Uydurma"
+    "section": "10.5 Model Uydurma",
+    "text": "10.5 Model Uydurma"
   },
   {
     "objectID": "proje.html#sonuçlar",
     "href": "proje.html#sonuçlar",
-    "title": "Proje X (proje adını yazınız)",
-    "section": "3.4 Sonuçlar",
-    "text": "3.4 Sonuçlar\nxxxxxx"
+    "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
+    "section": "14.3 Sonuçlar",
+    "text": "14.3 Sonuçlar"
   },
   {
     "objectID": "portfolyo/calisma1.html#a",
@@ -707,43 +707,43 @@
     "objectID": "proje.html#zaman-serisi-analizi",
     "href": "proje.html#zaman-serisi-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "5.2 1.Zaman Serisi Analizi",
-    "text": "5.2 1.Zaman Serisi Analizi"
+    "section": "10.2 1.Zaman Serisi Analizi",
+    "text": "10.2 1.Zaman Serisi Analizi\n\ndaily_avg &lt;- veri %&gt;% mutate(Gun = as_date(Tarih)) %&gt;% group_by(Gun) %&gt;% summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))\n\n\nggplot(daily_avg, aes(x = Gun, y = PM10)) + geom_line(color = “firebrick”) + labs(title = “Günlük Ortalama PM10 (2024)”, x = “Tarih”, y = “PM10 (µg/m³)”)\n\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## 2. Isı Haritası Analizi ======="
   },
   {
     "objectID": "proje.html#isı-haritası-analizi",
     "href": "proje.html#isı-haritası-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "5.3 2. Isı Haritası Analizi",
-    "text": "5.3 2. Isı Haritası Analizi"
+    "section": "10.3 2. Isı Haritası Analizi",
+    "text": "10.3 2. Isı Haritası Analizi"
   },
   {
     "objectID": "proje.html#korelasyon-analizi",
     "href": "proje.html#korelasyon-analizi",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "4.2 1. Korelasyon Analizi",
-    "text": "4.2 1. Korelasyon Analizi\n{r} cor_data &lt;- data %&gt;% select(all_of(numeric_cols)) %&gt;% drop_na()\ncorr_matrix &lt;- cor(cor_data) corrplot(corr_matrix, method = “color”, type = “lower”, tl.col = “black”)"
+    "section": "10.4 1. Korelasyon Analizi",
+    "text": "10.4 1. Korelasyon Analizi"
   },
   {
     "objectID": "proje.html#sınıflandırma-modeli",
     "href": "proje.html#sınıflandırma-modeli",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "4.4 1. Sınıflandırma Modeli",
-    "text": "4.4 1. Sınıflandırma Modeli\n{r} # PM10’u sınıflara ayıralım (örnek: temiz - kirli) data\\(class &lt;- ifelse(data\\)PM10 &gt; 50, “Kirli”, “Temiz”) data_model &lt;- data %&gt;% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %&gt;% drop_na()"
+    "section": "10.6 1. Sınıflandırma Modeli",
+    "text": "10.6 1. Sınıflandırma Modeli"
   },
   {
     "objectID": "proje.html#görselleştirme",
     "href": "proje.html#görselleştirme",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "7.1 Görselleştirme",
-    "text": "7.1 Görselleştirme"
+    "section": "14.1 Görselleştirme",
+    "text": "14.1 Görselleştirme"
   },
   {
     "objectID": "proje.html#etkileşimli-grafik-istasyona-göre-pm2.5",
     "href": "proje.html#etkileşimli-grafik-istasyona-göre-pm2.5",
     "title": "Temiz Ankara: İlçelere Göre Hava Kalitesi Analizi",
-    "section": "7.2 1. Etkileşimli Grafik: İstasyona göre PM2.5",
-    "text": "7.2 1. Etkileşimli Grafik: İstasyona göre PM2.5\n{r} ui &lt;- fluidPage( selectInput(“istasyon”, “İstasyon Seçin”, choices = unique(veri$Istasyon)), plotOutput(“grafik”) )\nserver &lt;- function(input, output) { output\\(grafik &lt;- renderPlot({\n    df_filt &lt;- veri %&gt;% filter(Istasyon == input\\)istasyon) %&gt;% group_by(Gun = as.Date(Tarih)) %&gt;% summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))\nggplot(df_filt, aes(x = Gun, y = PM2_5)) +\n  geom_line(color = \"darkgreen\") +\n  labs(title = paste(input$istasyon, \"PM2.5 Günlük Ortalama\"), x = \"Tarih\", y = \"PM2.5\") +\n  theme_minimal()\n```"
+    "section": "14.2 1. Etkileşimli Grafik: İstasyona göre PM2.5",
+    "text": "14.2 1. Etkileşimli Grafik: İstasyona göre PM2.5"
   },
   {
     "objectID": "proje.html#keşifsel-veri-analizi-1",
