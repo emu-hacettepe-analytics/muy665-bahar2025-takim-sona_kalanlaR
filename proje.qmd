@@ -119,10 +119,10 @@ print(veri)
 
 
 ```
-# Analiz
+## Analiz
 ```{r}
 ```
-# Veri Analizi ve Ön İşleme
+## Veri Analizi ve Ön İşleme
 
 # 1. Veri Yükleme ve Temizleme
 ```{r}
@@ -162,7 +162,7 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
 ```{r}
 ## 1. Korelasyon Analizi
 ```
-## Model Uydurma
+## 1. Model Uydurma
 ```{r}
 ## 1. Sınıflandırma Modeli
 
