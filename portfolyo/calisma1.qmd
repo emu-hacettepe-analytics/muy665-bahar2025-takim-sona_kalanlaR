@@ -1,6 +1,7 @@
 ---
 title: "Çalışma 1"
 ---
+
 ```{r}
 
 ## (a) Video özeti
@@ -16,7 +17,6 @@ print("Söyleşi, Doç. Dr. Mustafa Gökçe Baydoğan'ın, veri bilimi ve endüs
 
 ## (b) Fonksiyonlar ve Döngüler ile Verileri Özetleme
 
-```{r}
 
 library(dslabs)  # dslabs paketi
 library(knitr)  # kable fonksiyonu 
