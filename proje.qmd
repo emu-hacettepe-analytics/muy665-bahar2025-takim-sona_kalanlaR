@@ -93,9 +93,13 @@ Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi veriler
 
 ## Gerekli kütüphaneler
 
+## Veri Analizi ve Ön İşleme
+
+## 1. Veri Yükleme ve Temizleme
+
 ```{r}
 
-install.packages("readr")
+# install.packages("readr")
 
 library(tidyverse)
 library(lubridate)
@@ -105,39 +109,30 @@ library(corrplot)
 library(rpart)
 library(rpart.plot)
 library(shiny)
-library(leaflet)
 library(DT)
 library(viridis)
 library(readr)
+library(stringr)
+library(dplyr)
 
-getwd("C:\Users\tulay.aras\Desktop\github\muy665-bahar2025-takim-sona_kalanlaR\data")
 
 # CSV dosyasını yükleme
 veri <- read.csv("ankara_hava_kalitesi.csv", header=TRUE)
 
-print(veri)
+
+# Son sütunun sayısını bulalım
+son_sutun_indeksi <- ncol(veri)
+
+# Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım
+veri <- veri[, -son_sutun_indeksi]
 
 
-```
-
-## Analiz
-
-```{r}
-```
-
-## Veri Analizi ve Ön İşleme
-
-## 1. Veri Yükleme ve Temizleme
-
-```{r}
-# Gereksiz sütun kaldır
-veri <- veri[, -which(names(veri) == "Unnamed..8")]
 
 # Sütun adlarını temizle
 colnames(veri) <- c("Istasyon", "Tarih", "PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
 
 # Nokta yerine virgül kullanılmış, düzelt
-numeric_cols <- c("PM10 ( µg/m3 )", "PM 2.5 ( µg/m3 )", "SO2 ( µg/m3 )", "NO2 ( µg/m3 )", "NOX ( µg/m3 )", "NO ( µg/m3 )")
+numeric_cols <- c("PM10", "PM2_5", "SO2", "NO2", "NOX", "NO")
 veri[numeric_cols] <- lapply(veri[numeric_cols], function(x) as.numeric(str_replace(x, ",", ".")))
 
 # Tarih-saat formatını düzenle
@@ -145,13 +140,12 @@ veri$Tarih <- dmy_hms(veri$Tarih)
 veri$Saat <- hour(veri$Tarih)
 veri$Ay <- month(veri$Tarih, label = TRUE)
 
-```
 
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
 
-```{r}
+
 daily_avg <- veri %>%
   mutate(Gun = as_date(Tarih)) %>%
   group_by(Gun) %>%
@@ -165,6 +159,16 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
 ## 2. Isı Haritası Analizi
 
 ```{r}
+heat_data <- veri %>%
+  group_by(Saat, Ay) %>%
+  summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
+
+ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
+  geom_tile(color = "white") +
+  scale_fill_viridis(name = "PM2.5", option = "C") +
+  labs(title = "PM2.5 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
+  theme_minimal()
+
 ```
 
 ## Trend Analizi
@@ -210,5 +214,7 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
 \#<https://aqicn.org/city/turkey/ankara/ulus-trafik/>
 
 \#<https://quarto.org/docs/interactive/widgets/jupyter.html>
+
+#https://plotly.com/python/tile-county-choropleth/
 
 \`\`\`
