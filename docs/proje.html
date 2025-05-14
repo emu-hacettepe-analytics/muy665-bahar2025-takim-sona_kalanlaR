@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,35 +103,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -159,34 +164,19 @@ window.Quarto = {
   <li><a href="#veri-hakkında-genel-bilgiler" id="toc-veri-hakkında-genel-bilgiler" class="nav-link" data-scroll-target="#veri-hakkında-genel-bilgiler"><span class="header-section-number">2.2</span> Veri Hakkında Genel Bilgiler</a></li>
   <li><a href="#tercih-sebebi" id="toc-tercih-sebebi" class="nav-link" data-scroll-target="#tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</a></li>
   <li><a href="#ön-işleme" id="toc-ön-işleme" class="nav-link" data-scroll-target="#ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</a></li>
+  <li><a href="#gerekli-kütüphaneler" id="toc-gerekli-kütüphaneler" class="nav-link" data-scroll-target="#gerekli-kütüphaneler"><span class="header-section-number">2.5</span> Gerekli kütüphaneler</a></li>
+  <li><a href="#veri-analizi-ve-ön-işleme" id="toc-veri-analizi-ve-ön-işleme" class="nav-link" data-scroll-target="#veri-analizi-ve-ön-işleme"><span class="header-section-number">2.6</span> Veri Analizi ve Ön İşleme</a></li>
+  <li><a href="#veri-yükleme-ve-temizleme" id="toc-veri-yükleme-ve-temizleme" class="nav-link" data-scroll-target="#veri-yükleme-ve-temizleme"><span class="header-section-number">2.7</span> 1. Veri Yükleme ve Temizleme</a></li>
+  <li><a href="#isı-haritası-analizi" id="toc-isı-haritası-analizi" class="nav-link" data-scroll-target="#isı-haritası-analizi"><span class="header-section-number">2.8</span> 2. Isı Haritası Analizi</a></li>
+  <li><a href="#trend-analizi" id="toc-trend-analizi" class="nav-link" data-scroll-target="#trend-analizi"><span class="header-section-number">2.9</span> Trend Analizi</a></li>
+  <li><a href="#korelasyon-analizi" id="toc-korelasyon-analizi" class="nav-link" data-scroll-target="#korelasyon-analizi"><span class="header-section-number">2.10</span> 1. Korelasyon Analizi</a></li>
+  <li><a href="#model-uydurma" id="toc-model-uydurma" class="nav-link" data-scroll-target="#model-uydurma"><span class="header-section-number">2.11</span> Model Uydurma</a></li>
+  <li><a href="#sınıflandırma-modeli" id="toc-sınıflandırma-modeli" class="nav-link" data-scroll-target="#sınıflandırma-modeli"><span class="header-section-number">2.12</span> 1. Sınıflandırma Modeli</a></li>
+  <li><a href="#görselleştirme" id="toc-görselleştirme" class="nav-link" data-scroll-target="#görselleştirme"><span class="header-section-number">2.13</span> Görselleştirme</a></li>
+  <li><a href="#sonuçlar" id="toc-sonuçlar" class="nav-link" data-scroll-target="#sonuçlar"><span class="header-section-number">2.14</span> Sonuçlar</a></li>
   </ul></li>
-  <li><a href="#csv-dosyasını-yükleme" id="toc-csv-dosyasını-yükleme" class="nav-link" data-scroll-target="#csv-dosyasını-yükleme"><span class="header-section-number">3</span> CSV dosyasını yükleme</a></li>
-  <li><a href="#analiz" id="toc-analiz" class="nav-link" data-scroll-target="#analiz"><span class="header-section-number">4</span> # Analiz</a></li>
-  <li><a href="#veri-analizi-ve-ön-işleme" id="toc-veri-analizi-ve-ön-işleme" class="nav-link" data-scroll-target="#veri-analizi-ve-ön-işleme"><span class="header-section-number">5</span> Veri Analizi ve Ön İşleme</a></li>
-  <li><a href="#veri-yükleme-ve-temizleme" id="toc-veri-yükleme-ve-temizleme" class="nav-link" data-scroll-target="#veri-yükleme-ve-temizleme"><span class="header-section-number">6</span> 1. Veri Yükleme ve Temizleme</a></li>
-  <li><a href="#gereksiz-sütun-kaldır" id="toc-gereksiz-sütun-kaldır" class="nav-link" data-scroll-target="#gereksiz-sütun-kaldır"><span class="header-section-number">7</span> Gereksiz sütun kaldır</a></li>
-  <li><a href="#sütun-adlarını-temizle" id="toc-sütun-adlarını-temizle" class="nav-link" data-scroll-target="#sütun-adlarını-temizle"><span class="header-section-number">8</span> Sütun adlarını temizle</a></li>
-  <li><a href="#nokta-yerine-virgül-kullanılmış-düzelt" id="toc-nokta-yerine-virgül-kullanılmış-düzelt" class="nav-link" data-scroll-target="#nokta-yerine-virgül-kullanılmış-düzelt"><span class="header-section-number">9</span> Nokta yerine virgül kullanılmış, düzelt</a></li>
-  <li><a href="#tarih-saat-formatını-düzenle" id="toc-tarih-saat-formatını-düzenle" class="nav-link" data-scroll-target="#tarih-saat-formatını-düzenle"><span class="header-section-number">10</span> Tarih-saat formatını düzenle</a>
-  <ul class="collapse">
-  <li><a href="#keşifsel-veri-analizi" id="toc-keşifsel-veri-analizi" class="nav-link" data-scroll-target="#keşifsel-veri-analizi"><span class="header-section-number">10.1</span> Keşifsel Veri Analizi</a></li>
-  <li><a href="#zaman-serisi-analizi" id="toc-zaman-serisi-analizi" class="nav-link" data-scroll-target="#zaman-serisi-analizi"><span class="header-section-number">10.2</span> 1.Zaman Serisi Analizi</a></li>
-  <li><a href="#trend-analizi" id="toc-trend-analizi" class="nav-link" data-scroll-target="#trend-analizi"><span class="header-section-number">10.3</span> Trend Analizi</a></li>
-  <li><a href="#korelasyon-analizi" id="toc-korelasyon-analizi" class="nav-link" data-scroll-target="#korelasyon-analizi"><span class="header-section-number">10.4</span> 1. Korelasyon Analizi</a></li>
-  <li><a href="#model-uydurma" id="toc-model-uydurma" class="nav-link" data-scroll-target="#model-uydurma"><span class="header-section-number">10.5</span> Model Uydurma</a></li>
-  <li><a href="#sınıflandırma-modeli" id="toc-sınıflandırma-modeli" class="nav-link" data-scroll-target="#sınıflandırma-modeli"><span class="header-section-number">10.6</span> 1. Sınıflandırma Modeli</a></li>
-  </ul></li>
-  <li><a href="#pm10u-sınıflara-ayıralım-örnek-temiz---kirli" id="toc-pm10u-sınıflara-ayıralım-örnek-temiz---kirli" class="nav-link" data-scroll-target="#pm10u-sınıflara-ayıralım-örnek-temiz---kirli"><span class="header-section-number">11</span> PM10’u sınıflara ayıralım (örnek: temiz - kirli)</a></li>
-  <li><a href="#eğitim-test-bölmesi" id="toc-eğitim-test-bölmesi" class="nav-link" data-scroll-target="#eğitim-test-bölmesi"><span class="header-section-number">12</span> Eğitim-test bölmesi</a></li>
-  <li><a href="#model-karar-ağacı-rpart" id="toc-model-karar-ağacı-rpart" class="nav-link" data-scroll-target="#model-karar-ağacı-rpart"><span class="header-section-number">13</span> Model: Karar ağacı (rpart)</a></li>
-  <li><a href="#doğruluk-oranı" id="toc-doğruluk-oranı" class="nav-link" data-scroll-target="#doğruluk-oranı"><span class="header-section-number">14</span> Doğruluk oranı</a>
-  <ul class="collapse">
-  <li><a href="#görselleştirme" id="toc-görselleştirme" class="nav-link" data-scroll-target="#görselleştirme"><span class="header-section-number">14.1</span> Görselleştirme</a></li>
-  <li><a href="#etkileşimli-grafik-istasyona-göre-pm2.5" id="toc-etkileşimli-grafik-istasyona-göre-pm2.5" class="nav-link" data-scroll-target="#etkileşimli-grafik-istasyona-göre-pm2.5"><span class="header-section-number">14.2</span> 1. Etkileşimli Grafik: İstasyona göre PM2.5</a></li>
-  <li><a href="#sonuçlar" id="toc-sonuçlar" class="nav-link" data-scroll-target="#sonuçlar"><span class="header-section-number">14.3</span> Sonuçlar</a></li>
-  </ul></li>
-  <li><a href="#sonuçlar-ve-ana-çıkarımlar" id="toc-sonuçlar-ve-ana-çıkarımlar" class="nav-link" data-scroll-target="#sonuçlar-ve-ana-çıkarımlar"><span class="header-section-number">15</span> Sonuçlar ve Ana Çıkarımlar</a></li>
-  <li><a href="#kaynaklar" id="toc-kaynaklar" class="nav-link" data-scroll-target="#kaynaklar"><span class="header-section-number">16</span> Kaynaklar</a></li>
+  <li><a href="#sonuçlar-ve-ana-çıkarımlar" id="toc-sonuçlar-ve-ana-çıkarımlar" class="nav-link" data-scroll-target="#sonuçlar-ve-ana-çıkarımlar"><span class="header-section-number">3</span> Sonuçlar ve Ana Çıkarımlar</a></li>
+  <li><a href="#kaynaklar" id="toc-kaynaklar" class="nav-link" data-scroll-target="#kaynaklar"><span class="header-section-number">4</span> Kaynaklar</a></li>
   </ul>
 </nav>
 </nav>
@@ -282,116 +272,200 @@ window.Quarto = {
 </section>
 <section id="ön-işleme" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</h2>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## Gerekli kütüphaneler</p>
-<blockquote class="blockquote">
-<p>install.packages(“readr”)</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>library(tidyverse) library(lubridate) library(ggplot2) library(reshape2) library(corrplot) library(rpart) library(rpart.plot) library(shiny) library(leaflet) library(DT) library(viridis) library(readr)</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>getwd(“C:.aras-bahar2025-takim-sona_kalanlaR”)</p>
-</blockquote>
+</section>
+<section id="gerekli-kütüphaneler" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="gerekli-kütüphaneler"><span class="header-section-number">2.5</span> Gerekli kütüphaneler</h2>
+</section>
+<section id="veri-analizi-ve-ön-işleme" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="veri-analizi-ve-ön-işleme"><span class="header-section-number">2.6</span> Veri Analizi ve Ön İşleme</h2>
+</section>
+<section id="veri-yükleme-ve-temizleme" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="veri-yükleme-ve-temizleme"><span class="header-section-number">2.7</span> 1. Veri Yükleme ve Temizleme</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readr")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'reshape2'
+
+The following object is masked from 'package:tidyr':
+
+    smiths</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.95 loaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'DT'
+
+The following objects are masked from 'package:shiny':
+
+    dataTableOutput, renderDataTable</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Zorunlu paket yükleniyor: viridisLite</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV dosyasını yükleme</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"ankara_hava_kalitesi.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunun sayısını bulalım</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>son_sutun_indeksi <span class="ot">&lt;-</span> <span class="fu">ncol</span>(veri)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> veri[, <span class="sc">-</span>son_sutun_indeksi]</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Sütun adlarını temizle</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(veri) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Istasyon"</span>, <span class="st">"Tarih"</span>, <span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Nokta yerine virgül kullanılmış, düzelt</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>veri[numeric_cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(veri[numeric_cols], <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(x, <span class="st">","</span>, <span class="st">"."</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
+Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
+Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
+Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
+Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
+Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tarih-saat formatını düzenle</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>Tarih <span class="ot">&lt;-</span> <span class="fu">dmy_hms</span>(veri<span class="sc">$</span>Tarih)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>Saat <span class="ot">&lt;-</span> <span class="fu">hour</span>(veri<span class="sc">$</span>Tarih)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>Ay <span class="ot">&lt;-</span> <span class="fu">month</span>(veri<span class="sc">$</span>Tarih, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Keşifsel Veri Analizi</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.Zaman Serisi Analizi</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>daily_avg <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gun =</span> <span class="fu">as_date</span>(Tarih)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gun) <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numeric_cols), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `summarise()`.
+ℹ In argument: `across(all_of(numeric_cols), mean, na.rm = TRUE)`.
+ℹ In group 1: `Gun = 2024-01-01`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(daily_avg, <span class="fu">aes</span>(<span class="at">x =</span> Gun, <span class="at">y =</span> PM10)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Günlük Ortalama PM10 (2024)"</span>, <span class="at">x =</span> <span class="st">"Tarih"</span>, <span class="at">y =</span> <span class="st">"PM10 (µg/m³)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="isı-haritası-analizi" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="isı-haritası-analizi"><span class="header-section-number">2.8</span> 2. Isı Haritası Analizi</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>heat_data <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Saat, Ay) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PM2_5 =</span> <span class="fu">mean</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Saat'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heat_data, <span class="fu">aes</span>(<span class="at">x =</span> Ay, <span class="at">y =</span> Saat, <span class="at">fill =</span> PM2_5)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">name =</span> <span class="st">"PM2.5"</span>, <span class="at">option =</span> <span class="st">"C"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PM2.5 Isı Haritası (Saat x Ay)"</span>, <span class="at">x =</span> <span class="st">"Ay"</span>, <span class="at">y =</span> <span class="st">"Saat"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trend-analizi" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="trend-analizi"><span class="header-section-number">2.9</span> Trend Analizi</h2>
+</section>
+<section id="korelasyon-analizi" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="korelasyon-analizi"><span class="header-section-number">2.10</span> 1. Korelasyon Analizi</h2>
+</section>
+<section id="model-uydurma" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="model-uydurma"><span class="header-section-number">2.11</span> Model Uydurma</h2>
+</section>
+<section id="sınıflandırma-modeli" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="sınıflandırma-modeli"><span class="header-section-number">2.12</span> 1. Sınıflandırma Modeli</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PM10'u sınıflara ayıralım (örnek: temiz - kirli)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Eğitim-test bölmesi</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Karar ağacı (rpart)</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Doğruluk oranı</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="görselleştirme" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="görselleştirme"><span class="header-section-number">2.13</span> Görselleştirme</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1. Etkileşimli Grafik: İstasyona göre PM2.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sonuçlar" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">2.14</span> Sonuçlar</h2>
 </section>
 </section>
-<section id="csv-dosyasını-yükleme" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> CSV dosyasını yükleme</h1>
-<blockquote class="blockquote">
-<p>veri &lt;- read.csv(“ankara_hava_kalitesi”, header=TRUE)</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>print(veri)</p>
-</blockquote>
+<section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Sonuçlar ve Ana Çıkarımlar</h1>
+</section>
+<section id="kaynaklar" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Kaynaklar</h1>
+<p>#<a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew">https://sim.csb.gov.tr</a></p>
+<p>#<a href="https://www.iqair.com/us/turkey/ankara/ankara" class="uri">https://www.iqair.com/us/turkey/ankara/ankara</a></p>
+<p>#<a href="https://aqicn.org/city/turkey/ankara/ulus-trafik/" class="uri">https://aqicn.org/city/turkey/ankara/ulus-trafik/</a></p>
+<p>#<a href="https://quarto.org/docs/interactive/widgets/jupyter.html" class="uri">https://quarto.org/docs/interactive/widgets/jupyter.html</a></p>
+<p>#https://plotly.com/python/tile-county-choropleth/</p>
 <p>```</p>
-</section>
-<section id="analiz" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> # Analiz</h1>
-</section>
-<section id="veri-analizi-ve-ön-işleme" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Veri Analizi ve Ön İşleme</h1>
-</section>
-<section id="veri-yükleme-ve-temizleme" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> 1. Veri Yükleme ve Temizleme</h1>
-</section>
-<section id="gereksiz-sütun-kaldır" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Gereksiz sütun kaldır</h1>
-<blockquote class="blockquote">
-<p>veri &lt;- veri[, -which(names(veri) == “Unnamed..8”)]</p>
-</blockquote>
-</section>
-<section id="sütun-adlarını-temizle" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Sütun adlarını temizle</h1>
-<blockquote class="blockquote">
-<p>colnames(veri) &lt;- c(“Istasyon”, “Tarih”, “PM10”, “PM2_5”, “SO2”, “NO2”, “NOX”, “NO”)</p>
-</blockquote>
-</section>
-<section id="nokta-yerine-virgül-kullanılmış-düzelt" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Nokta yerine virgül kullanılmış, düzelt</h1>
-<blockquote class="blockquote">
-<p>numeric_cols &lt;- c(“PM10 ( µg/m3 )”, “PM 2.5 ( µg/m3 )”, “SO2 ( µg/m3 )”, “NO2 ( µg/m3 )”, “NOX ( µg/m3 )”, “NO ( µg/m3 )”) veri[numeric_cols] &lt;- lapply(veri[numeric_cols], function(x) as.numeric(str_replace(x, “,”, “.”)))</p>
-</blockquote>
-</section>
-<section id="tarih-saat-formatını-düzenle" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Tarih-saat formatını düzenle</h1>
-<blockquote class="blockquote">
-<p>veri<span class="math inline">\(Tarih &lt;- dmy_hms(veri\)</span>Tarih) veri<span class="math inline">\(Saat &lt;- hour(veri\)</span>Tarih) veri<span class="math inline">\(Ay &lt;- month(veri\)</span>Tarih, label = TRUE) ``` &gt;&gt;&gt;&gt;&gt;&gt; 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2</p>
-</blockquote>
-<section id="keşifsel-veri-analizi" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">10.1</span> Keşifsel Veri Analizi</h2>
-</section>
-<section id="zaman-serisi-analizi" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="zaman-serisi-analizi"><span class="header-section-number">10.2</span> 1.Zaman Serisi Analizi</h2>
-<blockquote class="blockquote">
-<p>daily_avg &lt;- veri %&gt;% mutate(Gun = as_date(Tarih)) %&gt;% group_by(Gun) %&gt;% summarise(across(all_of(numeric_cols), mean, na.rm = TRUE))</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>ggplot(daily_avg, aes(x = Gun, y = PM10)) + geom_line(color = “firebrick”) + labs(title = “Günlük Ortalama PM10 (2024)”, x = “Tarih”, y = “PM10 (µg/m³)”)</p>
-</blockquote>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## 2. Isı Haritası Analizi =======</p>
-</section>
-<section id="trend-analizi" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="trend-analizi"><span class="header-section-number">10.3</span> Trend Analizi</h2>
-</section>
-<section id="korelasyon-analizi" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="korelasyon-analizi"><span class="header-section-number">10.4</span> 1. Korelasyon Analizi</h2>
-</section>
-<section id="model-uydurma" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="model-uydurma"><span class="header-section-number">10.5</span> Model Uydurma</h2>
-</section>
-<section id="sınıflandırma-modeli" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="sınıflandırma-modeli"><span class="header-section-number">10.6</span> 1. Sınıflandırma Modeli</h2>
-</section>
-</section>
-<section id="pm10u-sınıflara-ayıralım-örnek-temiz---kirli" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> PM10’u sınıflara ayıralım (örnek: temiz - kirli)</h1>
-</section>
-<section id="eğitim-test-bölmesi" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Eğitim-test bölmesi</h1>
-</section>
-<section id="model-karar-ağacı-rpart" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Model: Karar ağacı (rpart)</h1>
-</section>
-<section id="doğruluk-oranı" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Doğruluk oranı</h1>
-<section id="görselleştirme" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="görselleştirme"><span class="header-section-number">14.1</span> Görselleştirme</h2>
-</section>
-<section id="etkileşimli-grafik-istasyona-göre-pm2.5" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="etkileşimli-grafik-istasyona-göre-pm2.5"><span class="header-section-number">14.2</span> 1. Etkileşimli Grafik: İstasyona göre PM2.5</h2>
-</section>
-<section id="sonuçlar" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">14.3</span> Sonuçlar</h2>
-</section>
-</section>
-<section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Sonuçlar ve Ana Çıkarımlar</h1>
-</section>
-<section id="kaynaklar" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Kaynaklar</h1>
-<p><a href="https://sim.csb.gov.tr/STN/STN_Report/StationDataDownloadNew">https://sim.csb.gov.tr</a></p>
-<p><a href="https://www.iqair.com/us/turkey/ankara/ankara" class="uri">https://www.iqair.com/us/turkey/ankara/ankara</a></p>
-<p><a href="https://aqicn.org/city/turkey/ankara/ulus-trafik/" class="uri">https://aqicn.org/city/turkey/ankara/ulus-trafik/</a></p>
-<p><a href="https://quarto.org/docs/interactive/widgets/jupyter.html" class="uri">https://quarto.org/docs/interactive/widgets/jupyter.html</a> &gt;&gt;&gt;&gt;&gt;&gt;&gt; 2a2d3255fcf58e71dd2790c2a2cfb599e62db7c2</p>
 
 
 </section>
