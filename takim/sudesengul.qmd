@@ -2,31 +2,26 @@
 title: "Sude SENGUL"
 ---
 
-![](/assets/images/sude.jpeg){fig-align="center"}
+![](/assets/images/sude.jpeg){fig-align="center" width="241"}
 
 # EDitim
 
--   Lisans, ................................., .................................... Cniversitesi, TC\<rkiye, 20xx - 20xx.
--   YC\<ksek Lisans, EndC\<stri MC\<hendisliDi, Hacettepe Cniversitesi, TC\<rkiye, 20xx - devam ediyor.
+2024-Halen YC<ksek Lisans, Hacettepe Cniversitesi, Kalite ve Uygunluk DeDerlendirme MC<hendisliDi
+
+2014-2020 Lisans, Yalova Cniversitesi, Polimer MC<hendisliDi
 
 # D0E Deneyimi
 
-## D0Eler
+KasD1m 2024- Halen, Barko Elektronik, Proje ve SC<reC' Kalite Birim YC6neticisi
 
-1.  Firma xxx, pozisyon xx, yD1l xxx
+KasD1m 2022-KasD1m 2024, Barko Elektronik, Kalite Sistem MC<hendisi
 
-2.  Firma yyy, pozisyon yyy, yD1l yyy
+AralD1k 2020-KasD1m 2022, Volo Kompozit, Kalite GC<vence MC<hendisi
 
-## Stajlar
+# Yetkinlikler
 
-1.  Firma aaa, pozisyon xx, yD1l xxx
+Denetim SC<reci YC6netimi, KonfigC<rasyon YC6netimi, Risk Analizi
 
-2.  Firma bbb, pozisyon yyy, yD1l yyy
+# Hobiler
 
-# Projeler
-
-1.  TCBD0TAK 1001..........................
-
-# YayD1nlar
-
-1.  Dasdemir, E., Batta, R., Koksalan, M., Tezcaner CztC\<rk, D. (2022) b
+Seyahat etmek, tiyatroya gitmek, voleybol
