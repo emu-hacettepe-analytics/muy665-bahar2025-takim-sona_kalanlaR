@@ -101,6 +101,8 @@ Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi veriler
 
 # install.packages("readr")
 # install.packages("corrplot")
+# install.packages("tidyr")
+
 library(tidyverse)
 library(lubridate)
 library(ggplot2)
@@ -115,6 +117,8 @@ library(readr)
 library(stringr)
 library(dplyr)
 library(corrplot)
+
+
 
 # CSV dosyasını yükleme
 veri <- read.csv("ankara_hava_kalitesi.csv", header=TRUE)
@@ -137,7 +141,6 @@ veri$Tarih <- dmy_hms(veri$Tarih)
 veri$Saat <- hour(veri$Tarih)
 veri$Ay <- month(veri$Tarih, label = TRUE)
 
-
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
@@ -151,11 +154,14 @@ daily_avg <- veri %>%
 ggplot(daily_avg, aes(x = Gun, y = PM10)) +
   geom_line(color = "firebrick") +
   labs(title = "Günlük Ortalama PM10 (2024)", x = "Tarih", y = "PM10 (µg/m³)")
-```
+
+ggplot(daily_avg, aes(x = Gun, y = PM2_5)) +
+  geom_line(color = "firebrick") +
+  labs(title = "Günlük Ortalama PM2_5 (2024)", x = "Tarih", y = "PM2_5 (µg/m³)")
 
 ## 2. Isı Haritası Analizi
 
-```{r}
+
 heat_data <- veri %>%
   group_by(Saat, Ay) %>%
   summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
@@ -166,13 +172,22 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM2_5)) +
   labs(title = "PM2.5 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
   theme_minimal()
 
-```
+heat_data <- veri %>%
+  group_by(Saat, Ay) %>%
+  summarise(PM10 = mean(PM10, na.rm = TRUE))
+
+ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM10)) +
+  geom_tile(color = "green") +
+  scale_fill_viridis(name = "PM10", option = "C") +
+  labs(title = "PM10 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
+  theme_minimal()
+
 
 ## Trend Analizi
 
 ## 1. Korelasyon Analizi
 
-```{r}
+
 cor_data <- veri %>%
   select(all_of(numeric_cols)) %>%
   drop_na()
@@ -180,15 +195,15 @@ cor_data <- veri %>%
 corr_matrix <- cor(cor_data)
 corrplot(corr_matrix, method = "color", type = "lower", tl.col = "black"
 )
-```
+
 
 ## Model Uydurma
 
 ## 1. Sınıflandırma Modeli
 
-```{r}
+
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
-veri$class <- ifelse(veri$PM10 > 50, "Kirli", "Temiz")
+veri$class <- ifelse(veri$PM10 > 45, "Kirli", "Temiz")
 data_model <- veri %>%
   select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
   drop_na()
@@ -209,15 +224,90 @@ pred <- predict(model, test, type = "class")
 accuracy <- mean(pred == test$class)
 print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 
-```
+# PM2_5'u sınıflara ayıralım (örnek: temiz - kirli)
+veri$class <- ifelse(veri$PM2_5 > 15, "Kirli", "Temiz")
+data_model <- veri %>%
+  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
+  drop_na()
+
+# Eğitim-test bölmesi
+set.seed(123)
+sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
+train <- data_model[sample_idx, ]
+test <- data_model[-sample_idx, ]
+
+
+# Model: Karar ağacı (rpart)
+model <- rpart(class ~ ., data = train, method = "class")
+rpart.plot(model)
+
+# Doğruluk oranı
+pred <- predict(model, test, type = "class")
+accuracy <- mean(pred == test$class)
+print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
+
 
 ## Görselleştirme
 
-```{r}
-## 1. Etkileşimli Grafik: İstasyona göre PM2.5
+# İlçe bazında özet istatistikler
+ilce_ozet <- veri %>%
+  group_by(Istasyon) %>%
+  summarise(
+    PM10_Ortalama = mean(PM10, na.rm = TRUE),
+    PM10_Maksimum = max(PM10, na.rm = TRUE),
+    PM10_Olcum_Sayisi = sum(!is.na(PM10)),
+    PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE),
+    PM2_5_Maksimum = max(PM2_5, na.rm = TRUE),
+    PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5))
+  ) %>%
+  arrange(desc(PM10_Ortalama))
 
+# Görüntüleme
+print(ilce_ozet)
 
+# Grafik için uzun formata çevir
+ilce_grafik <- ilce_ozet %>%
+  select(Istasyon, PM10_Ortalama, PM2_5_Ortalama) %>%
+  pivot_longer(cols = -Istasyon, names_to = "Parametre", values_to = "Ortalama")
+
+ggplot(ilce_grafik, aes(x = reorder(Istasyon, -Ortalama), y = Ortalama, fill = Parametre)) +
+  geom_col(position = "dodge") +
+  labs(title = "İlçelere Göre Ortalama PM10 ve PM2.5", x = "İlçe", y = "Ortalama (µg/m³)", fill = "Parametre") +
+  coord_flip() +
+  theme_minimal()
+
+# Aylara göre özet istatistikler
+aylik_ozet <- veri %>%
+  group_by(Ay) %>%
+  summarise(
+    PM10_Ortalama = mean(PM10, na.rm = TRUE),
+    PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE),
+    PM10_Maksimum = max(PM10, na.rm = TRUE),
+    PM2_5_Maksimum = max(PM2_5, na.rm = TRUE),
+    PM10_Olcum_Sayisi = sum(!is.na(PM10)),
+    PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5))
+  ) %>%
+  arrange(match(Ay, month.abb))  # Ay sırasını korumak için
+
+# Sonuçları görüntüle
+print(aylik_ozet)
+
+# Grafik için uzun form
+aylik_grafik <- aylik_ozet %>%
+  select(Ay, PM10_Ortalama, PM2_5_Ortalama) %>%
+  pivot_longer(-Ay, names_to = "Parametre", values_to = "Ortalama")
+
+ggplot(aylik_grafik, aes(x = Ay, y = Ortalama, fill = Parametre)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Aylara Göre Ortalama PM10 ve PM2.5 Değerleri",
+    x = "Ay", y = "Ortalama (µg/m³)", fill = "Parametre"
+  ) +
+  scale_fill_manual(values = c("PM10_Ortalama" = "firebrick", "PM2_5_Ortalama" = "darkblue")) +
+  theme_minimal()
 ```
+
+## Analizler
 
 ## Sonuçlar
 
