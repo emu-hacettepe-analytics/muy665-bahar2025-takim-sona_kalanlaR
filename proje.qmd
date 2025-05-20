@@ -51,7 +51,7 @@ Ankara iline ait ilçelerin 2024 yılı boyunca ölçülen hava kalitesi veriler
 
 -   **Kapsanan Zaman Aralığı:**1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler).
 
-#### **PM10** 
+#### **PM10**
 
 Havadaki çapı 10 mikrometreden (µm) daha küçük olan partikül maddeleri ifade eder. Bu partiküller, solunduğunda burun ve boğazı geçerek akciğerlere kadar ulaşabilirler. Bu nedenle, insan sağlığı üzerinde olumsuz etkilere sahip potansiyel hava kirleticileridir. "µg/m³" ise bu partikül maddelerin bir metreküp havada kaç mikrogram bulunduğunu gösteren birimdir. PM10'un Kaynakları: PM10 partikülleri doğal ve insan kaynaklı çeşitli süreçler sonucu oluşabilir:
 
@@ -101,7 +101,7 @@ Dünya Sağlık Örgütü (DSÖ), hava kalitesi kılavuzlarında PM10 için aşa
 
 • Yıllık ortalama: 15 µg/m³ Bu değerler, insan sağlığını korumak amacıyla belirlenmiş olup, PM10 kirliliğinin olası zararlı etkilerini en aza indirmeyi hedeflemektedir.
 
-#### PM 2.5 
+#### PM 2.5
 
 Havadaki çapı 2.5 mikrometreden (µm) daha küçük olan ince partikül maddeleri ifade eder. Bu partiküller, PM10'a göre çok daha küçüktür ve bu nedenle solunduğunda akciğerlerin en derin bölgelerine, hatta kan dolaşımına kadar ulaşabilirler. "µg/m³" ise bu ince partiküllerin bir metreküp havada kaç mikrogram bulunduğunu gösteren birimdir. PM2.5'in Kaynakları: PM2.5 partikülleri, benzer şekilde doğal ve insan kaynaklı çeşitli süreçler sonucu oluşur, ancak daha ince oldukları için oluşum mekanizmaları ve kaynakları farklılık gösterebilir:
 
@@ -126,6 +126,16 @@ Dünya Sağlık Örgütü (DSÖ), hava kalitesi kılavuzlarında PM2.5 için aş
 • Yıllık ortalama: 5 µg/m³
 
 ***Etkiler:***
+
+• Göz, burun ve boğazda tahriş.
+
+• Öksürük, balgam ve nefes darlığı
+
+• Astım ataklarının tetiklenmesi ve şiddetlenmesi.
+
+• Bronşit ve diğer solunum yolu enfeksiyonlarına yatkınlık.
+
+• Kalp krizi, inme ve düzensiz kalp atışları riskinde artış (özellikle hassas gruplarda).
 
 • Akciğer fonksiyonlarında kalıcı azalma.
 
@@ -173,13 +183,11 @@ Dünya Sağlık Örgütü (DSÖ), hava kalitesi kılavuzlarında PM2.5 için aş
 
     Verinin zaman ve istasyon bazlı olması sayesinde **Shiny veya Quarto Widget gibi etkileşimli uygulamalarda** kullanılabilir, kullanıcıya veriyle oynama şansı tanır.
 
-## Ön İşleme
-
-## Gerekli kütüphaneler
-
 ## Veri Analizi ve Ön İşleme
 
 ## 1. Veri Yükleme ve Temizleme
+
+## 2. Analizler
 
 ```{r}
 
@@ -202,8 +210,6 @@ library(stringr)
 library(dplyr)
 library(corrplot)
 
-
-
 # CSV dosyasını yükleme
 veri <- read.csv("ankara_hava_kalitesi.csv", header=TRUE)
 
@@ -224,10 +230,13 @@ veri[numeric_cols] <- lapply(veri[numeric_cols], function(x) as.numeric(str_repl
 veri$Tarih <- dmy_hms(veri$Tarih)
 veri$Saat <- hour(veri$Tarih)
 veri$Ay <- month(veri$Tarih, label = TRUE)
+```
 
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
+
+```{r}
 daily_avg <- veri %>%
   mutate(Gun = as_date(Tarih)) %>%
   group_by(Gun) %>%
@@ -240,8 +249,13 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
 ggplot(daily_avg, aes(x = Gun, y = PM2_5)) +
   geom_line(color = "firebrick") +
   labs(title = "Günlük Ortalama PM2_5 (2024)", x = "Tarih", y = "PM2_5 (µg/m³)")
+```
+
+Yıl boyunca PM10 konsantrasyonlarında belirgin dalgalanmalar görülmektedir. Belirli dönemlerde yüksek zirveler, diğer dönemlerde ise daha düşük ve stabil seviyeler mevcuttur. Nisan 2024'teki ve Ekim/Kasım 2024'teki zirveler, yılın en yüksek kirlilik zamanlarını göstermektedir. Özellikle Nisan ayındaki zirve oldukça keskin ve yüksektir. Haziran-Temmuz-Ağustos ayları genel olarak daha temiz hava koşullarına işaret ederken, kış ve sonbahar ayları (özellikle Nisan başı ve Ekim'den itibaren) daha yüksek PM10 konsantrasyonlarını göstermektedir.
 
 ## 2. Isı Haritası Analizi
+
+```{r}
 heat_data <- veri %>%
   group_by(Saat, Ay) %>%
   summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
@@ -261,181 +275,111 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM10)) +
   scale_fill_viridis(name = "PM10", option = "C") +
   labs(title = "PM10 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
   theme_minimal()
-
+```
 
 ## Trend Analizi
 
-# Aylık ortalamaları hesapla
-aylik_trend <- veri %>%
-  mutate(Ay = floor_date(Tarih, "month")) %>%
-  group_by(Ay) %>%
-  summarise(
-    PM10_ort = mean(PM10, na.rm = TRUE),
-    PM2_5_ort = mean(PM2_5, na.rm = TRUE)
-  )
+# Gerekirse tarih sütununu dönüştür
 
-veri$Yil <- year(veri$Tarih)
+veri$Tarih <- as.Date(veri$Tarih)
 
-# İlçe ve yıla göre yıllık ortalamaları hesapla
-yillik_ortalama <- veri %>%
-  group_by(Istasyon, Yil) %>%
-  summarise(
-    PM10_ort = mean(PM10, na.rm = TRUE),
-    PM2_5_ort = mean(PM2_5, na.rm = TRUE)
-  ) %>%
-  ungroup()
+# PM2.5 ve PM10'u uzun formata getir
 
-# PM10 Trend Grafiği (İlçe Yıllık Ortalama Bazlı)
+veri_uzun \<- veri %\>% pivot_longer(cols = c(`PM2_5`, PM10), names_to = "Partikul", values_to = "Deger")
 
-ggplot(yillik_ortalama, aes(x = Yil, y = PM10_ort, color = Istasyon)) +
-  geom_line(size = 1) +
-  geom_point() +
-  labs(title = "İlçelere Göre Yıllık PM10 Ortalaması - Trend Analizi",
-       x = "Yıl", y = "PM10 (µg/m³)", color = "İstasyon") +
-  theme_minimal()
+# Facet'li grafik çizimi
 
-# PM2.5 Trend Grafiği (İlçe Yıllık Ortalama Bazlı)
-
-ggplot(yillik_ortalama, aes(x = Yil, y = PM2_5_ort, color = Istasyon)) +
-  geom_line(size = 1) +
-  geom_point() +
-  labs(title = "İlçelere Göre Yıllık PM2.5 Ortalaması - Trend Analizi",
-       x = "Yıl", y = "PM2.5 (µg/m³)", color = "İstasyon") +
-  theme_minimal()
+ggplot(veri_uzun, aes(x = Tarih, y = Deger, color = Partikul)) + geom_line(alpha = 0.7) + facet_wrap(\~ Istasyon, ncol = 3, scales = "free_y") + labs(title = "Ankara'daki 9 İstasyon İçin PM2.5 ve PM10 Değerleri", x = "Tarih", y = "Değer (µg/m³)", color = "Partikül Türü") + theme_minimal() + theme( strip.text = element_text(size = 10, face = "bold"), legend.position = "bottom" )
 
 ## Model Uydurma
+
 ## 1. Sınıflandırma Modeli
+
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
-veri$class <- ifelse(veri$PM10 > 45, "Kirli", "Temiz")
-data_model <- veri %>%
-  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
-  drop_na()
+
+veri$class <- ifelse(veri$PM10 \> 45, "Kirli", "Temiz") data_model \<- veri %\>% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %\>% drop_na()
 
 # Eğitim-test bölmesi
-set.seed(123)
-sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
-train <- data_model[sample_idx, ]
-test <- data_model[-sample_idx, ]
+
+set.seed(123) sample_idx \<- sample(1:nrow(data_model), 0.7 \* nrow(data_model)) train \<- data_model\[sample_idx, \] test \<- data_model\[-sample_idx, \]
 
 # Model: Karar ağacı (rpart)
-model <- rpart(class ~ ., data = train, method = "class")
-rpart.plot(model)
+
+model \<- rpart(class \~ ., data = train, method = "class") rpart.plot(model)
 
 # Doğruluk oranı
-pred <- predict(model, test, type = "class")
-accuracy <- mean(pred == test$class)
-print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
+
+pred \<- predict(model, test, type = "class") accuracy \<- mean(pred == test\$class) print(paste("Doğruluk: ", round(accuracy \* 100, 2), "%"))
 
 # PM2_5'u sınıflara ayıralım (örnek: temiz - kirli)
-veri$class <- ifelse(veri$PM2_5 > 15, "Kirli", "Temiz")
-data_model <- veri %>%
-  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
-  drop_na()
+
+veri$class <- ifelse(veri$PM2_5 \> 15, "Kirli", "Temiz") data_model \<- veri %\>% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %\>% drop_na()
 
 # Eğitim-test bölmesi
-set.seed(123)
-sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
-train <- data_model[sample_idx, ]
-test <- data_model[-sample_idx, ]
+
+set.seed(123) sample_idx \<- sample(1:nrow(data_model), 0.7 \* nrow(data_model)) train \<- data_model\[sample_idx, \] test \<- data_model\[-sample_idx, \]
 
 # Model: Karar ağacı (rpart)
-model <- rpart(class ~ ., data = train, method = "class")
-rpart.plot(model)
+
+model \<- rpart(class \~ ., data = train, method = "class") rpart.plot(model)
 
 # Doğruluk oranı
-pred <- predict(model, test, type = "class")
-accuracy <- mean(pred == test$class)
-print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
+
+pred \<- predict(model, test, type = "class") accuracy \<- mean(pred == test\$class) print(paste("Doğruluk: ", round(accuracy \* 100, 2), "%"))
 
 ## Görselleştirme
 
 # İlçe bazında özet istatistikler
-ilce_ozet <- veri %>%
-  group_by(Istasyon) %>%
-  summarise(
-    PM10_Ortalama = mean(PM10, na.rm = TRUE),
-    PM10_Maksimum = max(PM10, na.rm = TRUE),
-    PM10_Olcum_Sayisi = sum(!is.na(PM10)),
-    PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE),
-    PM2_5_Maksimum = max(PM2_5, na.rm = TRUE),
-    PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5))
-  ) %>%
-  arrange(desc(PM10_Ortalama))
+
+ilce_ozet \<- veri %\>% group_by(Istasyon) %\>% summarise( PM10_Ortalama = mean(PM10, na.rm = TRUE), PM10_Maksimum = max(PM10, na.rm = TRUE), PM10_Olcum_Sayisi = sum(!is.na(PM10)), PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE), PM2_5_Maksimum = max(PM2_5, na.rm = TRUE), PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5)) ) %\>% arrange(desc(PM10_Ortalama))
 
 # Görüntüleme
+
 print(ilce_ozet)
 
 # Grafik için uzun formata çevir
-ilce_grafik <- ilce_ozet %>%
-  select(Istasyon, PM10_Ortalama, PM2_5_Ortalama) %>%
-  pivot_longer(cols = -Istasyon, names_to = "Parametre", values_to = "Ortalama")
 
-ggplot(ilce_grafik, aes(x = reorder(Istasyon, -Ortalama), y = Ortalama, fill = Parametre)) +
-  geom_col(position = "dodge") +
-  labs(title = "İlçelere Göre Ortalama PM10 ve PM2.5", x = "İlçe", y = "Ortalama (µg/m³)", fill = "Parametre") +
-  coord_flip() +
-  theme_minimal()
+ilce_grafik \<- ilce_ozet %\>% select(Istasyon, PM10_Ortalama, PM2_5_Ortalama) %\>% pivot_longer(cols = -Istasyon, names_to = "Parametre", values_to = "Ortalama")
+
+ggplot(ilce_grafik, aes(x = reorder(Istasyon, -Ortalama), y = Ortalama, fill = Parametre)) + geom_col(position = "dodge") + labs(title = "İlçelere Göre Ortalama PM10 ve PM2.5", x = "İlçe", y = "Ortalama (µg/m³)", fill = "Parametre") + coord_flip() + theme_minimal()
 
 # 3 aylık dönem bilgisi (çeyrek/Q) ekle
+
 veri$Ceyrek <- case_when(
-  month(veri$Tarih) %in% 1:3 ~ "Ocak-Mart",
-  month(veri$Tarih) %in% 4:6 ~ "Nisan-Haziran",
-  month(veri$Tarih) %in% 7:9 ~ "Temmuz-Eylül",
-  month(veri$Tarih) %in% 10:12 ~ "Ekim-Aralık"
-)
+  month(veri$Tarih) %in% 1:3 \~ "Ocak-Mart", month(veri$Tarih) %in% 4:6 ~ "Nisan-Haziran",
+  month(veri$Tarih) %in% 7:9 \~ "Temmuz-Eylül", month(veri\$Tarih) %in% 10:12 \~ "Ekim-Aralık" )
 
 # PM10 için 3 aylık ortalamalar
-pm10_ceyrek <- veri %>%
-  group_by(Istasyon, Ceyrek) %>%
-  summarise(PM10_Ortalama = mean(PM10, na.rm = TRUE)) %>%
-  ungroup()
+
+pm10_ceyrek \<- veri %\>% group_by(Istasyon, Ceyrek) %\>% summarise(PM10_Ortalama = mean(PM10, na.rm = TRUE)) %\>% ungroup()
 
 # Sütun sırası için Ceyrek'i faktörleştir
+
 pm10_ceyrek$Ceyrek <- factor(pm10_ceyrek$Ceyrek, levels = c("Ocak-Mart", "Nisan-Haziran", "Temmuz-Eylül", "Ekim-Aralık"))
 
 # Grafik: PM10
-ggplot(pm10_ceyrek, aes(x = Istasyon, y = PM10_Ortalama, fill = Ceyrek)) +
-  geom_col(position = "dodge") +
-  labs(title = "İstasyona Göre 3 Aylık Ortalama PM10", x = "İstasyon", y = "PM10 (µg/m³)", fill = "Dönem") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_brewer(palette = "Set2")
+
+ggplot(pm10_ceyrek, aes(x = Istasyon, y = PM10_Ortalama, fill = Ceyrek)) + geom_col(position = "dodge") + labs(title = "İstasyona Göre 3 Aylık Ortalama PM10", x = "İstasyon", y = "PM10 (µg/m³)", fill = "Dönem") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + scale_fill_brewer(palette = "Set2")
 
 # PM2.5 için 3 aylık ortalamalar
-pm25_ceyrek <- veri %>%
-  group_by(Istasyon, Ceyrek) %>%
-  summarise(PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE)) %>%
-  ungroup()
+
+pm25_ceyrek \<- veri %\>% group_by(Istasyon, Ceyrek) %\>% summarise(PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE)) %\>% ungroup()
 
 pm25_ceyrek$Ceyrek <- factor(pm25_ceyrek$Ceyrek, levels = c("Ocak-Mart", "Nisan-Haziran", "Temmuz-Eylül", "Ekim-Aralık"))
 
 # Grafik: PM2.5
-ggplot(pm25_ceyrek, aes(x = Istasyon, y = PM2_5_Ortalama, fill = Ceyrek)) +
-  geom_col(position = "dodge") +
-  labs(title = "İstasyona Göre 3 Aylık Ortalama PM2.5", x = "İstasyon", y = "PM2.5 (µg/m³)", fill = "Dönem") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_brewer(palette = "Set2")
+
+ggplot(pm25_ceyrek, aes(x = Istasyon, y = PM2_5_Ortalama, fill = Ceyrek)) + geom_col(position = "dodge") + labs(title = "İstasyona Göre 3 Aylık Ortalama PM2.5", x = "İstasyon", y = "PM2.5 (µg/m³)", fill = "Dönem") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + scale_fill_brewer(palette = "Set2")
 
 # PM10 için İlçelere Göre Boxplot
-ggplot(veri, aes(x = Istasyon, y = PM10)) +
-  geom_boxplot(fill = "skyblue") +
-  labs(title = "İlçelere Göre PM10 Dağılımı", x = "İlçe", y = "PM10 (µg/m³)") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(veri, aes(x = Istasyon, y = PM10)) + geom_boxplot(fill = "skyblue") + labs(title = "İlçelere Göre PM10 Dağılımı", x = "İlçe", y = "PM10 (µg/m³)") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # PM2.5 için İlçelere Göre Boxplot
-ggplot(veri, aes(x = Istasyon, y = PM2_5)) +
-  geom_boxplot(fill = "salmon") +
-  labs(title = "İlçelere Göre PM2.5 Dağılımı", x = "İlçe", y = "PM2.5 (µg/m³)") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-```
+ggplot(veri, aes(x = Istasyon, y = PM2_5)) + geom_boxplot(fill = "salmon") + labs(title = "İlçelere Göre PM2.5 Dağılımı", x = "İlçe", y = "PM2.5 (µg/m³)") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-## Analizler
-
-## Sonuçlar
+\`\`\`
 
 # Sonuçlar ve Ana Çıkarımlar
 
@@ -449,6 +393,6 @@ ggplot(veri, aes(x = Istasyon, y = PM2_5)) +
 
 \#<https://quarto.org/docs/interactive/widgets/jupyter.html>
 
-#https://plotly.com/python/tile-county-choropleth/
+#https://plotly.com/python/tile-county-choropleth
 
 \`\`\`
