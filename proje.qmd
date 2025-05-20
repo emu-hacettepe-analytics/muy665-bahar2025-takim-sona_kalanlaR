@@ -230,13 +230,10 @@ veri[numeric_cols] <- lapply(veri[numeric_cols], function(x) as.numeric(str_repl
 veri$Tarih <- dmy_hms(veri$Tarih)
 veri$Saat <- hour(veri$Tarih)
 veri$Ay <- month(veri$Tarih, label = TRUE)
-```
 
 ## Keşifsel Veri Analizi
 
 ## 1.Zaman Serisi Analizi
-
-```{r}
 daily_avg <- veri %>%
   mutate(Gun = as_date(Tarih)) %>%
   group_by(Gun) %>%
@@ -249,13 +246,8 @@ ggplot(daily_avg, aes(x = Gun, y = PM10)) +
 ggplot(daily_avg, aes(x = Gun, y = PM2_5)) +
   geom_line(color = "firebrick") +
   labs(title = "Günlük Ortalama PM2_5 (2024)", x = "Tarih", y = "PM2_5 (µg/m³)")
-```
-
-Yıl boyunca PM10 konsantrasyonlarında belirgin dalgalanmalar görülmektedir. Belirli dönemlerde yüksek zirveler, diğer dönemlerde ise daha düşük ve stabil seviyeler mevcuttur. Nisan 2024'teki ve Ekim/Kasım 2024'teki zirveler, yılın en yüksek kirlilik zamanlarını göstermektedir. Özellikle Nisan ayındaki zirve oldukça keskin ve yüksektir. Haziran-Temmuz-Ağustos ayları genel olarak daha temiz hava koşullarına işaret ederken, kış ve sonbahar ayları (özellikle Nisan başı ve Ekim'den itibaren) daha yüksek PM10 konsantrasyonlarını göstermektedir.
 
 ## 2. Isı Haritası Analizi
-
-```{r}
 heat_data <- veri %>%
   group_by(Saat, Ay) %>%
   summarise(PM2_5 = mean(PM2_5, na.rm = TRUE))
@@ -275,113 +267,196 @@ ggplot(heat_data, aes(x = Ay, y = Saat, fill = PM10)) +
   scale_fill_viridis(name = "PM10", option = "C") +
   labs(title = "PM10 Isı Haritası (Saat x Ay)", x = "Ay", y = "Saat") +
   theme_minimal()
-```
+
 
 ## Trend Analizi
 
 # Gerekirse tarih sütununu dönüştür
-
 veri$Tarih <- as.Date(veri$Tarih)
 
 # PM2.5 ve PM10'u uzun formata getir
-
-veri_uzun \<- veri %\>% pivot_longer(cols = c(`PM2_5`, PM10), names_to = "Partikul", values_to = "Deger")
+veri_uzun <- veri %>%
+  pivot_longer(cols = c(`PM2_5`, PM10), 
+               names_to = "Partikul", 
+               values_to = "Deger")
 
 # Facet'li grafik çizimi
-
-ggplot(veri_uzun, aes(x = Tarih, y = Deger, color = Partikul)) + geom_line(alpha = 0.7) + facet_wrap(\~ Istasyon, ncol = 3, scales = "free_y") + labs(title = "Ankara'daki 9 İstasyon İçin PM2.5 ve PM10 Değerleri", x = "Tarih", y = "Değer (µg/m³)", color = "Partikül Türü") + theme_minimal() + theme( strip.text = element_text(size = 10, face = "bold"), legend.position = "bottom" )
+ggplot(veri_uzun, aes(x = Tarih, y = Deger, color = Partikul)) +
+  geom_line(alpha = 0.7) +
+  facet_wrap(~ Istasyon, ncol = 3, scales = "free_y") +
+  labs(title = "Ankara'daki 9 İstasyon İçin PM2.5 ve PM10 Değerleri",
+       x = "Tarih",
+       y = "Değer (µg/m³)",
+       color = "Partikül Türü") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(size = 10, face = "bold"),
+    legend.position = "bottom"
+  )
 
 ## Model Uydurma
-
 ## 1. Sınıflandırma Modeli
-
 # PM10'u sınıflara ayıralım (örnek: temiz - kirli)
-
-veri$class <- ifelse(veri$PM10 \> 45, "Kirli", "Temiz") data_model \<- veri %\>% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %\>% drop_na()
+veri$class <- ifelse(veri$PM10 > 45, "Kirli", "Temiz")
+data_model <- veri %>%
+  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
+  drop_na()
 
 # Eğitim-test bölmesi
-
-set.seed(123) sample_idx \<- sample(1:nrow(data_model), 0.7 \* nrow(data_model)) train \<- data_model\[sample_idx, \] test \<- data_model\[-sample_idx, \]
+set.seed(123)
+sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
+train <- data_model[sample_idx, ]
+test <- data_model[-sample_idx, ]
 
 # Model: Karar ağacı (rpart)
-
-model \<- rpart(class \~ ., data = train, method = "class") rpart.plot(model)
+model <- rpart(class ~ ., data = train, method = "class")
+rpart.plot(model)
 
 # Doğruluk oranı
-
-pred \<- predict(model, test, type = "class") accuracy \<- mean(pred == test\$class) print(paste("Doğruluk: ", round(accuracy \* 100, 2), "%"))
+pred <- predict(model, test, type = "class")
+accuracy <- mean(pred == test$class)
+print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 
 # PM2_5'u sınıflara ayıralım (örnek: temiz - kirli)
-
-veri$class <- ifelse(veri$PM2_5 \> 15, "Kirli", "Temiz") data_model \<- veri %\>% select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %\>% drop_na()
+veri$class <- ifelse(veri$PM2_5 > 15, "Kirli", "Temiz")
+data_model <- veri %>%
+  select(PM10, PM2_5, SO2, NO2, NOX, NO, class) %>%
+  drop_na()
 
 # Eğitim-test bölmesi
-
-set.seed(123) sample_idx \<- sample(1:nrow(data_model), 0.7 \* nrow(data_model)) train \<- data_model\[sample_idx, \] test \<- data_model\[-sample_idx, \]
+set.seed(123)
+sample_idx <- sample(1:nrow(data_model), 0.7 * nrow(data_model))
+train <- data_model[sample_idx, ]
+test <- data_model[-sample_idx, ]
 
 # Model: Karar ağacı (rpart)
-
-model \<- rpart(class \~ ., data = train, method = "class") rpart.plot(model)
+model <- rpart(class ~ ., data = train, method = "class")
+rpart.plot(model)
 
 # Doğruluk oranı
-
-pred \<- predict(model, test, type = "class") accuracy \<- mean(pred == test\$class) print(paste("Doğruluk: ", round(accuracy \* 100, 2), "%"))
+pred <- predict(model, test, type = "class")
+accuracy <- mean(pred == test$class)
+print(paste("Doğruluk: ", round(accuracy * 100, 2), "%"))
 
 ## Görselleştirme
 
 # İlçe bazında özet istatistikler
-
-ilce_ozet \<- veri %\>% group_by(Istasyon) %\>% summarise( PM10_Ortalama = mean(PM10, na.rm = TRUE), PM10_Maksimum = max(PM10, na.rm = TRUE), PM10_Olcum_Sayisi = sum(!is.na(PM10)), PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE), PM2_5_Maksimum = max(PM2_5, na.rm = TRUE), PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5)) ) %\>% arrange(desc(PM10_Ortalama))
+ilce_ozet <- veri %>%
+  group_by(Istasyon) %>%
+  summarise(
+    PM10_Ortalama = mean(PM10, na.rm = TRUE),
+    PM10_Maksimum = max(PM10, na.rm = TRUE),
+    PM10_Olcum_Sayisi = sum(!is.na(PM10)),
+    PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE),
+    PM2_5_Maksimum = max(PM2_5, na.rm = TRUE),
+    PM2_5_Olcum_Sayisi = sum(!is.na(PM2_5))
+  ) %>%
+  arrange(desc(PM10_Ortalama))
 
 # Görüntüleme
-
 print(ilce_ozet)
 
 # Grafik için uzun formata çevir
+ilce_grafik <- ilce_ozet %>%
+  select(Istasyon, PM10_Ortalama, PM2_5_Ortalama) %>%
+  pivot_longer(cols = -Istasyon, names_to = "Parametre", values_to = "Ortalama")
 
-ilce_grafik \<- ilce_ozet %\>% select(Istasyon, PM10_Ortalama, PM2_5_Ortalama) %\>% pivot_longer(cols = -Istasyon, names_to = "Parametre", values_to = "Ortalama")
-
-ggplot(ilce_grafik, aes(x = reorder(Istasyon, -Ortalama), y = Ortalama, fill = Parametre)) + geom_col(position = "dodge") + labs(title = "İlçelere Göre Ortalama PM10 ve PM2.5", x = "İlçe", y = "Ortalama (µg/m³)", fill = "Parametre") + coord_flip() + theme_minimal()
+ggplot(ilce_grafik, aes(x = reorder(Istasyon, -Ortalama), y = Ortalama, fill = Parametre)) +
+  geom_col(position = "dodge") +
+  labs(title = "İlçelere Göre Ortalama PM10 ve PM2.5", x = "İlçe", y = "Ortalama (µg/m³)", fill = "Parametre") +
+  coord_flip() +
+  theme_minimal()
 
 # 3 aylık dönem bilgisi (çeyrek/Q) ekle
-
 veri$Ceyrek <- case_when(
-  month(veri$Tarih) %in% 1:3 \~ "Ocak-Mart", month(veri$Tarih) %in% 4:6 ~ "Nisan-Haziran",
-  month(veri$Tarih) %in% 7:9 \~ "Temmuz-Eylül", month(veri\$Tarih) %in% 10:12 \~ "Ekim-Aralık" )
+  month(veri$Tarih) %in% 1:3 ~ "Ocak-Mart",
+  month(veri$Tarih) %in% 4:6 ~ "Nisan-Haziran",
+  month(veri$Tarih) %in% 7:9 ~ "Temmuz-Eylül",
+  month(veri$Tarih) %in% 10:12 ~ "Ekim-Aralık"
+)
 
 # PM10 için 3 aylık ortalamalar
-
-pm10_ceyrek \<- veri %\>% group_by(Istasyon, Ceyrek) %\>% summarise(PM10_Ortalama = mean(PM10, na.rm = TRUE)) %\>% ungroup()
+pm10_ceyrek <- veri %>%
+  group_by(Istasyon, Ceyrek) %>%
+  summarise(PM10_Ortalama = mean(PM10, na.rm = TRUE)) %>%
+  ungroup()
 
 # Sütun sırası için Ceyrek'i faktörleştir
-
 pm10_ceyrek$Ceyrek <- factor(pm10_ceyrek$Ceyrek, levels = c("Ocak-Mart", "Nisan-Haziran", "Temmuz-Eylül", "Ekim-Aralık"))
 
 # Grafik: PM10
-
-ggplot(pm10_ceyrek, aes(x = Istasyon, y = PM10_Ortalama, fill = Ceyrek)) + geom_col(position = "dodge") + labs(title = "İstasyona Göre 3 Aylık Ortalama PM10", x = "İstasyon", y = "PM10 (µg/m³)", fill = "Dönem") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + scale_fill_brewer(palette = "Set2")
+ggplot(pm10_ceyrek, aes(x = Istasyon, y = PM10_Ortalama, fill = Ceyrek)) +
+  geom_col(position = "dodge") +
+  labs(title = "İstasyona Göre 3 Aylık Ortalama PM10", x = "İstasyon", y = "PM10 (µg/m³)", fill = "Dönem") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer(palette = "Set2")
 
 # PM2.5 için 3 aylık ortalamalar
-
-pm25_ceyrek \<- veri %\>% group_by(Istasyon, Ceyrek) %\>% summarise(PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE)) %\>% ungroup()
+pm25_ceyrek <- veri %>%
+  group_by(Istasyon, Ceyrek) %>%
+  summarise(PM2_5_Ortalama = mean(PM2_5, na.rm = TRUE)) %>%
+  ungroup()
 
 pm25_ceyrek$Ceyrek <- factor(pm25_ceyrek$Ceyrek, levels = c("Ocak-Mart", "Nisan-Haziran", "Temmuz-Eylül", "Ekim-Aralık"))
 
 # Grafik: PM2.5
-
-ggplot(pm25_ceyrek, aes(x = Istasyon, y = PM2_5_Ortalama, fill = Ceyrek)) + geom_col(position = "dodge") + labs(title = "İstasyona Göre 3 Aylık Ortalama PM2.5", x = "İstasyon", y = "PM2.5 (µg/m³)", fill = "Dönem") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + scale_fill_brewer(palette = "Set2")
+ggplot(pm25_ceyrek, aes(x = Istasyon, y = PM2_5_Ortalama, fill = Ceyrek)) +
+  geom_col(position = "dodge") +
+  labs(title = "İstasyona Göre 3 Aylık Ortalama PM2.5", x = "İstasyon", y = "PM2.5 (µg/m³)", fill = "Dönem") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer(palette = "Set2")
 
 # PM10 için İlçelere Göre Boxplot
-
-ggplot(veri, aes(x = Istasyon, y = PM10)) + geom_boxplot(fill = "skyblue") + labs(title = "İlçelere Göre PM10 Dağılımı", x = "İlçe", y = "PM10 (µg/m³)") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggplot(veri, aes(x = Istasyon, y = PM10)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(title = "İlçelere Göre PM10 Dağılımı", x = "İlçe", y = "PM10 (µg/m³)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # PM2.5 için İlçelere Göre Boxplot
+ggplot(veri, aes(x = Istasyon, y = PM2_5)) +
+  geom_boxplot(fill = "salmon") +
+  labs(title = "İlçelere Göre PM2.5 Dağılımı", x = "İlçe", y = "PM2.5 (µg/m³)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-ggplot(veri, aes(x = Istasyon, y = PM2_5)) + geom_boxplot(fill = "salmon") + labs(title = "İlçelere Göre PM2.5 Dağılımı", x = "İlçe", y = "PM2.5 (µg/m³)") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-\`\`\`
+```
 
 # Sonuçlar ve Ana Çıkarımlar
+
+Yıl boyunca PM10 konsantrasyonlarında belirgin dalgalanmalar görülmektedir. Belirli dönemlerde yüksek zirveler, diğer dönemlerde ise daha düşük ve stabil seviyeler mevcuttur.
+
+Nisan 2024'teki ve Ekim/Kasım 2024'teki zirveler, yılın en yüksek kirlilik zamanlarını göstermektedir. Özellikle Nisan ayındaki zirve oldukça keskin ve yüksektir. Haziran-Temmuz-Ağustos ayları genel olarak daha temiz hava koşullarına işaret ederken, kış ve sonbahar ayları (özellikle Nisan başı ve Ekim'den itibaren) daha yüksek PM10 konsantrasyonlarını göstermektedir.
+
+Bu ısı haritası, PM2.5 kirliliğinin özellikle kış ve geç sonbahar aylarında (Ekim, Kasım, Aralık, Ocak) ve gün içinde sabah erken saatler ile akşam saatlerinde pik yaptığını açıkça göstermektedir. Bu dönemler, genellikle ısınma faaliyetlerinin yoğunlaştığı, trafik yoğunluğunun arttığı ve atmosferik inversiyon gibi kirliliğin dağılmasını engelleyici koşulların daha sık görüldüğü zaman dilimleridir. Yaz ayları ise PM2.5 açısından en temiz dönemdir.
+
+Bu ısı haritası, PM10 kirliliğinin özellikle kış ve geç sonbahar aylarında (Ocak, Şubat, Ekim, Kasım, Aralık) ve gün içinde sabah erken saatler ile akşam saatlerinde yüksek seviyelere ulaştığını göstermektedir. Bu dönemler, hava kalitesi açısından en riskli zaman dilimleridir. Yaz ayları ise PM10 açısından en temiz dönemdir.
+
+Ocak-Nisan 2024 için Değerler genel olarak 10 µg/m³ civarında; ara sıra 20 µg/m³’ü geçen zirveler var Nisan-Temmuz 2024 için PM2.5 seviyeleri oldukça düşük seyrediyor, hava nispeten daha temiz görünüyor. Ağustos-Ekim 2024 için Yükseliş başlıyor, dalgalanmalar artıyor. Kasım-Aralık 2024 için PM2.5 seviyelerinde ciddi artış görülüyor; bazı günlerde 30 µg/m³’ün üzerine çıkmış. Bu dönem yılın en kirli zamanı olabilir. Yaz aylarında (özellikle Haziran-Temmuz civarı) PM2.5 seviyeleri düşük, bu da açık hava koşullarının ve daha az ısınma ihtiyacının etkisi olabilir. Kış Aylarında Artış: Kasım-Aralık aylarında PM2.5 değerlerinde ciddi bir artış var. Bu durum muhtemelen ısınma için kullanılan fosil yakıtlar, hava durumu koşulları (inversiyon gibi) ve trafik yoğunluğu gibi etkenlerden kaynaklanıyor olabilir.
+
+Eğer PM10 ≥ 45 ise: Sol dal takip edilir. Bu durumda model tüm verileri “Kirli” olarak sınıflandırıyor. %22’lik bir kesim buraya düşmüş. Bu alt düğümde “Kirli” oranı %100 (yani buradaki verilerin tamamı gerçekten kirliymiş).
+
+Eğer PM10 \< 45 ise: Sağ dal takip edilir. Bu durumda model tüm verileri “Temiz” olarak sınıflandırıyor. %78’lik bir kesim buraya düşmüş. Bu alt düğümde “Temiz” oranı %100, yani model bu kısmı doğru tahmin etmiş.
+
+Bu grafik, Ankara'nın farklı ilçeleri arasında hava kalitesi açısından belirgin farklılıklar olduğunu ortaya koyuyor. Özellikle Ostim ve Batıkent ilçeleri, partikül madde kirliliği açısından daha yüksek risk taşıyan bölgeler olarak öne çıkarken, Çankaya nispeten daha iyi PM10 değerlerine sahip. Bu farklılıklar, ilçelerin sanayi faaliyetleri, trafik yoğunluğu, yerleşim özellikleri ve coğrafi koşulları gibi faktörlerle ilişkilendirilebilir. Hava kirliliği yönetimi için bu tür ilçe bazlı veriler, hedefli politikaların geliştirilmesinde önemli bir rol oynayabilir.
+
+PM2.5 ≥ 15 ise: Bu durumda model örneği “Kirli” olarak sınıflandırıyor. Bu sınıfa giren örneklerin oranı %15. Alt düğümde %100 Kirli, yani model bu sınıflandırmayı doğru yapmış. PM2.5 \< 15 ise: Model örneği “Temiz” olarak sınıflandırıyor. Bu sınıfa giren veriler veri setinin %85’ini oluşturuyor. Yine %100 doğru sınıflandırma yapılmış (%100 Temiz).
+
+Tüm ilçelerde PM10 ortalama değerleri, PM2.5 ortalama değerlerinden önemli ölçüde daha yüksektir. Bu beklenen bir durumdur, çünkü PM10 daha büyük partikülleri de içerirken, PM2.5 sadece 2.5 mikrondan küçük ince partikülleri kapsar.
+
+En Yüksek Kirlilik Seviyeleri (Ortalama PM10 ve PM2.5):
+
+PM10: En yüksek ortalama PM10 değerleri Ostim (yaklaşık 44 μg/m 3) ve Batıkent (yaklaşık 40 μg/m3) ilçelerinde gözlemleniyor. Bunu takiben Mamak ve Törekent de 30-35 μg/m3) aralığında yüksek değerlere sahiptir. PM2.5: PM2.5 için en yüksek ortalama değer Batıkent'te (yaklaşık 18 μg/m3) gözlemleniyor. Diğer ilçelerde PM2.5 değerleri genellikle 10 μg/m 3) 'ün altında veya etrafında seyrediyor. En Düşük Kirlilik Seviyeleri (Ortalama PM10 ve PM2.5): PM10: Grafiğe göre en düşük ortalama PM10 değeri Çankaya'da yaklaşık 22 μg/m3 görünmektedir. PM2.5: Çankaya, Polatlı, Bahçelievler, Keçiören, Etimesgut, Törekent, Mamak ve Ostim'de PM2.5 ortalama değerleri birbirine oldukça yakın ve genellikle 5-10 μg/m 3 aralığındadır.
+
+3 aylık ortalama PM10 En Yüksek Kirlilik: Ostim istasyonu, özellikle Ekim-Aralık ve Ocak-Mart dönemlerinde açık ara en yüksek PM10 ortalamalarına sahip. Batıkent, Mamak, Etimesgut ve Törekent de kış dönemlerinde yüksek seviyeler gösteriyor. En Düşük Kirlilik: Çankaya istasyonu, tüm dönemlerde ortalama PM10 seviyelerinin en düşük olduğu istasyon. Bu, Çankaya'nın genel hava kalitesinin diğer bölgelere göre daha iyi olduğunu gösteriyor.
+
+3 aylık ortala PM2,5 En Yüksek Kirlilik: Batıkent istasyonu, özellikle Ocak-Mart döneminde PM2.5 kirliliğinde belirgin bir zirveye sahip. Mamak, Etimesgut, Keçiören ve Ostim de kış ve sonbahar dönemlerinde yüksek PM2.5 seviyeleri gösteriyor. En Düşük Kirlilik: Polatlı ve kısmen Çankaya, PM2.5 ortalamaları açısından diğerlerine göre daha iyi performans gösteriyor. Temmuz-Eylül dönemlerinde neredeyse tüm istasyonlarda PM2.5 seviyeleri oldukça düşük.
+
+box plot PM10 Ortalama seviyeler çoğu ilçede düşük olmakla birlikte, özellikle Ostim ve Batıkent'te daha yüksektir. Tüm ilçelerde, ancak özellikle Ostim, Batıkent ve Etimesgut'ta, PM10 konsantrasyonlarında ciddi ve sıkça yüksek zirveler (aykırı değerler) yaşanmaktadır. Bu zirveler, günlük ortalama değerlerin çok üzerine çıkarak insan sağlığı için risk oluşturabilecek seviyelere ulaşmaktadır. Çankaya, hem medyan değeri hem de aykırı değerlerin sıklığı ve yüksekliği açısından en iyi performans gösteren ilçe olarak öne çıkıyor. Bu da Çankaya'da PM10 kirliliğinin genel olarak daha düşük ve daha istikrarlı olduğunu göstermektedir.
+
+box plot PM2.5 Batıkent, hem medyan PM2.5 değeri hem de dağılımın genişliği ve kaydedilen en yüksek aykırı değerler açısından PM2.5 kirliliğinin en yoğun olduğu ilçe olarak öne çıkıyor. Bu durum, Batıkent'in ince partikül kirliliği konusunda ciddi bir sorun yaşadığını gösteriyor. Diğer birçok ilçe (Ostim, Keçiören, Mamak, Etimesgut, Bahçelievler, Törekent) de medyan değerleri nispeten düşük olsa da, dönem dönem çok yüksek PM2.5 zirveleri yaşamaktadır. Bu zirveler, hava kalitesi açısından risk oluşturmaktadır. Polatlı, hem medyan değeri hem de aykırı değerlerin seviyesi ve sıklığı açısından PM2.5 kirliliğinin en düşük olduğu ilçelerden biridir. Çankaya'nın medyanı düşük olsa da, PM2.5 aykırı değerleri PM10'a kıyasla daha yüksek seviyelerde görünüyor.
 
 # Kaynaklar
 
