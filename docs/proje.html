@@ -163,12 +163,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#veri-kaynağı" id="toc-veri-kaynağı" class="nav-link" data-scroll-target="#veri-kaynağı"><span class="header-section-number">2.1</span> Veri Kaynağı</a></li>
   <li><a href="#veri-hakkında-genel-bilgiler" id="toc-veri-hakkında-genel-bilgiler" class="nav-link" data-scroll-target="#veri-hakkında-genel-bilgiler"><span class="header-section-number">2.2</span> Veri Hakkında Genel Bilgiler</a></li>
   <li><a href="#tercih-sebebi" id="toc-tercih-sebebi" class="nav-link" data-scroll-target="#tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</a></li>
-  <li><a href="#ön-işleme" id="toc-ön-işleme" class="nav-link" data-scroll-target="#ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</a></li>
-  <li><a href="#gerekli-kütüphaneler" id="toc-gerekli-kütüphaneler" class="nav-link" data-scroll-target="#gerekli-kütüphaneler"><span class="header-section-number">2.5</span> Gerekli kütüphaneler</a></li>
-  <li><a href="#veri-analizi-ve-ön-işleme" id="toc-veri-analizi-ve-ön-işleme" class="nav-link" data-scroll-target="#veri-analizi-ve-ön-işleme"><span class="header-section-number">2.6</span> Veri Analizi ve Ön İşleme</a></li>
-  <li><a href="#veri-yükleme-ve-temizleme" id="toc-veri-yükleme-ve-temizleme" class="nav-link" data-scroll-target="#veri-yükleme-ve-temizleme"><span class="header-section-number">2.7</span> 1. Veri Yükleme ve Temizleme</a></li>
-  <li><a href="#analizler" id="toc-analizler" class="nav-link" data-scroll-target="#analizler"><span class="header-section-number">2.8</span> Analizler</a></li>
-  <li><a href="#sonuçlar" id="toc-sonuçlar" class="nav-link" data-scroll-target="#sonuçlar"><span class="header-section-number">2.9</span> Sonuçlar</a></li>
+  <li><a href="#veri-analizi-ve-ön-işleme" id="toc-veri-analizi-ve-ön-işleme" class="nav-link" data-scroll-target="#veri-analizi-ve-ön-işleme"><span class="header-section-number">2.4</span> Veri Analizi ve Ön İşleme</a></li>
+  <li><a href="#veri-yükleme-ve-temizleme" id="toc-veri-yükleme-ve-temizleme" class="nav-link" data-scroll-target="#veri-yükleme-ve-temizleme"><span class="header-section-number">2.5</span> 1. Veri Yükleme ve Temizleme</a></li>
+  <li><a href="#analizler" id="toc-analizler" class="nav-link" data-scroll-target="#analizler"><span class="header-section-number">2.6</span> 2. Analizler</a></li>
   </ul></li>
   <li><a href="#sonuçlar-ve-ana-çıkarımlar" id="toc-sonuçlar-ve-ana-çıkarımlar" class="nav-link" data-scroll-target="#sonuçlar-ve-ana-çıkarımlar"><span class="header-section-number">3</span> Sonuçlar ve Ana Çıkarımlar</a></li>
   <li><a href="#kaynaklar" id="toc-kaynaklar" class="nav-link" data-scroll-target="#kaynaklar"><span class="header-section-number">4</span> Kaynaklar</a></li>
@@ -211,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Proje tanıtım filmine buradan ulaşabilirsiniz.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><a href="https://www.youtube.com"><img src=".\assets/video-logo.jpg" class="quarto-figure quarto-figure-left figure-img" width="65" height="65"></a></p>
+<p><a href="https://drive.google.com/file/d/1HfC04EG926MEaKpkCcZERJdy1K6iXkUN/view?usp=share_link"><img src=".\assets/video-logo.jpg" class="quarto-figure quarto-figure-left figure-img" width="65" height="65"></a></p>
 </figure>
 </div>
 <section id="proje-genel-bakış-ve-kapsamı" class="level1" data-number="1">
@@ -233,18 +230,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.</p></li>
 <li><p>Ölçümler saatlik olarak yapılmış. Tarih sütunu zaman bilgisini içerir ve yıl boyunca veri mevcuttur.</p></li>
 <li><p>Veride birden fazla hava kalitesi izleme istasyonu bulunmakta. İstasyon sütunu istasyon adlarını içermektedir.</p></li>
-<li><p>Aşağıdaki 6 temel hava kirleticinin saatlik ölçümleri yer alıyor.</p>
+<li><p>Aşağıdaki 2 temel hava kirleticinin saatlik ölçümleri yer alıyor.</p>
 <p><code>PM10</code> (Partikül madde ≤10 µm)</p>
-<p><code>PM2.5</code> (Partikül madde ≤2.5 µm)</p>
-<p><code>SO2</code> (Kükürt dioksit)</p>
-<p><code>NO2</code> (Azot dioksit)</p>
-<p><code>NOX</code> (Azot oksitler toplamı)</p>
-<p><code>NO</code> (Azot monoksit)</p></li>
+<p><code>PM2.5</code> (Partikül madde ≤2.5 µm)</p></li>
 <li><p>Veri setinde yaklaşık olarak <strong>86.000+</strong> gözlem bulunmaktadır (tüm istasyonlar dahil).</p>
 <p>Sayısal değerler nokta yerine virgül ile girilmişti; bu durum düzeltilerek sayısal veri türüne dönüştürüldü.</p>
 <p>Eksik değerler bazı sütunlarda mevcut ancak analiz için uygun şekilde ortalama alımı, sınıflandırma için filtreleme yapılmıştır.</p></li>
 <li><p><strong>Kapsanan Zaman Aralığı:</strong>1 Ocak 2024 – 31 Aralık 2024 arası (saatlik veriler).</p></li>
 </ul>
+<section id="pm10" class="level4" data-number="2.2.0.1">
+<h4 data-number="2.2.0.1" class="anchored" data-anchor-id="pm10"><span class="header-section-number">2.2.0.1</span> <strong>PM10</strong></h4>
+<p>Havadaki çapı 10 mikrometreden (µm) daha küçük olan partikül maddeleri ifade eder. Bu partiküller, solunduğunda burun ve boğazı geçerek akciğerlere kadar ulaşabilirler. Bu nedenle, insan sağlığı üzerinde olumsuz etkilere sahip potansiyel hava kirleticileridir. “µg/m³” ise bu partikül maddelerin bir metreküp havada kaç mikrogram bulunduğunu gösteren birimdir. PM10’un Kaynakları: PM10 partikülleri doğal ve insan kaynaklı çeşitli süreçler sonucu oluşabilir:</p>
+<p><strong><em>Doğal Kaynaklar:</em></strong></p>
+<p>• Rüzgarla taşınan toz ve toprak: Özellikle kurak ve yarı kurak bölgelerde önemli bir kaynaktır.</p>
+<p>• Orman yangınları ve volkanik patlamalar: Büyük miktarda partikül maddeyi atmosfere salabilirler.</p>
+<p>• Deniz tuzu: Deniz spreyi sonucu oluşan tuz kristalleri havada asılı kalabilir.</p>
+<p>• Polen ve bakteri parçacıkları: Biyolojik kaynaklı PM10 partikülleridir.</p>
+<p><strong><em>İnsan Kaynaklı Kaynaklar:</em></strong></p>
+<p>• Yanma süreçleri: o Isınma: Kömür, odun gibi yakıtların yakılması. o Sanayi: Fabrika bacalarından çıkan emisyonlar. o Enerji üretimi: Termik santraller. o Motorlu taşıtlar: Özellikle dizel araçlardan çıkan egzoz gazları ve lastik/fren aşınması. o Açık alanlarda yakılan atıklar.</p>
+<p>• İnşaat ve yıkım faaliyetleri: Toz oluşumuna neden olur.</p>
+<p>• Tarım faaliyetleri: Toprak işleme ve hasat sırasında toz oluşumu.</p>
+<p>• Madencilik ve taş ocakları: Toz ve partikül emisyonları.</p>
+<p>• Çöplükler: Toz ve biyolojik partiküllerin yayılması. PM10’un Sağlık Üzerindeki Etkileri: Solunan PM10 partikülleri, solunum sistemi ve kardiyovasküler sistem üzerinde çeşitli sağlık sorunlarına yol açabilir: Kısa Süreli Etkiler: • Öksürük, nefes darlığı, göğüste sıkışma gibi solunum yolu semptomlarında artış.</p>
+<p>• Astım ve kronik bronşit gibi mevcut solunum yolu hastalıklarının kötüleşmesi.</p>
+<p>• Kalp krizi ve aritmi riskinde artış (özellikle kalp hastaları için).</p>
+<p>• Hastaneye başvurularda ve erken ölümlerde artış. Uzun Süreli Etkiler:</p>
+<p>• Akciğer fonksiyonlarında azalma.</p>
+<p>• Kronik solunum ve kardiyovasküler hastalıkların gelişme riskinde artış.</p>
+<p>• Hastalığın ilerleme hızında artış.</p>
+<p>• Yaşam süresinde kısalma.</p>
+<p>• Çocuklarda akciğer gelişiminin olumsuz etkilenmesi.</p>
+<p>• Hamile kadınlarda erken doğum ve düşük doğum ağırlıklı bebek riskinde artış. • Bazı çalışmalar PM10 maruziyetinin inme, Alzheimer ve Parkinson gibi nörolojik hastalıklarla da ilişkili olabileceğini göstermektedir. Bu nedenlerle, PM10 seviyelerinin izlenmesi ve kontrol altına alınması halk sağlığının korunması açısından büyük önem taşımaktadır.</p>
+<p>Dünya Sağlık Örgütü (DSÖ), hava kalitesi kılavuzlarında PM10 için aşağıdaki sınır değerleri belirlemiştir:</p>
+<p>• 24 saatlik ortalama: 45 µg/m³ (Bu değerin bir yılda 3 kereden fazla aşılmaması önerilir.)</p>
+<p>• Yıllık ortalama: 15 µg/m³ Bu değerler, insan sağlığını korumak amacıyla belirlenmiş olup, PM10 kirliliğinin olası zararlı etkilerini en aza indirmeyi hedeflemektedir.</p>
+</section>
+<section id="pm-2.5" class="level4" data-number="2.2.0.2">
+<h4 data-number="2.2.0.2" class="anchored" data-anchor-id="pm-2.5"><span class="header-section-number">2.2.0.2</span> PM 2.5</h4>
+<p>Havadaki çapı 2.5 mikrometreden (µm) daha küçük olan ince partikül maddeleri ifade eder. Bu partiküller, PM10’a göre çok daha küçüktür ve bu nedenle solunduğunda akciğerlerin en derin bölgelerine, hatta kan dolaşımına kadar ulaşabilirler. “µg/m³” ise bu ince partiküllerin bir metreküp havada kaç mikrogram bulunduğunu gösteren birimdir. PM2.5’in Kaynakları: PM2.5 partikülleri, benzer şekilde doğal ve insan kaynaklı çeşitli süreçler sonucu oluşur, ancak daha ince oldukları için oluşum mekanizmaları ve kaynakları farklılık gösterebilir:</p>
+<p><strong><em>Doğal Kaynaklar:</em></strong></p>
+<p>• İkincil oluşum: Atmosferdeki gaz halindeki kirleticilerin (kükürt dioksit, azot oksitler, amonyak, uçucu organik bileşikler) kimyasal reaksiyonlara girerek oluşturduğu ince partiküller. Örneğin, sülfat ve nitrat aerosolleri. • Orman yangınları: Küçük boyutlu yanma ürünleri açığa çıkar.</p>
+<p>• Volkanik emisyonlar: İnce kül ve aerosoller içerebilir.</p>
+<p>• Toz fırtınaları: Çok ince toz partikülleri uzun mesafelere taşınabilir.</p>
+<p><strong><em>İnsan Kaynaklı Kaynaklar:</em></strong></p>
+<p>• Yanma süreçleri (daha baskın kaynaklardır): o Motorlu taşıtlar: Özellikle dizel araçların egzozundan çıkan çok ince partiküller. o Sanayi emisyonları: Fabrika bacalarından salınan ince toz ve duman. o Enerji üretimi: Termik santrallerin emisyonları. o Isınma: Kömür, odun ve diğer biyokütle yakıtlarının yanması. o Uçak yakıt artıkları. o Açık alanda atık yakılması.</p>
+<p>• İç mekan kaynakları: o Sigara dumanı. o Yemek pişirme (özellikle yağlı ve yüksek sıcaklıkta pişirme). o Mum ve tütsü yakılması. o Ev temizlik ürünleri ve oda spreyleri gibi kimyasalların reaksiyonları. PM2.5’in Sağlık Üzerindeki Etkileri: Çok küçük boyutları nedeniyle PM2.5 partikülleri, PM10’a göre insan sağlığı için daha tehlikeli kabul edilir. Akciğerlerin derinliklerine kadar inebilir ve kan dolaşımına karışarak tüm vücuda yayılabilirler. Bu durum çeşitli ciddi sağlık sorunlarına yol açabilir.</p>
+<p>Dünya Sağlık Örgütü (DSÖ), hava kalitesi kılavuzlarında PM2.5 için aşağıdaki sınır değerleri belirlemiştir:</p>
+<p>• 24 saatlik ortalama: 15 µg/m³</p>
+<p>• Yıllık ortalama: 5 µg/m³</p>
+<p><strong><em>Etkiler:</em></strong></p>
+<p>• Göz, burun ve boğazda tahriş.</p>
+<p>• Öksürük, balgam ve nefes darlığı</p>
+<p>• Astım ataklarının tetiklenmesi ve şiddetlenmesi.</p>
+<p>• Bronşit ve diğer solunum yolu enfeksiyonlarına yatkınlık.</p>
+<p>• Kalp krizi, inme ve düzensiz kalp atışları riskinde artış (özellikle hassas gruplarda).</p>
+<p>• Akciğer fonksiyonlarında kalıcı azalma.</p>
+<p>• Kronik bronşit ve amfizem gibi kronik solunum yolu hastalıklarının gelişimi.</p>
+<p>• Akciğer kanseri riskinde artış.</p>
+<p>• Kardiyovasküler hastalıkların gelişimi ve ilerlemesi (damar sertliği, yüksek tansiyon).</p>
+<p>• Erken ölüm riskinde artış.</p>
+<p>• Çocuklarda akciğer gelişiminin olumsuz etkilenmesi.</p>
+<p>• Sinir sistemi üzerinde olumsuz etkiler (Alzheimer ve Parkinson gibi nörolojik hastalıklarla olası bağlantılar araştırılmaktadır).</p>
+<p>• Hamilelikte olumsuz etkiler (erken doğum, düşük doğum ağırlığı). • Bağışıklık sisteminin zayıflaması.</p>
+</section>
 </section>
 <section id="tercih-sebebi" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="tercih-sebebi"><span class="header-section-number">2.3</span> Tercih Sebebi</h2>
@@ -265,17 +313,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Verinin zaman ve istasyon bazlı olması sayesinde <strong>Shiny veya Quarto Widget gibi etkileşimli uygulamalarda</strong> kullanılabilir, kullanıcıya veriyle oynama şansı tanır.</p></li>
 </ul>
 </section>
-<section id="ön-işleme" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="ön-işleme"><span class="header-section-number">2.4</span> Ön İşleme</h2>
+<section id="veri-analizi-ve-ön-işleme" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="veri-analizi-ve-ön-işleme"><span class="header-section-number">2.4</span> Veri Analizi ve Ön İşleme</h2>
 </section>
-<section id="gerekli-kütüphaneler" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="gerekli-kütüphaneler"><span class="header-section-number">2.5</span> Gerekli kütüphaneler</h2>
+<section id="veri-yükleme-ve-temizleme" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="veri-yükleme-ve-temizleme"><span class="header-section-number">2.5</span> 1. Veri Yükleme ve Temizleme</h2>
 </section>
-<section id="veri-analizi-ve-ön-işleme" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="veri-analizi-ve-ön-işleme"><span class="header-section-number">2.6</span> Veri Analizi ve Ön İşleme</h2>
-</section>
-<section id="veri-yükleme-ve-temizleme" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="veri-yükleme-ve-temizleme"><span class="header-section-number">2.7</span> 1. Veri Yükleme ve Temizleme</h2>
+<section id="analizler" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="analizler"><span class="header-section-number">2.6</span> 2. Analizler</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readr")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("corrplot")</span></span>
@@ -330,23 +375,21 @@ The following objects are masked from 'package:shiny':
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV dosyasını yükleme</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"ankara_hava_kalitesi.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunun sayısını bulalım</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>son_sutun_indeksi <span class="ot">&lt;-</span> <span class="fu">ncol</span>(veri)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> veri[, <span class="sc">-</span>son_sutun_indeksi]</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Sütun adlarını temizle</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(veri) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Istasyon"</span>, <span class="st">"Tarih"</span>, <span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Nokta yerine virgül kullanılmış, düzelt</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>veri[numeric_cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(veri[numeric_cols], <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(x, <span class="st">","</span>, <span class="st">"."</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV dosyasını yükleme</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"ankara_hava_kalitesi.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunun sayısını bulalım</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>son_sutun_indeksi <span class="ot">&lt;-</span> <span class="fu">ncol</span>(veri)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Son sütunu hariç tutarak yeni bir veri çerçevesi oluşturalım</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>veri <span class="ot">&lt;-</span> veri[, <span class="sc">-</span>son_sutun_indeksi]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Sütun adlarını temizle</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(veri) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Istasyon"</span>, <span class="st">"Tarih"</span>, <span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Nokta yerine virgül kullanılmış, düzelt</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PM10"</span>, <span class="st">"PM2_5"</span>, <span class="st">"SO2"</span>, <span class="st">"NO2"</span>, <span class="st">"NOX"</span>, <span class="st">"NO"</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>veri[numeric_cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(veri[numeric_cols], <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(x, <span class="st">","</span>, <span class="st">"."</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
 Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs
@@ -363,12 +406,10 @@ Warning in FUN(X[[i]], ...): Zorlamadan dolayı ortaya çıkan NAs</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Keşifsel Veri Analizi</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.Zaman Serisi Analizi</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>daily_avg <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gun =</span> <span class="fu">as_date</span>(Tarih)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gun) <span class="sc">%&gt;%</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numeric_cols), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>daily_avg <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gun =</span> <span class="fu">as_date</span>(Tarih)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gun) <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numeric_cols), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There was 1 warning in `summarise()`.
 ℹ In argument: `across(all_of(numeric_cols), mean, na.rm = TRUE)`.
@@ -404,11 +445,9 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2. Isı Haritası Analizi</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>heat_data <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Saat, Ay) <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PM2_5 =</span> <span class="fu">mean</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>heat_data <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Saat, Ay) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PM2_5 =</span> <span class="fu">mean</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'Saat'. You can override using the
 `.groups` argument.</code></pre>
@@ -446,16 +485,28 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Trend Analizi</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1. Korelasyon Analizi</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerekirse tarih sütununu dönüştür</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>Tarih <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(veri<span class="sc">$</span>Tarih)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>cor_data <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(numeric_cols)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_data)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(corr_matrix, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">type =</span> <span class="st">"lower"</span>, <span class="at">tl.col =</span> <span class="st">"black"</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># PM2.5 ve PM10'u uzun formata getir</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>veri_uzun <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">PM2_5</span><span class="st">`</span>, PM10), </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Partikul"</span>, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Deger"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Facet'li grafik çizimi</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veri_uzun, <span class="fu">aes</span>(<span class="at">x =</span> Tarih, <span class="at">y =</span> Deger, <span class="at">color =</span> Partikul)) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Istasyon, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Ankara'daki 9 İstasyon İçin PM2.5 ve PM10 Değerleri"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tarih"</span>,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Değer (µg/m³)"</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Partikül Türü"</span>) <span class="sc">+</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -464,26 +515,22 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model Uydurma</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1. Sınıflandırma Modeli</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># PM10'u sınıflara ayıralım (örnek: temiz - kirli)</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(veri<span class="sc">$</span>PM10 <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="st">"Kirli"</span>, <span class="st">"Temiz"</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(PM10, PM2_5, SO2, NO2, NOX, NO, class) <span class="sc">%&gt;%</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Eğitim-test bölmesi</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>sample_idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_model), <span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">nrow</span>(data_model))</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> data_model[sample_idx, ]</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data_model[<span class="sc">-</span>sample_idx, ]</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Karar ağacı (rpart)</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(class <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">method =</span> <span class="st">"class"</span>)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1. Sınıflandırma Modeli</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># PM10'u sınıflara ayıralım (örnek: temiz - kirli)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(veri<span class="sc">$</span>PM10 <span class="sc">&gt;</span> <span class="dv">45</span>, <span class="st">"Kirli"</span>, <span class="st">"Temiz"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>data_model <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(PM10, PM2_5, SO2, NO2, NOX, NO, class) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Eğitim-test bölmesi</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>sample_idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_model), <span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">nrow</span>(data_model))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> data_model[sample_idx, ]</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data_model[<span class="sc">-</span>sample_idx, ]</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Karar ağacı (rpart)</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(class <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -510,10 +557,9 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> data_model[sample_idx, ]</span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data_model[<span class="sc">-</span>sample_idx, ]</span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Karar ağacı (rpart)</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(class <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">method =</span> <span class="st">"class"</span>)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Karar ağacı (rpart)</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(class <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -528,18 +574,173 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Doğruluk:  100 %"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Görselleştirme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Görselleştirme</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># İlçe bazında özet istatistikler</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>ilce_ozet <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Istasyon) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM10_Ortalama =</span> <span class="fu">mean</span>(PM10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM10_Maksimum =</span> <span class="fu">max</span>(PM10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM10_Olcum_Sayisi =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(PM10)),</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM2_5_Ortalama =</span> <span class="fu">mean</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM2_5_Maksimum =</span> <span class="fu">max</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">PM2_5_Olcum_Sayisi =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(PM2_5))</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PM10_Ortalama))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Görüntüleme</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ilce_ozet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  Istasyon     PM10_Ortalama PM10_Maksimum PM10_Olcum_Sayisi PM2_5_Ortalama
+  &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;          &lt;dbl&gt;
+1 Ostim                 45.5          434.              8229           8.52
+2 Batıkent              39.5          592.              8631          21.6 
+3 Mamak                 35.0          298.              8633          12.4 
+4 Törekent              33.5          386.              8696           7.39
+5 Etimesgut             29.1          490.              8493           8.10
+6 Polatlı               28.7          271.              8694           5.07
+7 Keçiören              26.8          215.              8596           9.28
+8 Bahçelievler          25.2          181.              8549           9.74
+9 Çankaya               22.7          223.              8484           8.49
+# ℹ 2 more variables: PM2_5_Maksimum &lt;dbl&gt;, PM2_5_Olcum_Sayisi &lt;int&gt;</code></pre>
 </div>
-</section>
-<section id="analizler" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="analizler"><span class="header-section-number">2.8</span> Analizler</h2>
-</section>
-<section id="sonuçlar" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">2.9</span> Sonuçlar</h2>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafik için uzun formata çevir</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ilce_grafik <span class="ot">&lt;-</span> ilce_ozet <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Istasyon, PM10_Ortalama, PM2_5_Ortalama) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Istasyon, <span class="at">names_to =</span> <span class="st">"Parametre"</span>, <span class="at">values_to =</span> <span class="st">"Ortalama"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ilce_grafik, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Istasyon, <span class="sc">-</span>Ortalama), <span class="at">y =</span> Ortalama, <span class="at">fill =</span> Parametre)) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"İlçelere Göre Ortalama PM10 ve PM2.5"</span>, <span class="at">x =</span> <span class="st">"İlçe"</span>, <span class="at">y =</span> <span class="st">"Ortalama (µg/m³)"</span>, <span class="at">fill =</span> <span class="st">"Parametre"</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 aylık dönem bilgisi (çeyrek/Q) ekle</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>veri<span class="sc">$</span>Ceyrek <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(veri<span class="sc">$</span>Tarih) <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">~</span> <span class="st">"Ocak-Mart"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(veri<span class="sc">$</span>Tarih) <span class="sc">%in%</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">~</span> <span class="st">"Nisan-Haziran"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(veri<span class="sc">$</span>Tarih) <span class="sc">%in%</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">~</span> <span class="st">"Temmuz-Eylül"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(veri<span class="sc">$</span>Tarih) <span class="sc">%in%</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">12</span> <span class="sc">~</span> <span class="st">"Ekim-Aralık"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># PM10 için 3 aylık ortalamalar</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>pm10_ceyrek <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Istasyon, Ceyrek) <span class="sc">%&gt;%</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PM10_Ortalama =</span> <span class="fu">mean</span>(PM10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Istasyon'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sütun sırası için Ceyrek'i faktörleştir</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>pm10_ceyrek<span class="sc">$</span>Ceyrek <span class="ot">&lt;-</span> <span class="fu">factor</span>(pm10_ceyrek<span class="sc">$</span>Ceyrek, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Ocak-Mart"</span>, <span class="st">"Nisan-Haziran"</span>, <span class="st">"Temmuz-Eylül"</span>, <span class="st">"Ekim-Aralık"</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafik: PM10</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pm10_ceyrek, <span class="fu">aes</span>(<span class="at">x =</span> Istasyon, <span class="at">y =</span> PM10_Ortalama, <span class="at">fill =</span> Ceyrek)) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"İstasyona Göre 3 Aylık Ortalama PM10"</span>, <span class="at">x =</span> <span class="st">"İstasyon"</span>, <span class="at">y =</span> <span class="st">"PM10 (µg/m³)"</span>, <span class="at">fill =</span> <span class="st">"Dönem"</span>) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PM2.5 için 3 aylık ortalamalar</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pm25_ceyrek <span class="ot">&lt;-</span> veri <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Istasyon, Ceyrek) <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">PM2_5_Ortalama =</span> <span class="fu">mean</span>(PM2_5, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Istasyon'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pm25_ceyrek<span class="sc">$</span>Ceyrek <span class="ot">&lt;-</span> <span class="fu">factor</span>(pm25_ceyrek<span class="sc">$</span>Ceyrek, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Ocak-Mart"</span>, <span class="st">"Nisan-Haziran"</span>, <span class="st">"Temmuz-Eylül"</span>, <span class="st">"Ekim-Aralık"</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafik: PM2.5</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pm25_ceyrek, <span class="fu">aes</span>(<span class="at">x =</span> Istasyon, <span class="at">y =</span> PM2_5_Ortalama, <span class="at">fill =</span> Ceyrek)) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"İstasyona Göre 3 Aylık Ortalama PM2.5"</span>, <span class="at">x =</span> <span class="st">"İstasyon"</span>, <span class="at">y =</span> <span class="st">"PM2.5 (µg/m³)"</span>, <span class="at">fill =</span> <span class="st">"Dönem"</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_col()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PM10 için İlçelere Göre Boxplot</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veri, <span class="fu">aes</span>(<span class="at">x =</span> Istasyon, <span class="at">y =</span> PM10)) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"İlçelere Göre PM10 Dağılımı"</span>, <span class="at">x =</span> <span class="st">"İlçe"</span>, <span class="at">y =</span> <span class="st">"PM10 (µg/m³)"</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1844 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-11.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PM2.5 için İlçelere Göre Boxplot</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veri, <span class="fu">aes</span>(<span class="at">x =</span> Istasyon, <span class="at">y =</span> PM2_5)) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"salmon"</span>) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"İlçelere Göre PM2.5 Dağılımı"</span>, <span class="at">x =</span> <span class="st">"İlçe"</span>, <span class="at">y =</span> <span class="st">"PM2.5 (µg/m³)"</span>) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 12149 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-1-12.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Sonuçlar ve Ana Çıkarımlar</h1>
+<p>Yıl boyunca PM10 konsantrasyonlarında belirgin dalgalanmalar görülmektedir. Belirli dönemlerde yüksek zirveler, diğer dönemlerde ise daha düşük ve stabil seviyeler mevcuttur.</p>
+<p>Nisan 2024’teki ve Ekim/Kasım 2024’teki zirveler, yılın en yüksek kirlilik zamanlarını göstermektedir. Özellikle Nisan ayındaki zirve oldukça keskin ve yüksektir. Haziran-Temmuz-Ağustos ayları genel olarak daha temiz hava koşullarına işaret ederken, kış ve sonbahar ayları (özellikle Nisan başı ve Ekim’den itibaren) daha yüksek PM10 konsantrasyonlarını göstermektedir.</p>
+<p>Bu ısı haritası, PM2.5 kirliliğinin özellikle kış ve geç sonbahar aylarında (Ekim, Kasım, Aralık, Ocak) ve gün içinde sabah erken saatler ile akşam saatlerinde pik yaptığını açıkça göstermektedir. Bu dönemler, genellikle ısınma faaliyetlerinin yoğunlaştığı, trafik yoğunluğunun arttığı ve atmosferik inversiyon gibi kirliliğin dağılmasını engelleyici koşulların daha sık görüldüğü zaman dilimleridir. Yaz ayları ise PM2.5 açısından en temiz dönemdir.</p>
+<p>Bu ısı haritası, PM10 kirliliğinin özellikle kış ve geç sonbahar aylarında (Ocak, Şubat, Ekim, Kasım, Aralık) ve gün içinde sabah erken saatler ile akşam saatlerinde yüksek seviyelere ulaştığını göstermektedir. Bu dönemler, hava kalitesi açısından en riskli zaman dilimleridir. Yaz ayları ise PM10 açısından en temiz dönemdir.</p>
+<p>Ocak-Nisan 2024 için Değerler genel olarak 10 µg/m³ civarında; ara sıra 20 µg/m³’ü geçen zirveler var Nisan-Temmuz 2024 için PM2.5 seviyeleri oldukça düşük seyrediyor, hava nispeten daha temiz görünüyor. Ağustos-Ekim 2024 için Yükseliş başlıyor, dalgalanmalar artıyor. Kasım-Aralık 2024 için PM2.5 seviyelerinde ciddi artış görülüyor; bazı günlerde 30 µg/m³’ün üzerine çıkmış. Bu dönem yılın en kirli zamanı olabilir. Yaz aylarında (özellikle Haziran-Temmuz civarı) PM2.5 seviyeleri düşük, bu da açık hava koşullarının ve daha az ısınma ihtiyacının etkisi olabilir. Kış Aylarında Artış: Kasım-Aralık aylarında PM2.5 değerlerinde ciddi bir artış var. Bu durum muhtemelen ısınma için kullanılan fosil yakıtlar, hava durumu koşulları (inversiyon gibi) ve trafik yoğunluğu gibi etkenlerden kaynaklanıyor olabilir.</p>
+<p>Eğer PM10 ≥ 45 ise: Sol dal takip edilir. Bu durumda model tüm verileri “Kirli” olarak sınıflandırıyor. %22’lik bir kesim buraya düşmüş. Bu alt düğümde “Kirli” oranı %100 (yani buradaki verilerin tamamı gerçekten kirliymiş).</p>
+<p>Eğer PM10 &lt; 45 ise: Sağ dal takip edilir. Bu durumda model tüm verileri “Temiz” olarak sınıflandırıyor. %78’lik bir kesim buraya düşmüş. Bu alt düğümde “Temiz” oranı %100, yani model bu kısmı doğru tahmin etmiş.</p>
+<p>Bu grafik, Ankara’nın farklı ilçeleri arasında hava kalitesi açısından belirgin farklılıklar olduğunu ortaya koyuyor. Özellikle Ostim ve Batıkent ilçeleri, partikül madde kirliliği açısından daha yüksek risk taşıyan bölgeler olarak öne çıkarken, Çankaya nispeten daha iyi PM10 değerlerine sahip. Bu farklılıklar, ilçelerin sanayi faaliyetleri, trafik yoğunluğu, yerleşim özellikleri ve coğrafi koşulları gibi faktörlerle ilişkilendirilebilir. Hava kirliliği yönetimi için bu tür ilçe bazlı veriler, hedefli politikaların geliştirilmesinde önemli bir rol oynayabilir.</p>
+<p>PM2.5 ≥ 15 ise: Bu durumda model örneği “Kirli” olarak sınıflandırıyor. Bu sınıfa giren örneklerin oranı %15. Alt düğümde %100 Kirli, yani model bu sınıflandırmayı doğru yapmış. PM2.5 &lt; 15 ise: Model örneği “Temiz” olarak sınıflandırıyor. Bu sınıfa giren veriler veri setinin %85’ini oluşturuyor. Yine %100 doğru sınıflandırma yapılmış (%100 Temiz).</p>
+<p>Tüm ilçelerde PM10 ortalama değerleri, PM2.5 ortalama değerlerinden önemli ölçüde daha yüksektir. Bu beklenen bir durumdur, çünkü PM10 daha büyük partikülleri de içerirken, PM2.5 sadece 2.5 mikrondan küçük ince partikülleri kapsar.</p>
+<p>En Yüksek Kirlilik Seviyeleri (Ortalama PM10 ve PM2.5):</p>
+<p>PM10: En yüksek ortalama PM10 değerleri Ostim (yaklaşık 44 μg/m 3) ve Batıkent (yaklaşık 40 μg/m3) ilçelerinde gözlemleniyor. Bunu takiben Mamak ve Törekent de 30-35 μg/m3) aralığında yüksek değerlere sahiptir. PM2.5: PM2.5 için en yüksek ortalama değer Batıkent’te (yaklaşık 18 μg/m3) gözlemleniyor. Diğer ilçelerde PM2.5 değerleri genellikle 10 μg/m 3) ’ün altında veya etrafında seyrediyor. En Düşük Kirlilik Seviyeleri (Ortalama PM10 ve PM2.5): PM10: Grafiğe göre en düşük ortalama PM10 değeri Çankaya’da yaklaşık 22 μg/m3 görünmektedir. PM2.5: Çankaya, Polatlı, Bahçelievler, Keçiören, Etimesgut, Törekent, Mamak ve Ostim’de PM2.5 ortalama değerleri birbirine oldukça yakın ve genellikle 5-10 μg/m 3 aralığındadır.</p>
+<p>3 aylık ortalama PM10 En Yüksek Kirlilik: Ostim istasyonu, özellikle Ekim-Aralık ve Ocak-Mart dönemlerinde açık ara en yüksek PM10 ortalamalarına sahip. Batıkent, Mamak, Etimesgut ve Törekent de kış dönemlerinde yüksek seviyeler gösteriyor. En Düşük Kirlilik: Çankaya istasyonu, tüm dönemlerde ortalama PM10 seviyelerinin en düşük olduğu istasyon. Bu, Çankaya’nın genel hava kalitesinin diğer bölgelere göre daha iyi olduğunu gösteriyor.</p>
+<p>3 aylık ortala PM2,5 En Yüksek Kirlilik: Batıkent istasyonu, özellikle Ocak-Mart döneminde PM2.5 kirliliğinde belirgin bir zirveye sahip. Mamak, Etimesgut, Keçiören ve Ostim de kış ve sonbahar dönemlerinde yüksek PM2.5 seviyeleri gösteriyor. En Düşük Kirlilik: Polatlı ve kısmen Çankaya, PM2.5 ortalamaları açısından diğerlerine göre daha iyi performans gösteriyor. Temmuz-Eylül dönemlerinde neredeyse tüm istasyonlarda PM2.5 seviyeleri oldukça düşük.</p>
+<p>box plot PM10 Ortalama seviyeler çoğu ilçede düşük olmakla birlikte, özellikle Ostim ve Batıkent’te daha yüksektir. Tüm ilçelerde, ancak özellikle Ostim, Batıkent ve Etimesgut’ta, PM10 konsantrasyonlarında ciddi ve sıkça yüksek zirveler (aykırı değerler) yaşanmaktadır. Bu zirveler, günlük ortalama değerlerin çok üzerine çıkarak insan sağlığı için risk oluşturabilecek seviyelere ulaşmaktadır. Çankaya, hem medyan değeri hem de aykırı değerlerin sıklığı ve yüksekliği açısından en iyi performans gösteren ilçe olarak öne çıkıyor. Bu da Çankaya’da PM10 kirliliğinin genel olarak daha düşük ve daha istikrarlı olduğunu göstermektedir.</p>
+<p>box plot PM2.5 Batıkent, hem medyan PM2.5 değeri hem de dağılımın genişliği ve kaydedilen en yüksek aykırı değerler açısından PM2.5 kirliliğinin en yoğun olduğu ilçe olarak öne çıkıyor. Bu durum, Batıkent’in ince partikül kirliliği konusunda ciddi bir sorun yaşadığını gösteriyor. Diğer birçok ilçe (Ostim, Keçiören, Mamak, Etimesgut, Bahçelievler, Törekent) de medyan değerleri nispeten düşük olsa da, dönem dönem çok yüksek PM2.5 zirveleri yaşamaktadır. Bu zirveler, hava kalitesi açısından risk oluşturmaktadır. Polatlı, hem medyan değeri hem de aykırı değerlerin seviyesi ve sıklığı açısından PM2.5 kirliliğinin en düşük olduğu ilçelerden biridir. Çankaya’nın medyanı düşük olsa da, PM2.5 aykırı değerleri PM10’a kıyasla daha yüksek seviyelerde görünüyor.</p>
 </section>
 <section id="kaynaklar" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Kaynaklar</h1>
@@ -547,7 +748,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <p>#<a href="https://www.iqair.com/us/turkey/ankara/ankara" class="uri">https://www.iqair.com/us/turkey/ankara/ankara</a></p>
 <p>#<a href="https://aqicn.org/city/turkey/ankara/ulus-trafik/" class="uri">https://aqicn.org/city/turkey/ankara/ulus-trafik/</a></p>
 <p>#<a href="https://quarto.org/docs/interactive/widgets/jupyter.html" class="uri">https://quarto.org/docs/interactive/widgets/jupyter.html</a></p>
-<p>#https://plotly.com/python/tile-county-choropleth/</p>
+<p>#https://plotly.com/python/tile-county-choropleth</p>
 <p>```</p>
 
 
